@@ -2,6 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "zixuanchen.vitest-explorer",
-    "editorconfig.editorconfig"
+    "editorconfig.editorconfig",
+    "mquandalle.graphql"
   ]
 }

@@ -1,13 +1,12 @@
-import Button from '@mui/material/Button';
+import { withProviders } from './providers';
+import { Router } from './router';
 
-import './index.scss';
-
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Button>asdasd</Button>
+    <div className="app">
+      <Router />
     </div>
   );
-}
+};
 
-export default App;
+export default withProviders(App);
