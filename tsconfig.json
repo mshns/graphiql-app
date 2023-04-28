@@ -5,7 +5,7 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -18,9 +18,10 @@
     "noEmit": true,
     "noImplicitAny": true,
     "jsx": "react-jsx",
-    "types": ["vite/client", "node"],
+    "types": ["vite/client", "node", "graphql", "@apollo/client"],
+    "typeRoots": ["node_modules/@types", "src/@types"],
     "baseUrl": "./src"
   },
-  "include": ["./src"],
+  "include": ["./src", "global.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
