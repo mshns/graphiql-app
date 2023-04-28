@@ -1,4 +1,4 @@
-query {
+query allFilms {
   allFilms {
     films {
       created

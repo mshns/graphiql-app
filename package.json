@@ -23,7 +23,7 @@
     "update-schema": "graphql-codegen --config codegen.download.ts",
     "watch-codegen": "graphql-codegen --watch",
     "watch": "pnpm run clear && concurrently -k pnpm:watch-codegen pnpm:dev",
-    "clear": "find ./src -name \"__generated__\" -exec rm -rf '{}' +"
+    "clear": "find src -name \"__generated__\" -exec rm -rf '{}' +"
   },
   "dependencies": {
     "@apollo/client": "^3.7.12",
@@ -63,8 +63,6 @@
     "concurrently": "^8.0.1",
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.5.5",
-    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
