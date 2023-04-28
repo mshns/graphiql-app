@@ -1,6 +1,6 @@
 export enum ROUTE {
   about = '/',
-  login = 'login',
-  playground = 'graphql',
+  login = '/login',
+  playground = 'playground',
   notFound = '*'
 }

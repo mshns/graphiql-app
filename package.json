@@ -48,6 +48,7 @@
     "@graphql-codegen/client-preset": "3.0.1",
     "@graphql-codegen/near-operation-file-preset": "^2.5.0",
     "@graphql-codegen/typescript": "^3.0.4",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.7",
     "@graphql-codegen/typescript-resolvers": "^3.2.1",
     "@graphql-eslint/eslint-plugin": "^3.18.0",
     "@testing-library/jest-dom": "^5.16.5",

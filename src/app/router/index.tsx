@@ -14,11 +14,6 @@ export const routes = [
       {
         index: true,
         element: <About />,
-        id: 'Home'
-      },
-      {
-        path: ROUTE.login,
-        element: <LogIn />,
         id: 'About'
       },
       {
@@ -27,6 +22,11 @@ export const routes = [
         id: 'playground'
       }
     ]
+  },
+  {
+    path: ROUTE.login,
+    element: <LogIn />,
+    id: 'LogIn'
   },
   {
     path: ROUTE.notFound,
