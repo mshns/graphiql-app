@@ -1,14 +1,19 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  schema: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
-  // documents: 'src/**/*.tsx',
+  overwrite: true,
+  schema: import.meta.env.VITE_GRAPH_API,
   generates: {
     './schema.graphql': {
       plugins: ['schema-ast'],
       config: {
-        includeDirectives: false
+        includeDirectives: true,
+        commentDescriptions: true,
+        includeIntrospectionTypes: true
       }
+    },
+    './introspection.json': {
+      plugins: ['introspection']
     }
   }
 };

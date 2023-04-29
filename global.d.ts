@@ -4,3 +4,12 @@ declare module '*.graphql' {
 
   export = Schema;
 }
+
+interface ImportMetaEnv {
+  readonly VITE_GRAPH_API: string;
+  // more env variables...
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}

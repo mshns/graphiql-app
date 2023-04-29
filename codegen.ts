@@ -2,7 +2,7 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
+  schema: import.meta.env.VITE_GRAPH_API,
   documents: ['src/**/*.graphql'],
   generates: {
     'src/shared/types/__generated__/schema.ts': { plugins: ['typescript'] },
