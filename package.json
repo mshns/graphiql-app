@@ -14,7 +14,7 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "prepare": "husky install",
-    "lint": "eslint 'src/**/*.{js,ts,tsx,graphql}'",
+    "lint": "eslint --ext js,ts,tsx,graphql src",
     "build-codegen": "graphql-codegen --config codegen.ts",
     "update-schema": "graphql-codegen --config codegen.download.ts",
     "watch-codegen": "graphql-codegen --watch",
