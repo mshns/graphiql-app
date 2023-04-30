@@ -1,6 +1,6 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import * as appReducers from './reducers';
+import * as appReducers from 'shared/model/reducers';
 
 const { introspectionReducer } = appReducers;
 

@@ -1,2 +1,4 @@
-export * from './CodeExplorer/ui/CodeExplorer';
-export * from './Schema/ui/Schema';
+export * from './QueryTerminal/ui/QueryTerminal';
+export * from './QueryConfigBar/ui/QueryConfigBar';
+export * from './ResponseBar/ui/ResponseBar';
+export { default as default } from './DocumentationSidebar/ui/DocumentationSidebar';
