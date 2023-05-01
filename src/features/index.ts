@@ -1,1 +1,1 @@
-export * from './Example/ui/Example';
+export * from './DocumentsBreadCrumbs';
