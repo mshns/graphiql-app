@@ -1,8 +1,6 @@
 import { type FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from '../Header/Header';
-import { Footer } from '../Footer/Footer';
-import { Navbar } from '../Navbar/Navbar';
+import { Navbar, Footer, Header } from 'widgets';
 import { Box, Grid } from '@mui/material';
 
 export const Layout: FC = () => {
@@ -11,10 +9,10 @@ export const Layout: FC = () => {
       <Header />
       <main>
         <Grid container>
-          <Grid xl={1} lg={1}>
+          <Grid xl={1} lg={1} item={true}>
             <Navbar />
           </Grid>
-          <Grid xl={11} lg={11}>
+          <Grid xl={11} lg={11} item={true}>
             <Outlet />
           </Grid>
         </Grid>
