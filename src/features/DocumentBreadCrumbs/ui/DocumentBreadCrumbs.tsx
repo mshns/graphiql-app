@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useAppActions, useAppSelector } from 'shared';
 
-export const DocumentsBreadCrumbs: FC = () => {
+export const DocumentBreadCrumbs: FC = () => {
   const { breadCrumbs } = useAppSelector((state) => state.breadCrumbsReducer);
   const { setBreadCrumbs } = useAppActions();
 

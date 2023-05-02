@@ -1,23 +1,31 @@
 import { FC } from 'react';
-import { DocumentsBreadCrumbs, DocumentsTypeHeader, DocumentsArgs, DocumentsFields } from 'features';
+import { DocumentBreadCrumbs, DocumentTypeHeader, DocumentArgs, DocumentFields } from 'features';
 import { useAppSelector, useIntrospection, useTypesInfo } from 'shared';
 
-const DocumentsSideBar: FC = () => {
+const DocumentSideBar: FC = () => {
   const { introspection } = useIntrospection();
   const { breadCrumbs, currentTypeName } = useAppSelector((state) => state.breadCrumbsReducer);
   const { fieldInfo, thisType } = useTypesInfo(introspection, breadCrumbs, currentTypeName);
 
   // console.log(introspection);
 
+  if (!currentTypeName) {
+    return (
+      <section>
+        <h3>Root Types</h3>
+      </section>
+    );
+  }
+
   return (
     <section>
       <h3>Documentation</h3>
-      <DocumentsBreadCrumbs />
-      <DocumentsTypeHeader fieldInfo={fieldInfo} />
-      <DocumentsArgs fieldInfo={fieldInfo} />
-      <DocumentsFields thisType={thisType} />
+      <DocumentBreadCrumbs />
+      <DocumentTypeHeader fieldInfo={fieldInfo} />
+      <DocumentArgs fieldInfo={fieldInfo} />
+      <DocumentFields thisType={thisType} />
     </section>
   );
 };
 
-export default DocumentsSideBar;
+export default DocumentSideBar;

@@ -2,8 +2,9 @@ import { FC } from 'react';
 import { IntrospectionField } from 'graphql';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useAppActions, useAppSelector } from 'shared';
+import { DocumentTypeRow } from 'entities';
 
-export const DocumentsTypeHeader: FC<{ fieldInfo?: IntrospectionField }> = ({ fieldInfo }) => {
+export const DocumentTypeHeader: FC<{ fieldInfo?: IntrospectionField }> = ({ fieldInfo }) => {
   const { setStepBack } = useAppActions();
   const { breadCrumbs, currentTypeName } = useAppSelector((state) => state.breadCrumbsReducer);
 
@@ -15,8 +16,7 @@ export const DocumentsTypeHeader: FC<{ fieldInfo?: IntrospectionField }> = ({ fi
     return (
       <section>
         <ArrowBackIcon onClick={stepBackHandler} />
-        <span>{fieldInfo?.name}: </span>
-        <span>{currentTypeName}</span>
+        <DocumentTypeRow type={currentTypeName} name={fieldInfo?.name} />
       </section>
     );
   }

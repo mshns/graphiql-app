@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { IntrospectionType } from 'graphql';
 import { isIntrospectionNamedOutput, isIntrospectionObjectType } from 'shared';
 
-export const DocumentsFields: FC<{ thisType?: IntrospectionType }> = ({ thisType }) => {
+export const DocumentFields: FC<{ thisType?: IntrospectionType }> = ({ thisType }) => {
   if (!isIntrospectionObjectType(thisType)) {
     return null;
   } else {
@@ -17,6 +17,4 @@ export const DocumentsFields: FC<{ thisType?: IntrospectionType }> = ({ thisType
       </section>
     );
   }
-
-  return <section>DocumentsFields</section>;
 };

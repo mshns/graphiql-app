@@ -6,8 +6,8 @@ interface IBreadCrumbs {
 }
 
 const initialState: IBreadCrumbs = {
-  breadCrumbs: ['__schema'],
-  currentTypeName: '__schema'
+  breadCrumbs: [],
+  currentTypeName: ''
 };
 
 export const breadCrumbsSlice = createSlice({

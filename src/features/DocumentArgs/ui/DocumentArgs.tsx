@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { IntrospectionField } from 'graphql';
 import { isIntrospectionNamedInput } from 'shared';
 
-export const DocumentsArgs: FC<{ fieldInfo?: IntrospectionField }> = ({ fieldInfo }) => {
+export const DocumentArgs: FC<{ fieldInfo?: IntrospectionField }> = ({ fieldInfo }) => {
   if (!fieldInfo?.args) {
     return null;
   }
