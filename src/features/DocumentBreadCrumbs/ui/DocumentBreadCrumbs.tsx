@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Breadcrumbs, Link } from '@mui/material';
 import { useAppActions, useAppSelector } from 'shared';
 
 export const DocumentBreadCrumbs: FC = () => {
@@ -10,12 +11,12 @@ export const DocumentBreadCrumbs: FC = () => {
   };
 
   return (
-    <div>
+    <Breadcrumbs separator="›" maxItems={2} aria-label="breadcrumb">
       {breadCrumbs.map((type, i) => (
-        <span onClick={() => navHandler(type)} key={i}>
+        <Link onClick={() => navHandler(type)} key={i}>
           {type}
-        </span>
+        </Link>
       ))}
-    </div>
+    </Breadcrumbs>
   );
 };

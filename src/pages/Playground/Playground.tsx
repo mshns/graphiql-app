@@ -13,7 +13,7 @@ export const PlayGround: FC = () => {
   }, []);
 
   return (
-    <Grid container>
+    <Grid container sx={{ height: '100%' }}>
       <Grid xl={4} lg={4} item={true}>
         {isOpenSideBar && (
           <Suspense fallback={<CircularProgress />}>
