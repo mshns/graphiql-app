@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IBreadCrumbs {
   breadCrumbs: string[];
-  currentType: string;
+  currentTypeName: string;
 }
 
 const initialState: IBreadCrumbs = {
-  breadCrumbs: [],
-  currentType: ''
+  breadCrumbs: ['__schema'],
+  currentTypeName: '__schema'
 };
 
 export const breadCrumbsSlice = createSlice({
@@ -15,7 +15,7 @@ export const breadCrumbsSlice = createSlice({
   initialState,
   reducers: {
     setBreadCrumbs(state, action: PayloadAction<string>) {
-      if (state.currentType === action.payload) {
+      if (state.currentTypeName === action.payload) {
         return;
       }
 
@@ -27,7 +27,16 @@ export const breadCrumbsSlice = createSlice({
         state.breadCrumbs.push(action.payload);
       }
 
-      state.currentType = action.payload;
+      state.currentTypeName = action.payload;
+    },
+
+    setStepBack(state) {
+      const prevType = state.breadCrumbs.at(-2);
+
+      if (prevType) {
+        state.currentTypeName = prevType;
+        state.breadCrumbs.pop();
+      }
     }
   }
 });
