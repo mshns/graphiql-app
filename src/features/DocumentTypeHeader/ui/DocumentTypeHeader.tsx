@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { IntrospectionField } from 'graphql';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useAppActions, useAppSelector } from 'shared';
 import { DocumentTypeRow } from 'entities';
+import { useAppActions, useAppSelector } from 'shared';
 
 export const DocumentTypeHeader: FC<{ fieldInfo?: IntrospectionField }> = ({ fieldInfo }) => {
   const { setStepBack } = useAppActions();

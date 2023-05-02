@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { IntrospectionType } from 'graphql';
+import { DocumentTypeRow } from 'entities';
 import { isIntrospectionNamedOutput, isIntrospectionObjectType } from 'shared';
 
 export const DocumentFields: FC<{ thisType?: IntrospectionType }> = ({ thisType }) => {
@@ -9,10 +10,7 @@ export const DocumentFields: FC<{ thisType?: IntrospectionType }> = ({ thisType 
     return (
       <section>
         {thisType.fields.map((field, i) => (
-          <div key={i}>
-            <span>{field.name}: </span>
-            <span>{isIntrospectionNamedOutput(field.type) && field.type.name}</span>
-          </div>
+          <DocumentTypeRow key={i} name={field.name} type={isIntrospectionNamedOutput(field.type) && field.type.name} />
         ))}
       </section>
     );
