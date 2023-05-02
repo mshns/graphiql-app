@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { DocumentBreadCrumbs, DocumentTypeHeader, DocumentArgs, DocumentFields } from 'features';
+import { DocumentBreadCrumbs, DocumentTypeHeader, DocumentArgs, DocumentFields, DocumentRoot } from 'features';
 import { useAppSelector, useIntrospection, useTypesInfo } from 'shared';
 
 const DocumentSideBar: FC = () => {
@@ -9,21 +9,19 @@ const DocumentSideBar: FC = () => {
 
   // console.log(introspection);
 
-  if (!currentTypeName) {
-    return (
-      <section>
-        <h3>Root Types</h3>
-      </section>
-    );
-  }
-
   return (
     <section>
       <h3>Documentation</h3>
-      <DocumentBreadCrumbs />
-      <DocumentTypeHeader fieldInfo={fieldInfo} />
-      <DocumentArgs fieldInfo={fieldInfo} />
-      <DocumentFields thisType={thisType} />
+      {!currentTypeName ? (
+        <DocumentRoot introspection={introspection} />
+      ) : (
+        <section>
+          <DocumentBreadCrumbs />
+          <DocumentTypeHeader fieldInfo={fieldInfo} />
+          <DocumentArgs fieldInfo={fieldInfo} />
+          <DocumentFields thisType={thisType} />
+        </section>
+      )}
     </section>
   );
 };
