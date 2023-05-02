@@ -3,7 +3,9 @@ module.exports = {
   jsxSingleQuote: false,
   tabWidth: 2,
   useTabs: false,
-  endOfLine: 'lf',
+  endOfLine: 'auto',
   printWidth: 120,
-  trailingComma: 'none'
+  trailingComma: 'none',
+  semi: true,
+  arrowParens: 'always'
 };

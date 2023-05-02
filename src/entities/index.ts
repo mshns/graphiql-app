@@ -1,1 +1,1 @@
-export * from './ui/Example';
+export * from './ui/DocumentTypeRow';

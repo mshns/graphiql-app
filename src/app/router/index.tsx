@@ -2,7 +2,7 @@ import { FC, Suspense } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import { About, LogIn, PlayGround, NotFound } from 'pages';
-import { Layout } from 'shared/ui';
+import { Layout } from 'processes';
 import { ROUTE } from './constants';
 
 export const routes = [

@@ -1,11 +1,8 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
-
-import * as appReducers from 'shared/model/reducers';
-
-const { introspectionReducer } = appReducers;
+import { breadCrumbsReducer } from 'shared';
 
 const rootReducer = combineReducers({
-  introspectionReducer
+  breadCrumbsReducer
 });
 
 export const setupStore = (preloadedState?: PreloadedState<TRootState>) => {
