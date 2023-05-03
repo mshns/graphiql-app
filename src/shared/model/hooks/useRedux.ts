@@ -1,13 +1,13 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from '@reduxjs/toolkit';
 import { type TAppDispatch, type TRootState } from 'app/model/store/index';
-import { breadCrumbsActions } from '../reducers';
+import { documentActions } from '../reducers';
 
 const useAppDispatch = () => useDispatch<TAppDispatch>();
 const useAppSelector: TypedUseSelectorHook<TRootState> = useSelector;
 
 const actions = {
-  ...breadCrumbsActions
+  ...documentActions
 };
 
 const useAppActions = () => {
@@ -16,4 +16,4 @@ const useAppActions = () => {
   return bindActionCreators(actions, dispatch);
 };
 
-export { useAppDispatch, useAppSelector, useAppActions };
+export { useAppSelector, useAppActions };

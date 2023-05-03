@@ -1,17 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface IBreadCrumbs {
+export interface IBreadCrumbs {
   breadCrumbs: string[];
   currentTypeName: string;
+  parentTypeName: string;
+  isDocumentOpen: boolean;
 }
 
 const initialState: IBreadCrumbs = {
-  breadCrumbs: [],
-  currentTypeName: ''
+  breadCrumbs: ['Schema'],
+  currentTypeName: 'Schema',
+  parentTypeName: '',
+  isDocumentOpen: false
 };
 
-export const breadCrumbsSlice = createSlice({
-  name: 'breadCrumbs',
+export const documentSlice = createSlice({
+  name: 'document',
   initialState,
   reducers: {
     setBreadCrumbs(state, action: PayloadAction<string>) {
@@ -21,13 +25,14 @@ export const breadCrumbsSlice = createSlice({
 
       const prevTypeIndex = state.breadCrumbs.findIndex((type) => type === action.payload);
 
-      if (prevTypeIndex) {
+      if (prevTypeIndex > 0) {
         state.breadCrumbs = state.breadCrumbs.slice(0, prevTypeIndex + 1);
       } else {
         state.breadCrumbs.push(action.payload);
       }
 
       state.currentTypeName = action.payload;
+      state.parentTypeName = state.breadCrumbs.at(-2) || '';
     },
 
     setStepBack(state) {
@@ -36,11 +41,16 @@ export const breadCrumbsSlice = createSlice({
       if (prevType) {
         state.currentTypeName = prevType;
         state.breadCrumbs.pop();
+        state.parentTypeName = state.breadCrumbs.at(-2) || '';
       }
+    },
+
+    setIsDocumentOpen(state) {
+      state.isDocumentOpen = !state.isDocumentOpen;
     }
   }
 });
 
-export const breadCrumbsActions = breadCrumbsSlice.actions;
+export const documentActions = documentSlice.actions;
 
-export const breadCrumbsReducer = breadCrumbsSlice.reducer;
+export const documentReducer = documentSlice.reducer;

@@ -1,8 +1,8 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
-import { breadCrumbsReducer } from 'shared';
+import { documentReducer } from 'shared';
 
 const rootReducer = combineReducers({
-  breadCrumbsReducer
+  documentReducer
 });
 
 export const setupStore = (preloadedState?: PreloadedState<TRootState>) => {

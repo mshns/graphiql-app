@@ -4,9 +4,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { DocumentTypeRow } from 'entities';
 import { useAppActions, useAppSelector } from 'shared';
 
-export const DocumentTypeHeader: FC<{ fieldInfo?: IntrospectionField }> = ({ fieldInfo }) => {
+export const DocumentTypeHeader: FC<{ typeAsField?: IntrospectionField }> = ({ typeAsField }) => {
   const { setStepBack } = useAppActions();
-  const { breadCrumbs, currentTypeName } = useAppSelector((state) => state.breadCrumbsReducer);
+  const { breadCrumbs, currentTypeName } = useAppSelector((state) => state.documentReducer);
 
   const stepBackHandler = () => {
     setStepBack();
@@ -16,7 +16,7 @@ export const DocumentTypeHeader: FC<{ fieldInfo?: IntrospectionField }> = ({ fie
     return (
       <section>
         <ArrowBackIcon onClick={stepBackHandler} />
-        <DocumentTypeRow type={currentTypeName} name={fieldInfo?.name} />
+        <DocumentTypeRow type={currentTypeName} name={typeAsField?.name} />
       </section>
     );
   }
