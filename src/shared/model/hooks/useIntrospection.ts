@@ -3,7 +3,7 @@ import { gql, useQuery } from '@apollo/client';
 import { buildClientSchema, getIntrospectionQuery, GraphQLSchema, IntrospectionQuery } from 'graphql';
 
 export const useIntrospection = () => {
-  const { data: introspection } = useQuery<IntrospectionQuery>(
+  const { data: introspection, loading: isLoading } = useQuery<IntrospectionQuery>(
     gql`
       ${getIntrospectionQuery()}
     `
@@ -17,5 +17,5 @@ export const useIntrospection = () => {
     }
   }, [introspection]);
 
-  return { introspection, schema };
+  return { introspection, isLoading, schema };
 };

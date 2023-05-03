@@ -1,35 +1,33 @@
 import { FC } from 'react';
+import { CircularProgress } from '@mui/material';
 import { DocumentBreadCrumbs, DocumentTypeHeader, DocumentArgs, DocumentFields, DocumentRoot } from 'features';
-import { useAppSelector, useIntrospection, useTypesInfo } from 'shared';
-// import { GraphQLObjectType, OperationTypeNode } from 'graphql';
+import { useTypesInfo } from '../model';
+import { useAppSelector, useIntrospection } from 'shared';
 
 const DocumentSideBar: FC = () => {
-  const { introspection } = useIntrospection();
-  const { breadCrumbs, currentTypeName } = useAppSelector((state) => state.breadCrumbsReducer);
-  const { fieldInfo, thisType } = useTypesInfo(introspection, breadCrumbs, currentTypeName);
-
-  // useEffect(() => {
-  //   if (schema) {
-  //     const a = schema.current?.getRootType(OperationTypeNode.QUERY);
-  //     const b = schema.current?.getType('FilmsConnection');
-  //     if (b && 'getFields' in b) {
-  //       console.log(b.getFields());
-  //     }
-  //   }
-  // }, [schema]);
+  const { introspection, isLoading } = useIntrospection();
+  const breadCrumbsState = useAppSelector((state) => state.documentReducer);
+  const { typeAsField, currentType } = useTypesInfo(introspection, breadCrumbsState);
+  const { breadCrumbs } = breadCrumbsState;
 
   return (
     <section>
       <h3>Documentation</h3>
-      {!currentTypeName ? (
-        <DocumentRoot introspection={introspection} />
+      {isLoading ? (
+        <CircularProgress />
       ) : (
-        <section>
+        <>
           <DocumentBreadCrumbs />
-          <DocumentTypeHeader fieldInfo={fieldInfo} />
-          <DocumentArgs fieldInfo={fieldInfo} />
-          <DocumentFields thisType={thisType} />
-        </section>
+          {breadCrumbs.length < 2 ? (
+            <DocumentRoot introspection={introspection} />
+          ) : (
+            <section>
+              <DocumentTypeHeader typeAsField={typeAsField} />
+              <DocumentArgs typeAsField={typeAsField} />
+              <DocumentFields currentType={currentType} />
+            </section>
+          )}
+        </>
       )}
     </section>
   );
