@@ -1,6 +1,11 @@
 import { useMemo } from 'react';
 import { IntrospectionQuery, IntrospectionType, IntrospectionField } from 'graphql';
-import { isIntrospectionObjectType, isIntrospectionNamedOutput, IBreadCrumbs } from 'shared';
+import {
+  isIntrospectionObjectType,
+  isIntrospectionNamedTypeRef,
+  IBreadCrumbs,
+  isIntrospectionInterfaceType
+} from 'shared';
 
 type IntrospectionSearch = IntrospectionType | undefined;
 
@@ -20,9 +25,9 @@ export const useTypesInfo: UseTypesInfo = (introspection, { currentTypeName, par
       currentType = introspection.__schema.types.find((type) => type.name === currentTypeName);
     }
 
-    if (isIntrospectionObjectType(parentType)) {
+    if (isIntrospectionObjectType(parentType) || isIntrospectionInterfaceType(parentType)) {
       typeAsField = parentType.fields.find((field) => {
-        if (isIntrospectionNamedOutput(field.type)) {
+        if (isIntrospectionNamedTypeRef(field.type)) {
           return field.type.name === currentTypeName;
         }
       });

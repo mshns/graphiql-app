@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { IntrospectionField } from 'graphql';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { DocumentTypeRow } from 'entities';
 import { useAppActions, useAppSelector } from 'shared';
 
 export const DocumentTypeHeader: FC<{ typeAsField?: IntrospectionField }> = ({ typeAsField }) => {
@@ -16,7 +15,10 @@ export const DocumentTypeHeader: FC<{ typeAsField?: IntrospectionField }> = ({ t
     return (
       <section>
         <ArrowBackIcon onClick={stepBackHandler} />
-        <DocumentTypeRow type={currentTypeName} name={typeAsField?.name} />
+        <div>
+          {typeAsField?.name ? <span>{typeAsField?.name} :</span> : null}
+          <span>{currentTypeName}</span>
+        </div>
       </section>
     );
   }
