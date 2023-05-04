@@ -25,7 +25,7 @@ export const documentSlice = createSlice({
 
       const prevTypeIndex = state.breadCrumbs.findIndex((type) => type === action.payload);
 
-      if (prevTypeIndex > 0) {
+      if (prevTypeIndex !== -1) {
         state.breadCrumbs = state.breadCrumbs.slice(0, prevTypeIndex + 1);
       } else {
         state.breadCrumbs.push(action.payload);
