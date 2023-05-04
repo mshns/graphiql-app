@@ -4,7 +4,9 @@ import {
   isIntrospectionObjectType,
   isIntrospectionNamedTypeRef,
   IBreadCrumbs,
-  isIntrospectionInterfaceType
+  isIntrospectionInterfaceType,
+  isIntrospectionListTypeRef,
+  isIntrospectionNonNullTypeRef
 } from 'shared';
 
 type IntrospectionSearch = IntrospectionType | undefined;
@@ -19,7 +21,6 @@ export const useTypesInfo: UseTypesInfo = (introspection, { currentTypeName, par
     let parentType: IntrospectionSearch;
     let typeAsField: IntrospectionField | undefined;
     let currentType: IntrospectionSearch;
-
     if (introspection && parentTypeName) {
       parentType = introspection.__schema.types.find((type) => type.name === parentTypeName);
       currentType = introspection.__schema.types.find((type) => type.name === currentTypeName);
@@ -27,6 +28,10 @@ export const useTypesInfo: UseTypesInfo = (introspection, { currentTypeName, par
 
     if (isIntrospectionObjectType(parentType) || isIntrospectionInterfaceType(parentType)) {
       typeAsField = parentType.fields.find((field) => {
+        if (isIntrospectionListTypeRef(field.type) || isIntrospectionNonNullTypeRef(field.type)) {
+          return field.type.ofType.name === currentTypeName;
+        }
+
         if (isIntrospectionNamedTypeRef(field.type)) {
           return field.type.name === currentTypeName;
         }

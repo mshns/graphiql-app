@@ -6,7 +6,8 @@ import {
   DocumentArgs,
   DocumentFields,
   DocumentRoot,
-  DocumentPossibleTypes
+  DocumentPossibleTypes,
+  DocumentMetaData
 } from 'features';
 import { useTypesInfo } from '../model';
 import { useAppSelector, useIntrospection } from 'shared';
@@ -30,7 +31,11 @@ const DocumentSideBar: FC = () => {
           ) : (
             <section>
               <DocumentTypeHeader typeAsField={typeAsField} />
+
+              {typeAsField?.description ? <p>{typeAsField?.description}</p> : null}
+
               <DocumentArgs typeAsField={typeAsField} />
+              <DocumentMetaData currentType={currentType} />
               <DocumentFields currentType={currentType} />
               <DocumentPossibleTypes currentType={currentType} introspection={introspection} />
             </section>
