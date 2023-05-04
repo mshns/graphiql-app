@@ -1,15 +1,15 @@
 import { FC } from 'react';
 import { IntrospectionType } from 'graphql';
-import { sortFieldsArray } from '../lib/sortFieldsArray';
 import { DocumentTypeRow } from 'entities';
-import { isIntrospectionInterfaceType, isIntrospectionObjectType } from 'shared';
+import { isIntrospectionInterfaceType, isIntrospectionObjectType, sortAlphabetArray } from 'shared';
 
 export const DocumentFields: FC<{ currentType?: IntrospectionType }> = ({ currentType }) => {
   if (isIntrospectionObjectType(currentType) || isIntrospectionInterfaceType(currentType)) {
     return (
       <section>
-        {sortFieldsArray(currentType.fields).map((field, i) => (
-          <DocumentTypeRow key={i} name={field.name} type={field.type} />
+        <h4>Fields</h4>
+        {sortAlphabetArray(currentType.fields).map((field, i) => (
+          <DocumentTypeRow key={i + Date.now()} name={field.name} type={field.type} />
         ))}
       </section>
     );

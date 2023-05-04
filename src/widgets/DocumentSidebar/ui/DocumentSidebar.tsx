@@ -1,6 +1,13 @@
 import { FC } from 'react';
-import { CircularProgress } from '@mui/material';
-import { DocumentBreadCrumbs, DocumentTypeHeader, DocumentArgs, DocumentFields, DocumentRoot } from 'features';
+import { Box, CircularProgress } from '@mui/material';
+import {
+  DocumentBreadCrumbs,
+  DocumentTypeHeader,
+  DocumentArgs,
+  DocumentFields,
+  DocumentRoot,
+  DocumentPossibleTypes
+} from 'features';
 import { useTypesInfo } from '../model';
 import { useAppSelector, useIntrospection } from 'shared';
 
@@ -11,7 +18,7 @@ const DocumentSideBar: FC = () => {
   const { breadCrumbs } = breadCrumbsState;
 
   return (
-    <section>
+    <Box>
       <h3>Documentation</h3>
       {isLoading ? (
         <CircularProgress />
@@ -25,11 +32,12 @@ const DocumentSideBar: FC = () => {
               <DocumentTypeHeader typeAsField={typeAsField} />
               <DocumentArgs typeAsField={typeAsField} />
               <DocumentFields currentType={currentType} />
+              <DocumentPossibleTypes currentType={currentType} introspection={introspection} />
             </section>
           )}
         </>
       )}
-    </section>
+    </Box>
   );
 };
 

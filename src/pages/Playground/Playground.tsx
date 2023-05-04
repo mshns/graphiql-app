@@ -12,13 +12,13 @@ export const PlayGround: FC = () => {
   return (
     <Grid container sx={{ height: '100%' }}>
       {isDocumentOpen && (
-        <Grid xl={4} lg={4} item={true}>
+        <Grid xl={3} lg={3} item={true} sx={{ height: '100%', overflow: 'auto' }}>
           <Suspense fallback={<CircularProgress />}>
             <DocumentationSideBar />
           </Suspense>
         </Grid>
       )}
-      <Grid xl={isDocumentOpen ? 4 : 8} lg={isDocumentOpen ? 4 : 8} item={true}>
+      <Grid xl={isDocumentOpen ? 5 : 8} lg={isDocumentOpen ? 5 : 8} item={true}>
         <Grid>
           <QueryTerminal />
         </Grid>
