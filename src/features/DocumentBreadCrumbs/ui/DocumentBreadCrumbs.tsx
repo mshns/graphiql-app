@@ -3,7 +3,7 @@ import { Breadcrumbs, Link } from '@mui/material';
 import { useAppActions, useAppSelector } from 'shared';
 
 export const DocumentBreadCrumbs: FC = () => {
-  const { breadCrumbs } = useAppSelector((state) => state.breadCrumbsReducer);
+  const { breadCrumbs } = useAppSelector((state) => state.documentReducer);
   const { setBreadCrumbs } = useAppActions();
 
   const navHandler = (type: string) => {
@@ -11,9 +11,9 @@ export const DocumentBreadCrumbs: FC = () => {
   };
 
   return (
-    <Breadcrumbs separator="›" maxItems={2} aria-label="breadcrumb">
+    <Breadcrumbs separator="›" maxItems={5} aria-label="breadcrumb">
       {breadCrumbs.map((type, i) => (
-        <Link onClick={() => navHandler(type)} key={i}>
+        <Link onClick={() => navHandler(type)} key={i + Date.now()}>
           {type}
         </Link>
       ))}

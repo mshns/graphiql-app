@@ -1,24 +1,38 @@
 import {
-  IntrospectionInputObjectType,
-  IntrospectionInputTypeRef,
+  IntrospectionInterfaceType,
+  IntrospectionListTypeRef,
   IntrospectionNamedTypeRef,
+  IntrospectionNonNullTypeRef,
   IntrospectionObjectType,
-  IntrospectionOutputTypeRef,
-  IntrospectionType
+  IntrospectionType,
+  IntrospectionTypeRef
 } from 'graphql';
+import { INTROSPECTION_TYPES } from './constants';
+
+export function isIntrospectionType(type: IntrospectionTypeRef): type is IntrospectionType {
+  return INTROSPECTION_TYPES.some((arrType) => type?.kind === arrType);
+}
 
 export function isIntrospectionObjectType(type?: IntrospectionType): type is IntrospectionObjectType {
-  return !!type && 'fields' in type && 'interfaces' in type;
+  return type?.kind === 'OBJECT';
 }
 
-export function isIntrospectionNamedOutput(
-  type: IntrospectionOutputTypeRef
-): type is IntrospectionNamedTypeRef<IntrospectionObjectType> {
+export function isIntrospectionInterfaceType(type?: IntrospectionType): type is IntrospectionInterfaceType {
+  return type?.kind === 'INTERFACE';
+}
+
+export function isIntrospectionNamedTypeRef(type: IntrospectionTypeRef): type is IntrospectionNamedTypeRef {
   return 'name' in type;
 }
 
-export function isIntrospectionNamedInput(
-  type: IntrospectionInputTypeRef
-): type is IntrospectionNamedTypeRef<IntrospectionInputObjectType> {
-  return 'name' in type;
+export function isIntrospectionNonNullTypeRef(
+  type?: IntrospectionTypeRef | null
+): type is IntrospectionNonNullTypeRef<IntrospectionNamedTypeRef> {
+  return type?.kind === 'NON_NULL';
+}
+
+export function isIntrospectionListTypeRef(
+  type?: IntrospectionTypeRef | null
+): type is IntrospectionListTypeRef<IntrospectionNamedTypeRef> {
+  return type?.kind === 'LIST';
 }

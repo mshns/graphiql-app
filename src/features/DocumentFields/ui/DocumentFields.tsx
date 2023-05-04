@@ -1,18 +1,19 @@
 import { FC } from 'react';
 import { IntrospectionType } from 'graphql';
 import { DocumentTypeRow } from 'entities';
-import { isIntrospectionNamedOutput, isIntrospectionObjectType } from 'shared';
+import { isIntrospectionInterfaceType, isIntrospectionObjectType, sortAlphabetArray } from 'shared';
 
-export const DocumentFields: FC<{ thisType?: IntrospectionType }> = ({ thisType }) => {
-  if (!isIntrospectionObjectType(thisType)) {
-    return null;
-  } else {
+export const DocumentFields: FC<{ currentType?: IntrospectionType }> = ({ currentType }) => {
+  if (isIntrospectionObjectType(currentType) || isIntrospectionInterfaceType(currentType)) {
     return (
       <section>
-        {thisType.fields.map((field, i) => (
-          <DocumentTypeRow key={i} name={field.name} type={isIntrospectionNamedOutput(field.type) && field.type.name} />
+        <h4>Fields</h4>
+        {sortAlphabetArray(currentType.fields).map((field, i) => (
+          <DocumentTypeRow key={i + Date.now()} name={field.name} type={field.type} />
         ))}
       </section>
     );
   }
+
+  return null;
 };
