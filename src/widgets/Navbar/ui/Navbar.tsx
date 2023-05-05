@@ -1,9 +1,9 @@
 import { type FC } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Box, ListItemIcon, ListItemButton, ListItem, List, Divider } from '@mui/material';
-import { Container } from './Container.styled';
 import { useAppActions } from 'shared';
 import { NAVIGATION } from '../constants';
+import { Container } from './Container.styled';
 
 export const Navbar: FC = () => {
   const navigate = useNavigate();

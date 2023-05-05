@@ -1,6 +1,6 @@
 import { type FC } from 'react';
-import { Navbar, Footer, Header } from 'widgets';
 import { Box } from '@mui/material';
+import { Navbar, Footer, Header } from 'widgets';
 import { Container } from './Container.styled';
 
 export const Layout: FC = () => {

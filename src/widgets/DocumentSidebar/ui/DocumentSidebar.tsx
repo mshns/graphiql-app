@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Box, CircularProgress } from '@mui/material';
+import { useAppSelector, useIntrospection } from 'shared';
 import {
   DocumentBreadCrumbs,
   DocumentTypeHeader,
@@ -10,7 +11,6 @@ import {
   DocumentMetaData
 } from 'features';
 import { useTypesInfo } from '../model';
-import { useAppSelector, useIntrospection } from 'shared';
 
 const DocumentSideBar: FC = () => {
   const { introspection, isLoading } = useIntrospection();

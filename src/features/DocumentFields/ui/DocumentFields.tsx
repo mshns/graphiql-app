@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { uid } from 'uid';
 import { IntrospectionType } from 'graphql';
 import { DocumentTypeRow } from 'entities';
 import { isIntrospectionInterfaceType, isIntrospectionObjectType, sortAlphabetArray } from 'shared';
@@ -8,8 +9,8 @@ export const DocumentFields: FC<{ currentType?: IntrospectionType }> = ({ curren
     return (
       <section>
         <h4>Fields</h4>
-        {sortAlphabetArray(currentType.fields).map((field, i) => (
-          <DocumentTypeRow key={i + Date.now()} name={field.name} type={field.type} />
+        {sortAlphabetArray(currentType.fields).map((field) => (
+          <DocumentTypeRow key={uid()} name={field.name} type={field.type} />
         ))}
       </section>
     );
