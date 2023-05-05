@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { uid } from 'uid';
 import { IntrospectionQuery, IntrospectionType } from 'graphql';
 import { isIntrospectionInterfaceType, isIntrospectionObjectType, sortAlphabetArray } from 'shared';
 import { DocumentTypeRow } from 'entities';
@@ -19,15 +20,15 @@ export const DocumentPossibleTypes: FC<Props> = ({ currentType, introspection })
   if (isIntrospectionInterfaceType(currentType)) {
     return (
       <section>
-        {currentType.possibleTypes.map((type, i) => {
+        {currentType.possibleTypes.map((type) => {
           return (
-            <section key={i + Date.now()}>
+            <section key={uid()}>
               <h4>{type.name}</h4>
 
               {getType(type.name) ? (
                 <>
-                  {sortAlphabetArray(getType(type.name)!)?.map((arrType, i) => (
-                    <DocumentTypeRow key={i + Date.now()} name={arrType.name} type={arrType.type} />
+                  {sortAlphabetArray(getType(type.name)!)?.map((arrType) => (
+                    <DocumentTypeRow key={uid()} name={arrType.name} type={arrType.type} />
                   ))}
                 </>
               ) : null}
