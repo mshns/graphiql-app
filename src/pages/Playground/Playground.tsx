@@ -1,7 +1,7 @@
 import { FC, lazy, Suspense } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import { QueryConfigBar, QueryTerminal, ResponseBar } from 'widgets';
 import { Grid } from '@mui/material';
+import { QueryConfigBar, QueryTerminal, ResponseBar } from 'widgets';
 import { useAppSelector } from 'shared';
 
 const DocumentationSideBar = lazy(() => import('widgets'));
