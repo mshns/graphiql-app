@@ -1,13 +1,13 @@
 import { FC, Suspense } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, RouteObject } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
-import { About, LogIn, PlayGround, NotFound } from 'pages';
 import { Layout } from 'processes';
-import { ROUTE } from './constants';
+import { About, LogIn, PlayGround, NotFound, SignUp } from 'pages';
+import { ROUTE } from 'shared/constants';
 
-export const routes = [
+export const routes: RouteObject[] = [
   {
-    path: ROUTE.about,
+    path: ROUTE.About,
     element: <Layout />,
     id: 'Layout',
     children: [
@@ -17,21 +17,26 @@ export const routes = [
         id: 'About'
       },
       {
-        path: ROUTE.playground,
+        path: ROUTE.Playground,
         element: <PlayGround />,
         id: 'playground'
+      },
+      {
+        path: ROUTE.Login,
+        element: <LogIn />,
+        id: 'LogIn'
+      },
+      {
+        path: ROUTE.SignUp,
+        element: <SignUp />,
+        id: 'SignUp'
+      },
+      {
+        path: ROUTE.NotFound,
+        element: <NotFound />,
+        id: 'NotFound'
       }
     ]
-  },
-  {
-    path: ROUTE.login,
-    element: <LogIn />,
-    id: 'LogIn'
-  },
-  {
-    path: ROUTE.notFound,
-    element: <NotFound />,
-    id: 'NotFound'
   }
 ];
 
