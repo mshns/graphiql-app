@@ -3,12 +3,13 @@ import { Box, styled } from '@mui/material';
 export const FooterItem = styled(Box)(({ theme }) => ({
   position: 'relative',
   minWidth: 260,
-  height: 90,
+  height: 96,
   margin: 10,
   display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'end',
-  borderTop: `1px solid ${theme.palette.primary.contrastText}`,
+  flexDirection: 'column',
+  justifyContent: 'end',
+  alignItems: 'center',
+  borderTop: `1px solid ${theme.palette.secondary.main}`,
   '&:before': {
     position: 'absolute',
     content: "''",
@@ -16,7 +17,7 @@ export const FooterItem = styled(Box)(({ theme }) => ({
     left: 0,
     width: '25%',
     height: 1,
-    backgroundColor: theme.palette.primary.contrastText
+    backgroundColor: theme.palette.secondary.main
   },
   '&:after': {
     position: 'absolute',
@@ -25,6 +26,6 @@ export const FooterItem = styled(Box)(({ theme }) => ({
     right: 0,
     width: '25%',
     height: 1,
-    backgroundColor: theme.palette.primary.contrastText
+    backgroundColor: theme.palette.secondary.main
   }
 }));

@@ -1,63 +1,60 @@
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Box, SpeedDial, SpeedDialAction, Typography } from '@mui/material';
+import { SpeedDialAction, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
+import { theme } from 'shared';
 import { FooterWrapper } from './FooterWrapper.styled';
 import { FooterItem } from './FooterItem.styled';
+import { AuthorListLogo } from './AuthorListLogo.styled';
+import { SvgIconLogo } from './SvgIconLogo.styled';
 
-import { theme } from 'shared';
-
+import { ReactComponent as LogoRSS } from '../assets/rs_school_js.svg';
+import { ReactComponent as LogoGraphQL } from '../assets/graph_ql.svg';
 import { AUTHORLIST } from 'widgets/Footer/constants';
 
 export const Footer: FC = () => {
   return (
     <FooterWrapper theme={theme}>
       <FooterItem theme={theme}>
-        <Typography variant="h6" component="div" sx={{ color: 'secondary.main' }}>
-          Created by Power Rangers
-        </Typography>
-        <SpeedDial
+        <AuthorListLogo
           ariaLabel="application authors"
-          sx={{ position: 'absolute', bottom: 32, left: 'calc(50% - 28px)' }}
-          icon={<GitHubIcon fontSize="large" sx={{ color: 'secondary.main' }} />}
+          icon={
+            <SvgIconLogo theme={theme} width={'48px'}>
+              <GitHubIcon />
+            </SvgIconLogo>
+          }
         >
           {AUTHORLIST.map((action) => (
             <SpeedDialAction key={action.name} icon={action.icon} tooltipTitle={action.name} />
           ))}
-        </SpeedDial>
+        </AuthorListLogo>
+        <Typography variant="h6" component="div" sx={{ color: 'secondary.main' }}>
+          Created by Power Rangers
+        </Typography>
       </FooterItem>
 
       <FooterItem theme={theme}>
-        <Typography variant="h6" component="div" sx={{ color: 'secondary.main', textAlign: 'center' }}>
+        <Link to="https://graphql.org/">
+          <SvgIconLogo theme={theme} width={'48px'}>
+            <LogoGraphQL />
+          </SvgIconLogo>
+        </Link>
+        <Typography variant="h6" component="div" sx={{ color: 'secondary.main' }}>
           GraphiQL © 2023
         </Typography>
       </FooterItem>
 
       <FooterItem theme={theme}>
-        <Box
-          component={Link}
-          to="https://rs.school/react/"
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            height: 90,
-            textDecoration: 'none'
-          }}
-        >
-          <Box
-            component="img"
-            sx={{ width: 100, mt: 2 }}
-            alt="The Rolling Scopes School"
-            src="https://rs.school/images/rs_school_js.svg"
-          />
-          <Typography variant="h6" component="div" sx={{ color: 'secondary.main' }}>
-            The Rolling Scopes School
-          </Typography>
-        </Box>
+        <Link to="https://rs.school/react/">
+          <SvgIconLogo viewBox="0 0 242 90" theme={theme} width={'92px'}>
+            <LogoRSS />
+          </SvgIconLogo>
+        </Link>
+        <Typography variant="h6" component="div" sx={{ color: 'secondary.main', mt: 0.5 }}>
+          The Rolling Scopes School
+        </Typography>
       </FooterItem>
     </FooterWrapper>
   );
