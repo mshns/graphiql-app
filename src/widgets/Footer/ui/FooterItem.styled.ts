@@ -10,22 +10,18 @@ export const FooterItem = styled(Box)(({ theme }) => ({
   justifyContent: 'end',
   alignItems: 'center',
   borderTop: `1px solid ${theme.palette.secondary.main}`,
-  '&:before': {
+  '&:before, &:after': {
     position: 'absolute',
     content: "''",
     top: '50%',
-    left: 0,
     width: '25%',
     height: 1,
     backgroundColor: theme.palette.secondary.main
   },
+  '&:before': {
+    left: 0
+  },
   '&:after': {
-    position: 'absolute',
-    content: "''",
-    top: '50%',
-    right: 0,
-    width: '25%',
-    height: 1,
-    backgroundColor: theme.palette.secondary.main
+    right: 0
   }
 }));
