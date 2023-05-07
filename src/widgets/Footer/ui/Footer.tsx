@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { SpeedDialAction, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
+import { useTranslation } from 'react-i18next';
 import { theme, LogoGraphQL } from 'shared';
 
 import { AUTHORLIST } from 'widgets/Footer/constants';
@@ -15,6 +16,8 @@ import { SvgIconLogo } from './SvgIconLogo.styled';
 import { ReactComponent as LogoRSS } from './assets/rs_school_js.svg';
 
 export const Footer: FC = () => {
+  const { t } = useTranslation();
+
   return (
     <FooterWrapper theme={theme}>
       <FooterItem theme={theme}>
@@ -31,7 +34,7 @@ export const Footer: FC = () => {
           ))}
         </AuthorListLogo>
         <Typography variant="h6" component="div" sx={{ color: 'secondary.main' }}>
-          Created by Power Rangers
+          {t('Created by Power Rangers')}
         </Typography>
       </FooterItem>
 
@@ -53,7 +56,7 @@ export const Footer: FC = () => {
           </SvgIconLogo>
         </Link>
         <Typography variant="h6" component="div" sx={{ color: 'secondary.main', mt: 0.5 }}>
-          The Rolling Scopes School
+          {t('The Rolling Scopes School')}
         </Typography>
       </FooterItem>
     </FooterWrapper>
