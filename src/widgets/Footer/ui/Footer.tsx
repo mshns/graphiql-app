@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import { SpeedDialAction, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-import { theme } from 'shared';
+import { theme, LogoGraphQL } from 'shared';
+
+import { AUTHORLIST } from 'widgets/Footer/constants';
 import { FooterWrapper } from './FooterWrapper.styled';
 import { FooterItem } from './FooterItem.styled';
 import { AuthorListLogo } from './AuthorListLogo.styled';
 import { SvgIconLogo } from './SvgIconLogo.styled';
 
 import { ReactComponent as LogoRSS } from './assets/rs_school_js.svg';
-import { LogoGraphQL } from 'shared';
-import { AUTHORLIST } from 'widgets/Footer/constants';
 
 export const Footer: FC = () => {
   return (

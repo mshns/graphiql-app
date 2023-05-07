@@ -1,1 +1,1 @@
-export * from './breadCrumbs.slice';
+export * from './document.slice';

@@ -1,4 +1,3 @@
-import path from 'path';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -8,11 +7,9 @@ export default defineConfig({
   base: '/',
   plugins: [react(), svgr(), tsconfigPaths()],
   build: {
-    sourcemap: true
-  },
-  resolve: {
-    alias: {
-      '~variables': path.resolve(__dirname, 'src/app/styles/variables.scss')
+    sourcemap: true,
+    rollupOptions: {
+      external: ['@lezer/lr', '@lezer/highlight', '@lezer/common', '@codemirror/lint']
     }
   }
 });

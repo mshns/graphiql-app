@@ -1,28 +1,48 @@
 import { FC } from 'react';
-import { DocumentBreadCrumbs, DocumentTypeHeader, DocumentArgs, DocumentFields, DocumentRoot } from 'features';
-import { useAppSelector, useIntrospection, useTypesInfo } from 'shared';
+import { Box, CircularProgress } from '@mui/material';
+import { useAppSelector, useIntrospection } from 'shared';
+import {
+  DocumentBreadCrumbs,
+  DocumentTypeHeader,
+  DocumentArgs,
+  DocumentFields,
+  DocumentRoot,
+  DocumentPossibleTypes,
+  DocumentMetaData
+} from 'features';
+import { useTypesInfo } from '../model';
 
 const DocumentSideBar: FC = () => {
-  const { introspection } = useIntrospection();
-  const { breadCrumbs, currentTypeName } = useAppSelector((state) => state.breadCrumbsReducer);
-  const { fieldInfo, thisType } = useTypesInfo(introspection, breadCrumbs, currentTypeName);
-
-  // console.log(introspection);
+  const { introspection, isLoading } = useIntrospection();
+  const breadCrumbsState = useAppSelector((state) => state.documentReducer);
+  const { typeAsField, currentType } = useTypesInfo(introspection, breadCrumbsState);
+  const { breadCrumbs } = breadCrumbsState;
 
   return (
-    <section>
+    <Box>
       <h3>Documentation</h3>
-      {!currentTypeName ? (
-        <DocumentRoot introspection={introspection} />
+      {isLoading ? (
+        <CircularProgress />
       ) : (
-        <section>
+        <>
           <DocumentBreadCrumbs />
-          <DocumentTypeHeader fieldInfo={fieldInfo} />
-          <DocumentArgs fieldInfo={fieldInfo} />
-          <DocumentFields thisType={thisType} />
-        </section>
+          {breadCrumbs.length < 2 ? (
+            <DocumentRoot introspection={introspection} />
+          ) : (
+            <section>
+              <DocumentTypeHeader typeAsField={typeAsField} />
+
+              {typeAsField?.description ? <p>{typeAsField?.description}</p> : null}
+
+              <DocumentArgs typeAsField={typeAsField} />
+              <DocumentMetaData currentType={currentType} />
+              <DocumentFields currentType={currentType} />
+              <DocumentPossibleTypes currentType={currentType} introspection={introspection} />
+            </section>
+          )}
+        </>
       )}
-    </section>
+    </Box>
   );
 };
 

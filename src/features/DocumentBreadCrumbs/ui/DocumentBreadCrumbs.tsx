@@ -1,9 +1,10 @@
 import { FC } from 'react';
+import { uid } from 'uid';
 import { Breadcrumbs, Link } from '@mui/material';
 import { useAppActions, useAppSelector } from 'shared';
 
 export const DocumentBreadCrumbs: FC = () => {
-  const { breadCrumbs } = useAppSelector((state) => state.breadCrumbsReducer);
+  const { breadCrumbs } = useAppSelector((state) => state.documentReducer);
   const { setBreadCrumbs } = useAppActions();
 
   const navHandler = (type: string) => {
@@ -11,9 +12,9 @@ export const DocumentBreadCrumbs: FC = () => {
   };
 
   return (
-    <Breadcrumbs separator="›" maxItems={2} aria-label="breadcrumb">
-      {breadCrumbs.map((type, i) => (
-        <Link onClick={() => navHandler(type)} key={i}>
+    <Breadcrumbs separator="›" maxItems={5} aria-label="breadcrumb">
+      {breadCrumbs.map((type) => (
+        <Link onClick={() => navHandler(type)} key={uid()}>
           {type}
         </Link>
       ))}

@@ -22,6 +22,6 @@
     "typeRoots": ["node_modules/@types", "src/@types"],
     "baseUrl": "./src"
   },
-  "include": ["./src", "global.d.ts", "codegen.ts", "codegen.download.ts", "graphql.config.ts", "graphql.config.ts"],
+  "include": ["./src", "global.d.ts", "codegen.ts", "codegen.download.ts", "graphql.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

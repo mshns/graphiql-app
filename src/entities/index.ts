@@ -1,1 +1,1 @@
-export * from './ui/DocumentTypeRow';
+export * from './DocumentTypeRow/ui/DocumentTypeRow';
