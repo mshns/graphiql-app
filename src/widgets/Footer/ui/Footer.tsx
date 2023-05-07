@@ -10,8 +10,8 @@ import { FooterItem } from './FooterItem.styled';
 import { AuthorListLogo } from './AuthorListLogo.styled';
 import { SvgIconLogo } from './SvgIconLogo.styled';
 
-import { ReactComponent as LogoRSS } from '../assets/rs_school_js.svg';
-import { ReactComponent as LogoGraphQL } from '../assets/graph_ql.svg';
+import { ReactComponent as LogoRSS } from './assets/rs_school_js.svg';
+import { LogoGraphQL } from 'shared';
 import { AUTHORLIST } from 'widgets/Footer/constants';
 
 export const Footer: FC = () => {

@@ -1,3 +1,3 @@
 export * from './model';
 export * from './lib';
-export * from './ui/Theme';
+export * from './ui';
