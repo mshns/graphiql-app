@@ -32,7 +32,7 @@ export const Navbar: FC = () => {
         ))}
       </List>
       <Divider orientation="vertical" />
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1 }}>
         <Outlet />
       </Box>
     </Container>

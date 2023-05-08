@@ -14,7 +14,7 @@ export const DocumentBreadCrumbs: FC = () => {
   return (
     <Breadcrumbs separator="›" maxItems={5} aria-label="breadcrumb">
       {breadCrumbs.map((type) => (
-        <Link onClick={() => navHandler(type)} key={uid()}>
+        <Link href="#" onClick={() => navHandler(type)} key={uid()}>
           {type}
         </Link>
       ))}

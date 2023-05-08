@@ -21,8 +21,8 @@ export function isIntrospectionInterfaceType(type?: IntrospectionType): type is 
   return type?.kind === 'INTERFACE';
 }
 
-export function isIntrospectionNamedTypeRef(type: IntrospectionTypeRef): type is IntrospectionNamedTypeRef {
-  return 'name' in type;
+export function isIntrospectionNamedTypeRef(type?: IntrospectionTypeRef | null): type is IntrospectionNamedTypeRef {
+  return !!type && 'name' in type;
 }
 
 export function isIntrospectionNonNullTypeRef(
