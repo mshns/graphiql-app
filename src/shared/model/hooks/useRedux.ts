@@ -1,13 +1,14 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from '@reduxjs/toolkit';
 import { type TAppDispatch, type TRootState } from 'app';
-import { documentActions } from '../reducers';
+import { documentActions, editorActions } from '../reducers';
 
 const useAppDispatch = () => useDispatch<TAppDispatch>();
 const useAppSelector: TypedUseSelectorHook<TRootState> = useSelector;
 
 const actions = {
-  ...documentActions
+  ...documentActions,
+  ...editorActions
 };
 
 const useAppActions = () => {

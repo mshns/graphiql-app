@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface IBreadCrumbs {
+export interface IDocument {
   breadCrumbs: string[];
   currentTypeName: string;
   parentTypeName: string;
   isDocumentOpen: boolean;
 }
 
-const initialState: IBreadCrumbs = {
+const initialState: IDocument = {
   breadCrumbs: ['Schema'],
   currentTypeName: 'Schema',
   parentTypeName: '',

@@ -3,7 +3,7 @@ import { IntrospectionQuery, IntrospectionType, IntrospectionField } from 'graph
 import {
   isIntrospectionObjectType,
   isIntrospectionNamedTypeRef,
-  IBreadCrumbs,
+  IDocument,
   isIntrospectionInterfaceType,
   isIntrospectionListTypeRef,
   isIntrospectionNonNullTypeRef
@@ -13,7 +13,7 @@ type IntrospectionSearch = IntrospectionType | undefined;
 
 type UseTypesInfo = (
   introspection: IntrospectionQuery | undefined,
-  breadCrumbs: IBreadCrumbs
+  breadCrumbs: IDocument
 ) => { typeAsField?: IntrospectionField; currentType?: IntrospectionType };
 
 export const useTypesInfo: UseTypesInfo = (introspection, { currentTypeName, parentTypeName }) => {
