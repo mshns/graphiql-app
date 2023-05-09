@@ -1,8 +1,7 @@
 import { FC, lazy, Suspense } from 'react';
 import { CircularProgress, Divider, Grid, Paper } from '@mui/material';
 import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
-import { QueryConfigBar, QueryTerminal } from 'widgets';
-import { RequestButton } from 'features';
+import { EditorTools, QueryConfigBar, QueryTerminal } from 'widgets';
 import { useAppActions, useAppSelector, useIntrospection } from 'shared';
 import { DocButton } from './DocButton.styled';
 
@@ -30,7 +29,8 @@ export const PlayGround: FC = () => {
       <Grid xl={isDocumentOpen ? 5 : 8} lg={isDocumentOpen ? 5 : 8} item={true} sx={{ p: 1, height: '100%' }}>
         <Paper sx={{ height: '100%', boxShadow: 3, position: 'relative' }}>
           <QueryTerminal schema={schema} />
-          <RequestButton />
+
+          <EditorTools />
 
           <Divider />
 

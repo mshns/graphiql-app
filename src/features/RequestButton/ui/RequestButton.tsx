@@ -1,14 +1,15 @@
 import { FC } from 'react';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { gql } from 'graphql-request';
+import { Button } from '@mui/material';
 import { isGqlValid, useAppActions, useAppSelector } from 'shared';
-import { ReqButton } from './Button.styled';
 
 export const RequestButton: FC = () => {
   const { query } = useAppSelector((state) => state.editorReducer);
   const { setRequestObject } = useAppActions();
 
   const requesthandler = () => {
+    setRequestObject(null);
     const validatonResult = isGqlValid(query);
 
     if (validatonResult instanceof Error) {
@@ -24,8 +25,8 @@ export const RequestButton: FC = () => {
   };
 
   return (
-    <ReqButton onClick={() => requesthandler()}>
+    <Button onClick={() => requesthandler()} sx={{ minWidth: 'auto' }}>
       <PlayCircleOutlineIcon />
-    </ReqButton>
+    </Button>
   );
 };

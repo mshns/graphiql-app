@@ -6,3 +6,4 @@ export * from './DocumentRoot/ui/DocumentRoot';
 export * from './DocumentPossibleTypes/ui/DocumentPossibleTypes';
 export * from './DocumentMetaData/ui/DocumentMetaData';
 export * from './RequestButton/ui/RequestButton';
+export * from './PrettifyButton/ui/PrettifyButton';
