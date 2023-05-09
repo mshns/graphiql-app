@@ -6,8 +6,8 @@ export const LogoLink = styled(Link)(({ theme }) => ({
   alignItems: 'center',
   transition: 'ease-in-out 0.2s',
   fontSize: 24,
-  fontWeight: 400,
+  fontWeight: 500,
   '&:hover': {
     color: theme.palette.primary.contrastText
   }
-})) as typeof Link;
+}));
