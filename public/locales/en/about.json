@@ -1,6 +1,30 @@
 {
+  "title": "Welcome to GraphiQL!",
+  "subtitle": "Application for writing, validating, and testing GraphQL queries.",
   "description": {
-    "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
+    "part1": "GraphiQL is an application for writing, validating, and testing GraphQL queries. Type queries into this side of the screen, and you will see intelligent typeaheads aware of the current GraphQL type schema and live syntax and validation errors highlighted within the text. GraphQL queries typically start with a character. Lines that start with a # are ignored.",
     "part2": "Switch language between english and german using buttons above."
-  }
+  },
+  "How it works?": "How it works?",
+  "question1": {
+    "title": "What is GraphQL?",
+    "subtitle": "A query language for your API",
+    "answer": "GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools."
+  },
+  "question2": {
+    "title": "Why do you need a GraphiQL?",
+    "subtitle": "Using the GraphiQL",
+    "answer": "GraphiQL enables you to write and execute operations, define variables, view operation results, and explore your schema, among other things."
+  },
+  "question3": {
+    "title": "Why do you need a GraphiQL?",
+    "subtitle": "Using the GraphiQL",
+    "answer": "GraphiQL enables you to write and execute operations, define variables, view operation results, and explore your schema, among other things."
+  },
+  "question4": {
+    "title": "Why do you need a GraphiQL?",
+    "subtitle": "Using the GraphiQL",
+    "answer": "GraphiQL enables you to write and execute operations, define variables, view operation results, and explore your schema, among other things."
+  },
+  "Our Team": "Our Team"
 }
