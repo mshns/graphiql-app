@@ -5,7 +5,7 @@ import { SpeedDialAction, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 import { useTranslation } from 'react-i18next';
-import { theme, LogoGraphQL } from 'shared';
+import { LogoGraphQL } from 'shared';
 
 import { AUTHORLIST } from 'widgets/Footer/constants';
 import { FooterWrapper } from './FooterWrapper.styled';
@@ -16,15 +16,15 @@ import { SvgIconLogo } from './SvgIconLogo.styled';
 import { ReactComponent as LogoRSS } from './assets/rs_school_js.svg';
 
 export const Footer: FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['layout']);
 
   return (
-    <FooterWrapper theme={theme}>
-      <FooterItem theme={theme}>
+    <FooterWrapper>
+      <FooterItem>
         <AuthorListLogo
           ariaLabel="application authors"
           icon={
-            <SvgIconLogo theme={theme} width={'48px'}>
+            <SvgIconLogo width={'48px'}>
               <GitHubIcon />
             </SvgIconLogo>
           }
@@ -38,24 +38,24 @@ export const Footer: FC = () => {
         </Typography>
       </FooterItem>
 
-      <FooterItem theme={theme}>
+      <FooterItem>
         <Link to="https://graphql.org/">
-          <SvgIconLogo theme={theme} width={'48px'}>
+          <SvgIconLogo width={'46px'}>
             <LogoGraphQL />
           </SvgIconLogo>
         </Link>
         <Typography variant="h6" component="div" sx={{ color: 'secondary.main' }}>
-          GraphiQL © 2023
+          {t('GraphiQL © 2023')}
         </Typography>
       </FooterItem>
 
-      <FooterItem theme={theme}>
+      <FooterItem>
         <Link to="https://rs.school/react/">
-          <SvgIconLogo viewBox="0 0 242 90" theme={theme} width={'92px'}>
+          <SvgIconLogo viewBox="0 0 242 90" width={'92px'}>
             <LogoRSS />
           </SvgIconLogo>
         </Link>
-        <Typography variant="h6" component="div" sx={{ color: 'secondary.main', mt: 0.5 }}>
+        <Typography variant="h6" component="div" sx={{ color: 'secondary.main', mt: 0.7 }}>
           {t('The Rolling Scopes School')}
         </Typography>
       </FooterItem>

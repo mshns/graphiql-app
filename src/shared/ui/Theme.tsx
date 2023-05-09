@@ -10,5 +10,11 @@ export const theme = createTheme({
     secondary: {
       main: '#e535ab'
     }
+  },
+  typography: {
+    h6: {
+      fontSize: 12,
+      color: 'red'
+    }
   }
 });

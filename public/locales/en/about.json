@@ -1,6 +1,4 @@
 {
-  "Created by Power Rangers": "Created by Power Rangers",
-  "The Rolling Scopes School": "The Rolling Scopes School",
   "description": {
     "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
     "part2": "Switch language between english and german using buttons above."

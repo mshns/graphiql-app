@@ -1,5 +1,7 @@
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const About: FC = () => {
-  return <section> About</section>;
+  const { t } = useTranslation(['about']);
+  return <section>About {t('description.part1')}</section>;
 };
