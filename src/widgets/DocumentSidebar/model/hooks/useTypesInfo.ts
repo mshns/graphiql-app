@@ -12,18 +12,18 @@ import {
 type IntrospectionSearch = IntrospectionType | undefined;
 
 type UseTypesInfo = (
-  introspection: IntrospectionQuery | undefined,
-  breadCrumbs: IDocument
+  breadCrumbs: IDocument,
+  introspection?: IntrospectionQuery
 ) => { typeAsField?: IntrospectionField; currentType?: IntrospectionType };
 
-export const useTypesInfo: UseTypesInfo = (introspection, { currentTypeName, parentTypeName }) => {
+export const useTypesInfo: UseTypesInfo = ({ currentTypeName, parentTypeName }, introspection) => {
   const typeInfo = useMemo(() => {
     let parentType: IntrospectionSearch;
     let typeAsField: IntrospectionField | undefined;
     let currentType: IntrospectionSearch;
     if (introspection && parentTypeName) {
-      parentType = introspection.__schema.types.find((type) => type.name === parentTypeName);
-      currentType = introspection.__schema.types.find((type) => type.name === currentTypeName);
+      parentType = introspection?.__schema.types.find((type) => type.name === parentTypeName);
+      currentType = introspection?.__schema.types.find((type) => type.name === currentTypeName);
     }
 
     if (isIntrospectionObjectType(parentType) || isIntrospectionInterfaceType(parentType)) {

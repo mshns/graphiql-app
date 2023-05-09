@@ -1,21 +1,26 @@
-import { useEffect, useRef } from 'react';
-import { gql, useQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
 import { buildClientSchema, getIntrospectionQuery, GraphQLSchema, IntrospectionQuery } from 'graphql';
+import { request, gql } from 'graphql-request';
 
 export const useIntrospection = () => {
-  const { data: introspection, loading: isLoading } = useQuery<IntrospectionQuery>(
-    gql`
-      ${getIntrospectionQuery()}
-    `
-  );
-
-  const schema = useRef<GraphQLSchema>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [introspection, setIntrospection] = useState<IntrospectionQuery>();
+  const [schema, setSchema] = useState<GraphQLSchema>();
 
   useEffect(() => {
-    if (introspection) {
-      schema.current = buildClientSchema(introspection);
-    }
-  }, [introspection]);
+    (async () => {
+      const introspectionResponse = await request<IntrospectionQuery>(
+        import.meta.env.VITE_GRAPH_API,
+        gql`
+          ${getIntrospectionQuery()}
+        `
+      );
+      setIntrospection(introspectionResponse);
+      setIsLoading(false);
+
+      setSchema(buildClientSchema(introspectionResponse));
+    })();
+  }, []);
 
   return { introspection, isLoading, schema };
 };
