@@ -1,6 +1,5 @@
-import { FC, Suspense } from 'react';
+import { FC } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import CircularProgress from '@mui/material/CircularProgress';
 import { About, LogIn, PlayGround, NotFound } from 'pages';
 import { Layout } from 'processes';
 import { ROUTE } from './constants';
@@ -37,8 +36,4 @@ export const routes = [
 
 const router = createBrowserRouter(routes);
 
-export const Router: FC = () => (
-  <Suspense fallback={<CircularProgress />}>
-    <RouterProvider router={router} />
-  </Suspense>
-);
+export const Router: FC = () => <RouterProvider router={router} />;
