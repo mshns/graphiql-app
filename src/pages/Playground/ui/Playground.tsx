@@ -8,7 +8,7 @@ import { DocButton } from './DocButton.styled';
 const DocumentationSideBar = lazy(() => import('widgets/DocumentSidebar'));
 const ResponseBar = lazy(() => import('widgets/ResponseBar'));
 
-const PlayGround: FC = () => {
+export const PlayGround: FC = () => {
   const { schema } = useIntrospection();
   const { isDocumentOpen } = useAppSelector((state) => state.documentReducer);
   const { setIsDocumentOpen } = useAppActions();
@@ -44,5 +44,3 @@ const PlayGround: FC = () => {
     </Grid>
   );
 };
-
-export default PlayGround;

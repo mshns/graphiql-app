@@ -3,10 +3,10 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Layout } from 'processes';
 import { ROUTE } from './constants';
 
-const About = lazy(() => import('pages/About/About'));
-const PlayGround = lazy(() => import('pages/Playground/ui/Playground'));
-const LogIn = lazy(() => import('pages/LogIn/LogIn'));
-const NotFound = lazy(() => import('pages/NotFound/NotFound'));
+const About = lazy(() => import('pages').then((component) => ({ default: component.About })));
+const PlayGround = lazy(() => import('pages').then((component) => ({ default: component.PlayGround })));
+const LogIn = lazy(() => import('pages').then((component) => ({ default: component.LogIn })));
+const NotFound = lazy(() => import('pages').then((component) => ({ default: component.NotFound })));
 
 export const routes = [
   {
