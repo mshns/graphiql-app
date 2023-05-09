@@ -1,19 +1,14 @@
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
 import { SpeedDialAction, Typography } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-import { useTranslation } from 'react-i18next';
 import { LogoGraphQL } from 'shared';
-
 import { AUTHORLIST } from 'widgets/Footer/constants';
-import { FooterWrapper } from './FooterWrapper.styled';
-import { FooterItem } from './FooterItem.styled';
-import { AuthorListLogo } from './AuthorListLogo.styled';
-import { SvgIconLogo } from './SvgIconLogo.styled';
-
-import { ReactComponent as LogoRSS } from './assets/rs_school_js.svg';
+import { FooterWrapper, FooterItem, AuthorListLogo, SvgIconLogo } from './styleds';
+import { LogoRSS } from './assets';
 
 export const Footer: FC = () => {
   const { t } = useTranslation(['layout']);
