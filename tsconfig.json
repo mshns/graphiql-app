@@ -18,7 +18,7 @@
     "noEmit": true,
     "noImplicitAny": true,
     "jsx": "react-jsx",
-    "types": ["vite/client", "node", "graphql", "@apollo/client"],
+    "types": ["vite/client", "node", "graphql"],
     "typeRoots": ["node_modules/@types", "src/@types"],
     "baseUrl": "./src"
   },

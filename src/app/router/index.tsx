@@ -1,8 +1,12 @@
-import { FC } from 'react';
+import { FC, lazy } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { About, LogIn, PlayGround, NotFound } from 'pages';
 import { Layout } from 'processes';
 import { ROUTE } from './constants';
+
+const About = lazy(() => import('pages/About/About'));
+const PlayGround = lazy(() => import('pages/Playground/ui/Playground'));
+const LogIn = lazy(() => import('pages/LogIn/LogIn'));
+const NotFound = lazy(() => import('pages/NotFound/NotFound'));
 
 export const routes = [
   {

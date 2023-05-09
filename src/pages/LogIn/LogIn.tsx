@@ -1,3 +1,5 @@
 import { FC } from 'react';
 
-export const LogIn: FC = () => <section>LogIn</section>;
+const LogIn: FC = () => <section>LogIn</section>;
+
+export default LogIn;

@@ -1,6 +1,6 @@
-import { type FC } from 'react';
+import { Suspense, type FC } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Box, ListItemIcon, ListItemButton, ListItem, List, Divider } from '@mui/material';
+import { Box, ListItemIcon, ListItemButton, ListItem, List, Divider, CircularProgress } from '@mui/material';
 import { NAVIGATION } from '../constants';
 import { Container } from './Container.styled';
 
@@ -26,7 +26,9 @@ export const Navbar: FC = () => {
       </List>
       <Divider orientation="vertical" />
       <Box component="main" sx={{ flexGrow: 1 }}>
-        <Outlet />
+        <Suspense fallback={<CircularProgress />}>
+          <Outlet />
+        </Suspense>
       </Box>
     </Container>
   );

@@ -1,3 +1,5 @@
 import { FC } from 'react';
 
-export const NotFound: FC = () => <section>NotFound</section>;
+const NotFound: FC = () => <section>NotFound</section>;
+
+export default NotFound;

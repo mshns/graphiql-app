@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
-export const About: FC = () => {
+const About: FC = () => {
   return <section> About</section>;
 };
+
+export default About;
