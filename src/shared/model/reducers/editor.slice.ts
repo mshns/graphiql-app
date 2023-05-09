@@ -1,13 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export interface IRequestObject {
+  query: string;
+  variables?: { [key: string]: string };
+}
+
 export interface IEditor {
   query: string;
   variables: string;
+  variablesKeymap: string[];
+  requestObject: IRequestObject | null;
 }
 
 const initialState: IEditor = {
-  query: '',
-  variables: ''
+  query: `query {
+  allFilms {
+    films {
+      director
+      created
+    }
+  }
+}`,
+  variables: '',
+  variablesKeymap: [],
+  requestObject: null
 };
 
 export const editorSlice = createSlice({
@@ -20,6 +36,10 @@ export const editorSlice = createSlice({
 
     setVariables(state, action: PayloadAction<string>) {
       state.variables = action.payload;
+    },
+
+    setRequestObject(state, action: PayloadAction<IRequestObject>) {
+      state.requestObject = action.payload;
     }
   }
 });
