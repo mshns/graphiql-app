@@ -14,14 +14,9 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "prepare": "husky install",
-    "lint": "eslint --ext js,ts,tsx,graphql src",
-    "build-codegen": "graphql-codegen --config codegen.ts",
-    "update-schema": "graphql-codegen --config codegen.download.ts",
-    "watch-codegen": "graphql-codegen --watch",
-    "watch": "pnpm run clear && concurrently -k pnpm:watch-codegen pnpm:dev"
+    "lint": "eslint --ext js,ts,tsx,graphql src"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.12",
     "@codemirror/autocomplete": "^6.6.1",
     "@codemirror/commands": "^6.2.4",
     "@codemirror/lang-javascript": "^6.1.7",
