@@ -9,16 +9,22 @@ export const useIntrospection = () => {
 
   useEffect(() => {
     (async () => {
-      const introspectionResponse = await request<IntrospectionQuery>(
-        import.meta.env.VITE_GRAPH_API,
-        gql`
-          ${getIntrospectionQuery()}
-        `
-      );
-      setIntrospection(introspectionResponse);
-      setIsLoading(false);
+      try {
+        const introspectionResponse = await request<IntrospectionQuery>(
+          import.meta.env.VITE_GRAPH_API,
+          gql`
+            ${getIntrospectionQuery()}
+          `
+        );
+        setIntrospection(introspectionResponse);
+        setIsLoading(false);
 
-      setSchema(buildClientSchema(introspectionResponse));
+        setSchema(buildClientSchema(introspectionResponse));
+      } catch (error) {
+        // if (error instanceof Error) {
+        //   console.log(error.message);
+        // }
+      }
     })();
   }, []);
 

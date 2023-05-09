@@ -38,7 +38,7 @@ export const editorSlice = createSlice({
       state.variables = action.payload;
     },
 
-    setRequestObject(state, action: PayloadAction<IRequestObject>) {
+    setRequestObject(state, action: PayloadAction<IRequestObject | null>) {
       state.requestObject = action.payload;
     }
   }

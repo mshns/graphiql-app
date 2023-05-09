@@ -1,32 +1,16 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { default as jsonbeautify } from 'json-beautify';
-import { request } from 'graphql-request';
 import Codemirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
 import { EditorView } from '@codemirror/view';
 import { EditorState } from '@codemirror/state';
 import { useAppSelector } from 'shared';
 import { EXTENTIONS } from 'shared/api';
+import { useGetResponse } from '../model';
 
 const ResponseBar: FC = () => {
-  const [response, setResponse] = useState<unknown>();
   const { requestObject } = useAppSelector((state) => state.editorReducer);
-
-  useEffect(() => {
-    if (requestObject) {
-      (async () => {
-        try {
-          const data = await request<unknown>(import.meta.env.VITE_GRAPH_API, requestObject.query);
-
-          setResponse(data);
-        } catch (error) {
-          // if (error instanceof Error) {
-          //   console.log(error.message);
-          // }
-        }
-      })();
-    }
-  }, [requestObject]);
+  const { response } = useGetResponse(requestObject);
 
   return (
     <Codemirror
