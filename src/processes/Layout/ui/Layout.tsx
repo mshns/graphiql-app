@@ -6,6 +6,7 @@ import { ROUTE, Spinner } from 'shared';
 
 export const Layout: FC = () => {
   const { pathname } = useLocation();
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'background.default' }}>
       <Header />
