@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Box, CircularProgress } from '@mui/material';
-import { useAppSelector, useIntrospection } from 'shared';
+import { Box, Typography } from '@mui/material';
+import { Spinner, useAppSelector, useIntrospection } from 'shared';
 import {
   DocumentBreadCrumbs,
   DocumentTypeHeader,
@@ -12,38 +12,38 @@ import {
 } from 'features';
 import { useTypesInfo } from '../model';
 
-const DocumentSideBar: FC = () => {
+export const DocumentSideBar: FC = () => {
   const { introspection, isLoading } = useIntrospection();
   const breadCrumbsState = useAppSelector((state) => state.documentReducer);
-  const { typeAsField, currentType } = useTypesInfo(introspection, breadCrumbsState);
+  const { typeAsField, currentType } = useTypesInfo(breadCrumbsState, introspection);
   const { breadCrumbs } = breadCrumbsState;
 
   return (
     <Box>
-      <h3>Documentation</h3>
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        Documentation
+      </Typography>
       {isLoading ? (
-        <CircularProgress />
+        <Spinner />
       ) : (
         <>
           <DocumentBreadCrumbs />
           {breadCrumbs.length < 2 ? (
             <DocumentRoot introspection={introspection} />
           ) : (
-            <section>
+            <Box>
               <DocumentTypeHeader typeAsField={typeAsField} />
 
-              {typeAsField?.description ? <p>{typeAsField?.description}</p> : null}
+              {typeAsField?.description ? <Typography variant="body2">{typeAsField?.description}</Typography> : null}
 
               <DocumentArgs typeAsField={typeAsField} />
               <DocumentMetaData currentType={currentType} />
               <DocumentFields currentType={currentType} />
               <DocumentPossibleTypes currentType={currentType} introspection={introspection} />
-            </section>
+            </Box>
           )}
         </>
       )}
     </Box>
   );
 };
-
-export default DocumentSideBar;

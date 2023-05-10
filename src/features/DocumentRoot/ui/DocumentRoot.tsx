@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { IntrospectionQuery } from 'graphql';
-import { DocumentTypeRow } from 'entities';
+import { DocumentTypeHeader, DocumentTypeRow } from 'entities';
 
 export const DocumentRoot: FC<{ introspection?: IntrospectionQuery }> = ({ introspection }) => {
   return (
     <section>
-      <h3>Root Types</h3>
+      <DocumentTypeHeader>Root Types</DocumentTypeHeader>
       <div>
         <DocumentTypeRow name={'query'} type={introspection?.__schema.queryType} />
         <DocumentTypeRow name={'mutation'} type={introspection?.__schema.mutationType} />
