@@ -7,7 +7,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 import { LogoGraphQL } from 'shared';
 import { AUTHORLIST } from 'widgets/Footer/constants';
-import { FooterWrapper, FooterItem, AuthorListLogo, SvgIconLogo } from './styleds';
+import { FooterWrapper, FooterItem, AuthorListLogo, SvgIconLogo } from './styled';
 import { LogoRSS } from './assets';
 
 export const Footer: FC = () => {

@@ -6,7 +6,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { useTranslation } from 'react-i18next';
 
 import { LogoGraphQL } from 'shared';
-import { LogoLink, HeaderButton } from './styleds';
+import { LogoLink, HeaderButton } from './styled';
 
 export const Header: FC = () => {
   const { i18n, t } = useTranslation(['layout']);

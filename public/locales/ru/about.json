@@ -1,30 +1,39 @@
 {
   "title": "Добро пожаловать в GraphiQL!",
   "subtitle": "Приложение для написания, проверки и тестирования запросов GraphQL.",
+
   "description": {
     "part1": "GraphiQL — это приложение для написания, проверки и тестирования запросов GraphQL.",
     "part2": "Switch language between english and german using buttons above."
   },
+
+  "Features of GraphiQL": "Возможности GraphiQL",
+
   "How it works?": "Как это работает?",
+
   "question1": {
     "title": "Что такое GraphQL?",
     "subtitle": "Язык запросов для API-интерфейсов",
     "answer": "GraphQL — это язык запросов для API и среда выполнения этих запросов с введенными вами данными. GraphQL предоставляет полное и понятное описание данных в вашем API, дает клиентам возможность запрашивать именно то, что им нужно, и ничего больше, упрощает развитие API с течением времени и предоставляет мощные инструменты для разработки."
   },
+
   "question2": {
     "title": "Зачем нужен GraphiQL?",
     "subtitle": "Использование GraphiQL",
     "answer": "GraphiQL позволяет вам писать и выполнять операции, определять переменные, просматривать результаты операций, исследовать вашу схему, а также использовать другие полезные инструменты."
   },
+
   "question3": {
     "title": "Why do you need a GraphiQL?",
     "subtitle": "Using the GraphiQL",
     "answer": "GraphiQL enables you to write and execute operations, define variables, view operation results, and explore your schema, among other things."
   },
+
   "question4": {
     "title": "Why do you need a GraphiQL?",
     "subtitle": "Using the GraphiQL",
     "answer": "GraphiQL enables you to write and execute operations, define variables, view operation results, and explore your schema, among other things."
   },
+
   "Our Team": "Наша команда"
 }

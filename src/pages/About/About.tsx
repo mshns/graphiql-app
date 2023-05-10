@@ -7,6 +7,7 @@ import {
   AccordionSummary,
   Avatar,
   Box,
+  Button,
   Divider,
   List,
   ListItem,
@@ -14,10 +15,11 @@ import {
   ListItemText,
   Typography
 } from '@mui/material';
+
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export const About: FC = () => {
-  const { t } = useTranslation(['about', 'translation']);
+  const { t } = useTranslation(['about', 'translation', 'layout']);
 
   const [expanded, setExpanded] = useState<string | false>(false);
 
@@ -27,16 +29,32 @@ export const About: FC = () => {
 
   return (
     <Box sx={{ flexDirection: 'column' }}>
-      <Typography variant="h4" component="h2" sx={{ textAlign: 'center' }}>
+      <Typography variant="h4" component="h2" color="secondary.main" sx={{ textAlign: 'center' }}>
         {t('title')}
       </Typography>
-      <Typography variant="h5" component="h3" sx={{ textAlign: 'center', mb: 2 }}>
+      <Typography variant="h5" component="h3" sx={{ textAlign: 'center' }}>
         {t('subtitle')}
       </Typography>
-      <Typography variant="body2">{t('description.part1')}</Typography>
+
+      <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <Button variant="contained" sx={{ width: 300, m: 1 }}>
+          {t('Sign In', { ns: 'layout' })}
+        </Button>
+        <Button variant="contained" sx={{ width: 300, m: 1 }}>
+          {t('Sign Up', { ns: 'layout' })}
+        </Button>
+      </Box>
 
       <Divider textAlign="center" sx={{ m: 5 }}>
-        <Typography variant="h5" component="h4">
+        <Typography variant="h5" color="secondary.main" component="h4">
+          {t('Features of GraphiQL')}
+        </Typography>
+      </Divider>
+
+      <Typography>{t('description.part1')}</Typography>
+
+      <Divider textAlign="center" sx={{ m: 5 }}>
+        <Typography variant="h5" color="secondary.main" component="h4">
           {t('How it works?')}
         </Typography>
       </Divider>
@@ -79,7 +97,7 @@ export const About: FC = () => {
       </Accordion>
 
       <Divider textAlign="center" sx={{ m: 5 }}>
-        <Typography variant="h5" component="h4">
+        <Typography variant="h5" color="secondary.main" component="h4">
           {t('Our Team')}
         </Typography>
       </Divider>
