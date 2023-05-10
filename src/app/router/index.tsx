@@ -1,16 +1,17 @@
-import { FC, lazy } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { FC } from 'react';
+import { RouterProvider, createBrowserRouter, RouteObject } from 'react-router-dom';
 import { Layout } from 'processes';
-import { ROUTE } from './constants';
+import { ROUTE, getLazyComponent } from 'shared';
 
-const About = lazy(() => import('pages').then((component) => ({ default: component.About })));
-const PlayGround = lazy(() => import('pages').then((component) => ({ default: component.PlayGround })));
-const LogIn = lazy(() => import('pages').then((component) => ({ default: component.LogIn })));
-const NotFound = lazy(() => import('pages').then((component) => ({ default: component.NotFound })));
+const About = getLazyComponent('pages', 'About');
+const PlayGround = getLazyComponent('pages', 'PlayGround');
+const LogIn = getLazyComponent('pages', 'LogIn');
+const SignUp = getLazyComponent('pages', 'SignUp');
+const NotFound = getLazyComponent('pages', 'NotFound');
 
-export const routes = [
+export const routes: RouteObject[] = [
   {
-    path: ROUTE.about,
+    path: ROUTE.About,
     element: <Layout />,
     id: 'Layout',
     children: [
@@ -20,21 +21,26 @@ export const routes = [
         id: 'About'
       },
       {
-        path: ROUTE.playground,
+        path: ROUTE.Playground,
         element: <PlayGround />,
         id: 'playground'
+      },
+      {
+        path: ROUTE.Login,
+        element: <LogIn />,
+        id: 'LogIn'
+      },
+      {
+        path: ROUTE.SignUp,
+        element: <SignUp />,
+        id: 'SignUp'
+      },
+      {
+        path: ROUTE.NotFound,
+        element: <NotFound />,
+        id: 'NotFound'
       }
     ]
-  },
-  {
-    path: ROUTE.login,
-    element: <LogIn />,
-    id: 'LogIn'
-  },
-  {
-    path: ROUTE.notFound,
-    element: <NotFound />,
-    id: 'NotFound'
   }
 ];
 

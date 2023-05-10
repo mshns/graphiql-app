@@ -12,7 +12,7 @@ import {
 } from 'features';
 import { useTypesInfo } from '../model';
 
-const DocumentSideBar: FC = () => {
+export const DocumentSideBar: FC = () => {
   const { introspection, isLoading } = useIntrospection();
   const breadCrumbsState = useAppSelector((state) => state.documentReducer);
   const { typeAsField, currentType } = useTypesInfo(breadCrumbsState, introspection);
@@ -47,5 +47,3 @@ const DocumentSideBar: FC = () => {
     </Grid>
   );
 };
-
-export default DocumentSideBar;

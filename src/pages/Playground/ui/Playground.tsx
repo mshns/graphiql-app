@@ -1,12 +1,12 @@
-import { FC, lazy, Suspense } from 'react';
+import { FC, Suspense } from 'react';
 import { CircularProgress, Divider, Grid, Paper } from '@mui/material';
 import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
 import { EditorTools, QueryConfigBar, QueryTerminal } from 'widgets';
-import { useAppActions, useAppSelector, useIntrospection } from 'shared';
+import { getLazyComponent, useAppActions, useAppSelector, useIntrospection } from 'shared';
 import { DocButton } from './DocButton.styled';
 
-const DocumentationSideBar = lazy(() => import('widgets/DocumentSidebar'));
-const ResponseBar = lazy(() => import('widgets/ResponseBar'));
+const DocumentationSideBar = getLazyComponent('widgets', 'DocumentSideBar');
+const ResponseBar = getLazyComponent('widgets', 'ResponseBar');
 
 export const PlayGround: FC = () => {
   const { schema } = useIntrospection();
@@ -27,7 +27,7 @@ export const PlayGround: FC = () => {
       </Suspense>
 
       <Grid xl={isDocumentOpen ? 5 : 8} lg={isDocumentOpen ? 5 : 8} item={true} sx={{ p: 1, height: '100%' }}>
-        <Paper sx={{ height: '100%', boxShadow: 3, position: 'relative' }}>
+        <Paper sx={{ height: '100%', boxShadow: 3, position: 'relative', overflow: 'hidden' }}>
           <QueryTerminal schema={schema} />
 
           <EditorTools />

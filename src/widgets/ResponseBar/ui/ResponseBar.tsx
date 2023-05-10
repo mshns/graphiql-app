@@ -8,7 +8,7 @@ import { useAppSelector } from 'shared';
 import { EXTENTIONS } from 'shared/api';
 import { useGetResponse } from '../model';
 
-const ResponseBar: FC = () => {
+export const ResponseBar: FC = () => {
   const { requestObject } = useAppSelector((state) => state.editorReducer);
   const { response } = useGetResponse(requestObject);
 
@@ -22,5 +22,3 @@ const ResponseBar: FC = () => {
     />
   );
 };
-
-export default ResponseBar;
