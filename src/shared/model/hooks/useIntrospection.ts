@@ -3,13 +3,15 @@ import { buildClientSchema, getIntrospectionQuery, GraphQLSchema, IntrospectionQ
 import { request, gql } from 'graphql-request';
 
 export const useIntrospection = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [introspection, setIntrospection] = useState<IntrospectionQuery>();
   const [schema, setSchema] = useState<GraphQLSchema>();
 
   useEffect(() => {
     (async () => {
       try {
+        setIsLoading(true);
+
         const introspectionResponse = await request<IntrospectionQuery>(
           import.meta.env.VITE_GRAPH_API,
           gql`
@@ -17,7 +19,6 @@ export const useIntrospection = () => {
           `
         );
         setIntrospection(introspectionResponse);
-        setIsLoading(false);
 
         setSchema(buildClientSchema(introspectionResponse));
       } catch (error) {
@@ -25,6 +26,7 @@ export const useIntrospection = () => {
         //   console.log(error.message);
         // }
       }
+      setIsLoading(false);
     })();
   }, []);
 

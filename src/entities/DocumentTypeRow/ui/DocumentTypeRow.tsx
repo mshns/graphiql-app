@@ -24,12 +24,13 @@ export const DocumentTypeRow: FC<Props> = ({ type, name }) => {
     if (isNonNull || isList) {
       return (
         <Link
+          underline="hover"
           href="#"
           onClick={() => setBreadCrumbs(type.ofType.name)}
-          sx={{ display: 'flex', gap: '0.5em', textDecoration: 'none' }}
+          sx={{ display: 'flex', gap: '0.5em' }}
         >
-          <Typography>{name}: </Typography>
-          <Typography> {isNonNull ? `${type.ofType.name}!` : `[${type.ofType.name}]`} </Typography>
+          <Typography variant="body2">{name}: </Typography>
+          <Typography variant="body2"> {isNonNull ? `${type.ofType.name}!` : `[${type.ofType.name}]`} </Typography>
         </Link>
       );
     }
@@ -37,12 +38,13 @@ export const DocumentTypeRow: FC<Props> = ({ type, name }) => {
     if (isNamed) {
       return (
         <Link
+          underline="hover"
           href="#"
           onClick={() => setBreadCrumbs(type.name)}
-          sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.5em', textDecoration: 'none' }}
+          sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.5em' }}
         >
-          <Typography>{name}: </Typography>
-          <Typography>{type.name}</Typography>
+          <Typography variant="body2">{name}: </Typography>
+          <Typography variant="body2">{type.name}</Typography>
         </Link>
       );
     }

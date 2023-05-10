@@ -1,7 +1,6 @@
 import { FC, useCallback, useEffect, useRef } from 'react';
 import { GraphQLSchema } from 'graphql';
 import Codemirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
-import { Box } from '@mui/material';
 import { graphql, updateSchema } from 'cm6-graphql';
 import { useAppActions, useAppSelector } from 'shared';
 import { EXTENTIONS } from 'shared/api';
@@ -26,22 +25,21 @@ export const QueryTerminal: FC<{ schema: GraphQLSchema | undefined }> = ({ schem
   }, [schema, codemirror]);
 
   return (
-    <Box sx={{ height: '80%' }}>
-      <Codemirror
-        style={{ height: '100%' }}
-        ref={codemirror}
-        value={query}
-        theme={'none'}
-        onChange={onChange}
-        indentWithTab={false}
-        extensions={[...EXTENTIONS, graphql()]}
-        basicSetup={{
-          highlightActiveLine: false,
-          highlightActiveLineGutter: false,
-          defaultKeymap: false,
-          completionKeymap: false
-        }}
-      />
-    </Box>
+    <Codemirror
+      style={{ overflow: 'hidden', height: '70%' }}
+      ref={codemirror}
+      height="100%"
+      value={query}
+      theme={'none'}
+      onChange={onChange}
+      indentWithTab={false}
+      extensions={[...EXTENTIONS, graphql()]}
+      basicSetup={{
+        highlightActiveLine: false,
+        highlightActiveLineGutter: false,
+        defaultKeymap: false,
+        completionKeymap: false
+      }}
+    />
   );
 };

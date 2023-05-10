@@ -4,14 +4,12 @@ export interface IDocument {
   breadCrumbs: string[];
   currentTypeName: string;
   parentTypeName: string;
-  isDocumentOpen: boolean;
 }
 
 const initialState: IDocument = {
   breadCrumbs: ['Schema'],
   currentTypeName: 'Schema',
-  parentTypeName: '',
-  isDocumentOpen: false
+  parentTypeName: ''
 };
 
 export const documentSlice = createSlice({
@@ -43,10 +41,6 @@ export const documentSlice = createSlice({
         state.breadCrumbs.pop();
         state.parentTypeName = state.breadCrumbs.at(-2) || '';
       }
-    },
-
-    setIsDocumentOpen(state) {
-      state.isDocumentOpen = !state.isDocumentOpen;
     }
   }
 });

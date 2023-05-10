@@ -1,45 +1,49 @@
-import { FC, Suspense } from 'react';
-import { CircularProgress, Divider, Grid, Paper } from '@mui/material';
-import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
-import { EditorTools, QueryConfigBar, QueryTerminal } from 'widgets';
-import { getLazyComponent, useAppActions, useAppSelector, useIntrospection } from 'shared';
-import { DocButton } from './DocButton.styled';
+import { FC, Suspense, useState } from 'react';
+import { Grid } from '@mui/material';
+import { Editor } from 'widgets';
+import { DocumentButton } from 'entities';
+import { Spinner, getLazyComponent, useAppSelector } from 'shared';
 
 const DocumentationSideBar = getLazyComponent('widgets', 'DocumentSideBar');
-const ResponseBar = getLazyComponent('widgets', 'ResponseBar');
+const ResponseBar = getLazyComponent('features', 'ResponseBar');
 
 export const PlayGround: FC = () => {
-  const { schema } = useIntrospection();
-  const { isDocumentOpen } = useAppSelector((state) => state.documentReducer);
-  const { setIsDocumentOpen } = useAppActions();
+  const [isDocumentOpen, setIsDocumentOpen] = useState(false);
   const { requestObject } = useAppSelector((state) => state.editorReducer);
 
   return (
-    <Grid container sx={{ height: '100%', backgroundColor: '#f3f3f3', p: 3, position: 'relative' }}>
-      <Suspense fallback={<CircularProgress />}>
-        {isDocumentOpen ? (
-          <DocumentationSideBar />
-        ) : (
-          <DocButton variant="contained" onClick={() => setIsDocumentOpen()}>
-            <BookOutlinedIcon />
-          </DocButton>
-        )}
-      </Suspense>
-
-      <Grid xl={isDocumentOpen ? 5 : 8} lg={isDocumentOpen ? 5 : 8} item={true} sx={{ p: 1, height: '100%' }}>
-        <Paper sx={{ height: '100%', boxShadow: 3, position: 'relative', overflow: 'hidden' }}>
-          <QueryTerminal schema={schema} />
-
-          <EditorTools />
-
-          <Divider />
-
-          <QueryConfigBar schema={schema} />
-        </Paper>
+    <Grid container sx={{ height: '100%' }}>
+      <Grid
+        xl={isDocumentOpen ? 3 : 0}
+        lg={isDocumentOpen ? 3 : 0}
+        item
+        sx={{ height: '100%', overflow: 'auto', p: isDocumentOpen ? 1 : 0, position: 'relative' }}
+      >
+        <Suspense fallback={<Spinner />}>{isDocumentOpen && <DocumentationSideBar />}</Suspense>
       </Grid>
 
-      <Grid xl={4} lg={4} item={true} sx={{ p: 1, height: '100%' }}>
-        <Suspense fallback={<CircularProgress />}>{!!requestObject && <ResponseBar />}</Suspense>
+      <Grid
+        xl={isDocumentOpen ? 9 : 12}
+        lg={isDocumentOpen ? 9 : 12}
+        item
+        sx={{ display: 'flex', height: '100%', gap: '0.5em', flexDirection: 'column' }}
+      >
+        <DocumentButton isDocumentOpen={isDocumentOpen} setIsOpen={setIsDocumentOpen} />
+
+        <Grid container sx={{ flex: 1, maxHeight: '90%' }} item spacing={2}>
+          <Grid item xl={6} lg={6} sx={{ display: 'flex', height: '100%' }}>
+            <Editor />
+          </Grid>
+
+          <Grid
+            item
+            xl={6}
+            lg={6}
+            sx={{ height: '100%', display: 'flex', justifyContent: 'center', position: 'relative' }}
+          >
+            <Suspense fallback={<Spinner />}>{!!requestObject && <ResponseBar />}</Suspense>
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );

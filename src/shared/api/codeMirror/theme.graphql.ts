@@ -2,9 +2,7 @@ import { EditorView } from '@codemirror/view';
 
 export const QUERY_EDITOR_THEME = EditorView.baseTheme({
   '&': {
-    height: '100%',
     color: '#7e7e7e',
-    overflowY: 'auto',
     backgroundColor: 'transparent'
   },
   '&.cm-editor.cm-focused': {

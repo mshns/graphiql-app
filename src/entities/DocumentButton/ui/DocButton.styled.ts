@@ -1,17 +1,14 @@
 import { Button, styled } from '@mui/material';
 
 export const DocButton = styled(Button)(() => ({
-  position: 'absolute',
-  top: '1rem',
-  left: 0,
-  zIndex: 200,
+  alignSelf: 'flex-start',
   minWidth: 'auto',
   padding: '0.5em',
-  backgroundColor: '#fff',
+  backgroundColor: 'transparent',
+  boxShadow: 'none',
   color: 'rgba(0, 0, 0, 0.54)',
-  borderTopLeftRadius: 0,
-  borderBottomLeftRadius: 0,
   '&:hover': {
-    backgroundColor: 'rgb(243 243 243)'
+    backgroundColor: 'rgb(208 208 208)',
+    boxShadow: 'none'
   }
 }));
