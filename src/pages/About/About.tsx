@@ -17,12 +17,12 @@ import {
 } from '@mui/material';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { QUESTIONLIST, TEAMLIST } from './constants';
 
 export const About: FC = () => {
   const { t } = useTranslation(['about', 'translation', 'layout']);
 
-  const [expanded, setExpanded] = useState<string | false>(false);
-
+  const [expanded, setExpanded] = useState<string | false>('question1');
   const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -59,42 +59,17 @@ export const About: FC = () => {
         </Typography>
       </Divider>
 
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>{t('question1.title')}</Typography>
-          <Typography sx={{ color: 'text.secondary' }}>{t('question1.subtitle')}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>{t('question1.answer')}</Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2bh-content" id="panel2bh-header">
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>{t('question2.title')}</Typography>
-          <Typography sx={{ color: 'text.secondary' }}>{t('question2.subtitle')}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>{t('question2.answer')}</Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel3bh-content" id="panel3bh-header">
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>{t('question3.title')}</Typography>
-          <Typography sx={{ color: 'text.secondary' }}>{t('question3.subtitle')}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>{t('question3.answer')}</Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel4bh-content" id="panel4bh-header">
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>{t('question4.title')}</Typography>
-          <Typography sx={{ color: 'text.secondary' }}>{t('question4.subtitle')}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>{t('question4.answer')}</Typography>
-        </AccordionDetails>
-      </Accordion>
+      {QUESTIONLIST.map((question) => (
+        <Accordion key={question} expanded={expanded === question} onChange={handleChange(question)}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography sx={{ width: '33%', flexShrink: 0 }}>{t(`${question}.title`)}</Typography>
+            <Typography sx={{ color: 'text.secondary' }}>{t(`${question}.subtitle`)}</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>{t(`${question}.answer`)}</Typography>
+          </AccordionDetails>
+        </Accordion>
+      ))}
 
       <Divider textAlign="center" sx={{ m: 5 }}>
         <Typography variant="h5" color="secondary.main" component="h4">
@@ -111,42 +86,17 @@ export const About: FC = () => {
           flexWrap: 'wrap'
         }}
       >
-        <ListItem sx={{ width: 250 }}>
-          <ListItemAvatar>
-            <Avatar alt="Nikita Kisly" src="https://avatars.githubusercontent.com/u/83978362?v=4" />
-          </ListItemAvatar>
-          <ListItemText
-            primary={t('Nikita Kisly', { ns: 'translation' })}
-            secondary={t('Team Lead', { ns: 'translation' })}
-          />
-        </ListItem>
-        <ListItem sx={{ width: 250 }}>
-          <ListItemAvatar>
-            <Avatar alt="Hanna Yemelyanava" src="https://avatars.githubusercontent.com/u/107081776?v=4" />
-          </ListItemAvatar>
-          <ListItemText
-            primary={t('Hanna Yemelyanava', { ns: 'translation' })}
-            secondary={t('Front-End Developer', { ns: 'translation' })}
-          />
-        </ListItem>
-        <ListItem sx={{ width: 250 }}>
-          <ListItemAvatar>
-            <Avatar alt="Mikhail Nosikov" src="https://avatars.githubusercontent.com/u/106452809?v=4" />
-          </ListItemAvatar>
-          <ListItemText
-            primary={t('Mikhail Nosikov', { ns: 'translation' })}
-            secondary={t('Designer', { ns: 'translation' })}
-          />
-        </ListItem>
-        <ListItem sx={{ width: 250 }}>
-          <ListItemAvatar>
-            <Avatar alt="Iaroslav Silkin" src="https://avatars.githubusercontent.com/u/47328756?v=4" />
-          </ListItemAvatar>
-          <ListItemText
-            primary={t('Iaroslav Silkin', { ns: 'translation' })}
-            secondary={t('Mentor', { ns: 'translation' })}
-          />
-        </ListItem>
+        {TEAMLIST.map((item) => (
+          <ListItem key={item.teammate} sx={{ width: 250 }}>
+            <ListItemAvatar>
+              <Avatar alt={item.teammate} src={item.avatar} />
+            </ListItemAvatar>
+            <ListItemText
+              primary={t(item.teammate, { ns: 'translation' })}
+              secondary={t(item.position, { ns: 'translation' })}
+            />
+          </ListItem>
+        ))}
       </List>
     </Box>
   );
