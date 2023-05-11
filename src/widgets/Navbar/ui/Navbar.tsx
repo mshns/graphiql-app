@@ -1,6 +1,7 @@
 import { type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ListItemIcon, ListItemButton, ListItem, List } from '@mui/material';
+import { theme } from 'shared';
 import { NAVIGATION } from '../constants';
 
 export const Navbar: FC = () => {
@@ -10,7 +11,9 @@ export const Navbar: FC = () => {
     <List>
       {NAVIGATION.map((nav) => (
         <ListItem key={nav.id} disablePadding onClick={() => navigate(nav.route)}>
-          <ListItemButton>
+          <ListItemButton
+            sx={{ backgroundColor: location.pathname === nav.route ? theme.palette.primary.dark : 'transparent' }}
+          >
             <ListItemIcon
               sx={{
                 minWidth: 0

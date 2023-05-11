@@ -5,7 +5,7 @@ import { Button } from '@mui/material';
 import { isGqlValid, useAppActions, useAppSelector } from 'shared';
 
 export const RequestButton: FC = () => {
-  const { query } = useAppSelector((state) => state.editorReducer);
+  const { query, variables } = useAppSelector((state) => state.editorReducer);
   const { setRequestObject } = useAppActions();
 
   const requesthandler = () => {
@@ -17,11 +17,12 @@ export const RequestButton: FC = () => {
       return;
     }
 
-    setRequestObject({
-      query: gql`
-        ${query}
-      `
-    });
+    const queryRequest = gql`
+      ${query}
+    `;
+    const variablesRequest = JSON.parse(variables);
+
+    setRequestObject({ query: queryRequest, variables: variablesRequest });
   };
 
   return (

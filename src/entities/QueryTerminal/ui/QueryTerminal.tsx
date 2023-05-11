@@ -2,8 +2,7 @@ import React, { FC, useCallback, useEffect, useRef } from 'react';
 import { GraphQLSchema } from 'graphql';
 import Codemirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { graphql, updateSchema } from 'cm6-graphql';
-import { prettifyGraphql, useAppActions, useAppSelector } from 'shared';
-import { EXTENTIONS } from 'shared/api';
+import { prettifyGraphql, useAppActions, useAppSelector, EXTENTIONS } from 'shared';
 
 export const QueryTerminal: FC<{ schema: GraphQLSchema | undefined }> = ({ schema }) => {
   const codemirror = useRef<ReactCodeMirrorRef | null>(null);
@@ -32,7 +31,7 @@ export const QueryTerminal: FC<{ schema: GraphQLSchema | undefined }> = ({ schem
 
   return (
     <Codemirror
-      style={{ overflow: 'hidden', height: '70%' }}
+      style={{ overflow: 'hidden', maxHeight: '100%', flex: '1 1 auto' }}
       ref={codemirror}
       height="100%"
       value={query}

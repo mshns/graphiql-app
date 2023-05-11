@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Divider, Paper } from '@mui/material';
-import { EditorTools, QueryVariables, QueryTerminal } from 'features';
+import { QueryTerminal } from 'entities';
+import { EditorConfigBar, EditorTools } from 'features';
 import { useIntrospection } from 'shared';
 
 export const Editor: FC = () => {
@@ -9,6 +10,8 @@ export const Editor: FC = () => {
   return (
     <Paper
       sx={{
+        display: 'flex',
+        flexDirection: 'column',
         flex: '0 0 100%',
         boxShadow: 3,
         position: 'relative',
@@ -21,7 +24,7 @@ export const Editor: FC = () => {
 
       <Divider />
 
-      <QueryVariables schema={schema} />
+      <EditorConfigBar />
     </Paper>
   );
 };
