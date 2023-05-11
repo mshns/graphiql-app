@@ -1,8 +1,8 @@
-import { FC, useCallback, useEffect, useRef } from 'react';
+import React, { FC, useCallback, useEffect, useRef } from 'react';
 import { GraphQLSchema } from 'graphql';
 import Codemirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { graphql, updateSchema } from 'cm6-graphql';
-import { useAppActions, useAppSelector } from 'shared';
+import { prettifyGraphql, useAppActions, useAppSelector } from 'shared';
 import { EXTENTIONS } from 'shared/api';
 
 export const QueryTerminal: FC<{ schema: GraphQLSchema | undefined }> = ({ schema }) => {
@@ -15,6 +15,12 @@ export const QueryTerminal: FC<{ schema: GraphQLSchema | undefined }> = ({ schem
     },
     [setQuery]
   );
+
+  const prettifyHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
+      prettifyGraphql(query, setQuery);
+    }
+  };
 
   useEffect(() => {
     if (codemirror && schema) {
@@ -32,6 +38,7 @@ export const QueryTerminal: FC<{ schema: GraphQLSchema | undefined }> = ({ schem
       value={query}
       theme={'none'}
       onChange={onChange}
+      onKeyDown={prettifyHandler}
       indentWithTab={false}
       extensions={[...EXTENTIONS, graphql()]}
       basicSetup={{

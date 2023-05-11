@@ -5,7 +5,7 @@ import { graphql, updateSchema } from 'cm6-graphql';
 import { useAppActions, useAppSelector } from 'shared';
 import { EXTENTIONS } from 'shared/api';
 
-export const QueryConfigBar: FC<{ schema: GraphQLSchema | undefined }> = ({ schema }) => {
+export const QueryVariables: FC<{ schema: GraphQLSchema | undefined }> = ({ schema }) => {
   const codemirror = useRef<ReactCodeMirrorRef | null>(null);
   const { setVariables } = useAppActions();
   const { variables } = useAppSelector((state) => state.editorReducer);

@@ -7,5 +7,5 @@ export * from './DocumentPossibleTypes/ui/DocumentPossibleTypes';
 export * from './DocumentMetaData/ui/DocumentMetaData';
 
 export * from './QueryTerminal/ui/QueryTerminal';
-export * from './QueryConfigBar/ui/QueryConfigBar';
+export * from './QueryVariables/ui/QueryVariables';
 export * from './EditorTools/ui/EditorTools';
