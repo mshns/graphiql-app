@@ -7,7 +7,29 @@
     "part2": "Switch language between english and german using buttons above."
   },
 
+  "Please sign in to start using GraphiQL": "Please sign in to start using GraphiQL",
+
   "Features of GraphiQL": "Features of GraphiQL",
+
+  "feature1": {
+    "title": "Query Generation",
+    "subtitle": "Generate Graphql queries with random input data by extracting details from your graphql endpoint or schema text."
+  },
+
+  "feature2": {
+    "title": "Support variables and headers",
+    "subtitle": "GraphiQL provides flexibility by allowing you to set custom variables and headers."
+  },
+
+  "feature3": {
+    "title": "Schema documentation",
+    "subtitle": "You can view and navigate the documentation for the GraphQL schema."
+  },
+
+  "feature4": {
+    "title": "User friendly interface",
+    "subtitle": "In the settings, you can choose the language and color theme of the application."
+  },
 
   "How it works?": "How it works?",
 
@@ -19,20 +41,20 @@
 
   "question2": {
     "title": "Why do you need a GraphiQL?",
-    "subtitle": "Using the GraphiQL",
-    "answer": "GraphiQL enables you to write and execute operations, define variables, view operation results, and explore your schema, among other things."
+    "subtitle": "Working with GraphQL queries",
+    "answer": "GraphiQL is a free application that helps you with things like executing GraphQL queries, modifying and subscribing, minimizing queries, loading schemas, and more. It provides all of this in a simple yet powerful editor and user-friendly interface. It is an indispensable tool for developer."
   },
 
   "question3": {
-    "title": "Why do you need a GraphiQL?",
-    "subtitle": "Using the GraphiQL",
-    "answer": "GraphiQL enables you to write and execute operations, define variables, view operation results, and explore your schema, among other things."
+    "title": "How it's built?",
+    "subtitle": "React and TypeScript",
+    "answer": "GraphiQL is built on modern web technologies using React - a JavaScript web framework, and written in Typescript."
   },
 
   "question4": {
-    "title": "Why do you need a GraphiQL?",
-    "subtitle": "Using the GraphiQL",
-    "answer": "GraphiQL enables you to write and execute operations, define variables, view operation results, and explore your schema, among other things."
+    "title": "Where to begin?",
+    "subtitle": "Please sigh in to get started",
+    "answer": "GraphiGL is a free application. Please sign in and enjoy working in the editor."
   },
 
   "Our Team": "Our Team"

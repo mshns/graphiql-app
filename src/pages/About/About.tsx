@@ -9,7 +9,6 @@ import {
   Box,
   Button,
   Divider,
-  List,
   ListItem,
   ListItemAvatar,
   ListItemText,
@@ -17,12 +16,13 @@ import {
 } from '@mui/material';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { QUESTIONLIST, TEAMLIST } from './constants';
+import { CardList } from './ui/styled';
+import { FEATURELIST, QUESTIONLIST, TEAMLIST } from './constants';
 
 export const About: FC = () => {
   const { t } = useTranslation(['about', 'translation', 'layout']);
 
-  const [expanded, setExpanded] = useState<string | false>('question1');
+  const [expanded, setExpanded] = useState<string | false>('question2');
   const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -37,10 +37,10 @@ export const About: FC = () => {
       </Typography>
 
       <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <Button variant="contained" sx={{ width: 300, m: 1 }}>
+        <Button variant="contained" sx={{ width: 200, m: 1 }}>
           {t('Sign In', { ns: 'layout' })}
         </Button>
-        <Button variant="contained" sx={{ width: 300, m: 1 }}>
+        <Button variant="contained" sx={{ width: 200, m: 1 }}>
           {t('Sign Up', { ns: 'layout' })}
         </Button>
       </Box>
@@ -51,7 +51,14 @@ export const About: FC = () => {
         </Typography>
       </Divider>
 
-      <Typography>{t('description.part1')}</Typography>
+      <CardList>
+        {FEATURELIST.map((feature) => (
+          <ListItem key={feature} sx={{ width: 280, flexDirection: 'column' }}>
+            <Typography sx={{ color: 'secondary.main', width: 1 }}>{t(`${feature}.title`)}</Typography>
+            <Typography sx={{ color: 'text.primary' }}>{t(`${feature}.subtitle`)}</Typography>
+          </ListItem>
+        ))}
+      </CardList>
 
       <Divider textAlign="center" sx={{ m: 5 }}>
         <Typography variant="h5" color="secondary.main" component="h4">
@@ -61,9 +68,11 @@ export const About: FC = () => {
 
       {QUESTIONLIST.map((question) => (
         <Accordion key={question} expanded={expanded === question} onChange={handleChange(question)}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography sx={{ width: '33%', flexShrink: 0 }}>{t(`${question}.title`)}</Typography>
-            <Typography sx={{ color: 'text.secondary' }}>{t(`${question}.subtitle`)}</Typography>
+          <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'secondary.main' }} />}>
+            <Typography sx={{ width: '33%', flexShrink: 0, color: 'secondary.main' }}>
+              {t(`${question}.title`)}
+            </Typography>
+            <Typography sx={{ color: 'text.primary' }}>{t(`${question}.subtitle`)}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>{t(`${question}.answer`)}</Typography>
@@ -77,15 +86,7 @@ export const About: FC = () => {
         </Typography>
       </Divider>
 
-      <List
-        sx={{
-          width: '100%',
-          bgcolor: 'background.paper',
-          display: 'flex',
-          justifyContent: 'space-around',
-          flexWrap: 'wrap'
-        }}
-      >
+      <CardList>
         {TEAMLIST.map((item) => (
           <ListItem key={item.teammate} sx={{ width: 250 }}>
             <ListItemAvatar>
@@ -97,7 +98,7 @@ export const About: FC = () => {
             />
           </ListItem>
         ))}
-      </List>
+      </CardList>
     </Box>
   );
 };

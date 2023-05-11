@@ -7,7 +7,7 @@ import { ROUTE } from 'shared/constants';
 export const Layout: FC = () => {
   const { pathname } = useLocation();
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Box height="100%" display="flex">
         {[ROUTE.About, ROUTE.Playground].some((item) => item === pathname) && <Navbar />}
