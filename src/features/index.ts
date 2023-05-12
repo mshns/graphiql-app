@@ -5,3 +5,5 @@ export * from './DocumentFields/ui/DocumentFields';
 export * from './DocumentRoot/ui/DocumentRoot';
 export * from './DocumentPossibleTypes/ui/DocumentPossibleTypes';
 export * from './DocumentMetaData/ui/DocumentMetaData';
+
+export * from './HeaderSettings/ui/HeaderSettings';

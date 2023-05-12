@@ -16,8 +16,8 @@ import {
 } from '@mui/material';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { CardList } from './ui/styled';
 import { FEATURELIST, QUESTIONLIST, TEAMLIST } from './constants';
+import { CardList } from './ui/styled';
 
 export const About: FC = () => {
   const { t } = useTranslation(['about', 'translation', 'layout']);
