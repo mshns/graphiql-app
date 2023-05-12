@@ -7,8 +7,6 @@ import {
   AccordionSummary,
   Avatar,
   Box,
-  Button,
-  Divider,
   ListItem,
   ListItemAvatar,
   ListItemText,
@@ -16,13 +14,15 @@ import {
 } from '@mui/material';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { FEATURELIST, QUESTIONLIST, TEAMLIST } from './constants';
+import { PageDivider, SignButtons } from 'entities';
 import { CardList } from './ui/styled';
+import { FEATURELIST, QUESTIONLIST, TEAMLIST } from './constants';
 
 export const About: FC = () => {
   const { t } = useTranslation(['about', 'translation', 'layout']);
 
   const [expanded, setExpanded] = useState<string | false>('question2');
+
   const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -35,22 +35,8 @@ export const About: FC = () => {
       <Typography variant="h5" component="h3" sx={{ textAlign: 'center' }}>
         {t('subtitle')}
       </Typography>
-
-      <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <Button variant="contained" sx={{ width: 200, m: 1 }}>
-          {t('Sign In', { ns: 'layout' })}
-        </Button>
-        <Button variant="contained" sx={{ width: 200, m: 1 }}>
-          {t('Sign Up', { ns: 'layout' })}
-        </Button>
-      </Box>
-
-      <Divider textAlign="center" sx={{ m: 5 }}>
-        <Typography variant="h5" color="secondary.main" component="h4">
-          {t('Features of GraphiQL')}
-        </Typography>
-      </Divider>
-
+      <SignButtons />
+      <PageDivider title={t('Features of GraphiQL')} />
       <CardList>
         {FEATURELIST.map((feature) => (
           <ListItem key={feature} sx={{ width: 280, flexDirection: 'column' }}>
@@ -60,11 +46,7 @@ export const About: FC = () => {
         ))}
       </CardList>
 
-      <Divider textAlign="center" sx={{ m: 5 }}>
-        <Typography variant="h5" color="secondary.main" component="h4">
-          {t('How it works?')}
-        </Typography>
-      </Divider>
+      <PageDivider title={t('How it works?')} />
 
       {QUESTIONLIST.map((question) => (
         <Accordion key={question} expanded={expanded === question} onChange={handleChange(question)}>
@@ -80,11 +62,7 @@ export const About: FC = () => {
         </Accordion>
       ))}
 
-      <Divider textAlign="center" sx={{ m: 5 }}>
-        <Typography variant="h5" color="secondary.main" component="h4">
-          {t('Our Team')}
-        </Typography>
-      </Divider>
+      <PageDivider title={t('Our Team')} />
 
       <CardList>
         {TEAMLIST.map((item) => (
