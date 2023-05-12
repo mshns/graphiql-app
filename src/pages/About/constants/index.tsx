@@ -22,5 +22,3 @@ export const TEAMLIST = [
 ];
 
 export const FEATURELIST = ['feature1', 'feature2', 'feature3', 'feature4'];
-
-export const QUESTIONLIST = ['question1', 'question2', 'question3', 'question4'];

@@ -6,3 +6,5 @@ export * from './DocumentTypeHeader/ui/DocumentTypeHeader';
 
 export * from './PageDivider/ui/PageDivider';
 export * from './SignButtons/ui/SignButtons';
+export * from './WelcomeTitle/ui/WelcomeTitle';
+export * from './QuestionAccordion/ui/QuestionAccordion';
