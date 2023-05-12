@@ -1,9 +1,13 @@
-import { FC, Suspense } from 'react';
+import { FC } from 'react';
 import { RouterProvider, createBrowserRouter, RouteObject } from 'react-router-dom';
-import CircularProgress from '@mui/material/CircularProgress';
 import { Layout } from 'processes';
-import { About, LogIn, PlayGround, NotFound, SignUp } from 'pages';
-import { ROUTE } from 'shared/constants';
+import { ROUTE, getLazyComponent } from 'shared';
+
+const About = getLazyComponent('pages', 'About');
+const PlayGround = getLazyComponent('pages', 'PlayGround');
+const LogIn = getLazyComponent('pages', 'LogIn');
+const SignUp = getLazyComponent('pages', 'SignUp');
+const NotFound = getLazyComponent('pages', 'NotFound');
 
 export const routes: RouteObject[] = [
   {
@@ -42,8 +46,4 @@ export const routes: RouteObject[] = [
 
 const router = createBrowserRouter(routes);
 
-export const Router: FC = () => (
-  <Suspense fallback={<CircularProgress />}>
-    <RouterProvider router={router} />
-  </Suspense>
-);
+export const Router: FC = () => <RouterProvider router={router} />;

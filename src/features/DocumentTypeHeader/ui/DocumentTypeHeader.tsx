@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { IntrospectionField } from 'graphql';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Box } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useAppActions, useAppSelector } from 'shared';
 
 export const DocumentTypeHeader: FC<{ typeAsField?: IntrospectionField }> = ({ typeAsField }) => {
@@ -14,12 +14,15 @@ export const DocumentTypeHeader: FC<{ typeAsField?: IntrospectionField }> = ({ t
 
   if (breadCrumbs.length) {
     return (
-      <Box sx={{ display: 'flex' }}>
-        <ArrowBackIcon onClick={stepBackHandler} />
-        <div>
-          {typeAsField?.name ? <span>{typeAsField?.name} :</span> : null}
-          <span>{currentTypeName}</span>
-        </div>
+      <Box sx={{ display: 'flex', gap: '0.5em', alignItems: 'center', userSelect: 'none' }}>
+        <Button sx={{ minWidth: 'auto' }}>
+          <ArrowBackIcon onClick={stepBackHandler} sx={{ cursor: 'pointer', fontSize: '1.2rem' }} />
+        </Button>
+
+        <Box sx={{ display: 'flex', gap: '0.5em', my: 1 }}>
+          {typeAsField?.name ? <Typography>{typeAsField?.name} :</Typography> : null}
+          <Typography>{currentTypeName}</Typography>
+        </Box>
       </Box>
     );
   }

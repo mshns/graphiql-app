@@ -1,14 +1,15 @@
 import { FC } from 'react';
 import { IntrospectionType } from 'graphql';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { DocumentTypeHeader } from 'entities';
 
 export const DocumentMetaData: FC<{ currentType?: IntrospectionType }> = ({ currentType }) => {
   if (currentType && currentType.description) {
     return (
-      <>
-        <h4>Metadata for {currentType.name} type</h4>
-        <Typography>{currentType.description}</Typography>
-      </>
+      <Box sx={{ my: 2 }}>
+        <DocumentTypeHeader> Metadata for {currentType.name} type </DocumentTypeHeader>
+        <Typography variant="body2">{currentType.description}</Typography>
+      </Box>
     );
   }
 
