@@ -1,8 +1,9 @@
 import { EditorView } from '@codemirror/view';
+import { theme } from 'shared/ui';
 
 export const QUERY_EDITOR_THEME = EditorView.baseTheme({
   '&': {
-    color: '#7e7e7e',
+    color: theme.palette.info.main,
     backgroundColor: 'transparent'
   },
   '&.cm-editor.cm-focused': {
@@ -21,7 +22,7 @@ export const QUERY_EDITOR_THEME = EditorView.baseTheme({
     order: 2
   },
   '&.cm-editor.cm-focused .cm-cursor-primary': {
-    color: 'red',
+    color: theme.palette.error.main,
     backgroundColor: 'white',
     borderLeft: '2px solid #686868'
   },
