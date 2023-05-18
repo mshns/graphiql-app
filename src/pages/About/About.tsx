@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Avatar, Box, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { Avatar, Box, Divider, ListItem, ListItemAvatar, ListItemText, Paper, Typography } from '@mui/material';
 
 import { PageDivider, QuestionAccordion, SignButtons, WelcomeTitle } from 'entities';
 import { CardList } from './ui/styled';
@@ -17,10 +17,11 @@ export const About: FC = () => {
       <PageDivider title={t('Features of GraphiQL')} />
       <CardList>
         {FEATURELIST.map((feature) => (
-          <ListItem key={feature} sx={{ width: 280, flexDirection: 'column' }}>
+          <Paper key={feature} sx={{ width: 280, p: 1, m: 1 }}>
             <Typography sx={{ color: 'secondary.main', width: 1 }}>{t(`${feature}.title`)}</Typography>
+            <Divider />
             <Typography sx={{ color: 'text.primary' }}>{t(`${feature}.subtitle`)}</Typography>
-          </ListItem>
+          </Paper>
         ))}
       </CardList>
       <PageDivider title={t('How it works?')} />

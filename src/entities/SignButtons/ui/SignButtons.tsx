@@ -6,10 +6,10 @@ export const SignButtons = () => {
 
   return (
     <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-      <Button variant="contained" sx={{ width: 200, m: 1 }}>
+      <Button variant="contained" sx={{ width: 200, m: 1, backgroundColor: 'secondary.main' }}>
         {t('Sign In')}
       </Button>
-      <Button variant="contained" sx={{ width: 200, m: 1 }}>
+      <Button variant="contained" sx={{ width: 200, m: 1, backgroundColor: 'secondary.main' }}>
         {t('Sign Up')}
       </Button>
     </Box>

@@ -14,7 +14,7 @@ export const Footer: FC = () => {
   const { t } = useTranslation(['layout']);
 
   return (
-    <FooterWrapper>
+    <FooterWrapper elevation={4}>
       <FooterItem>
         <AuthorListLogo
           ariaLabel="application authors"
@@ -50,7 +50,7 @@ export const Footer: FC = () => {
             <LogoRSS />
           </SvgIconLogo>
         </Link>
-        <Typography variant="h6" component="div" sx={{ color: 'secondary.main', mt: 0.7 }}>
+        <Typography variant="h6" component="div" sx={{ mt: 0.7, color: 'secondary.main' }}>
           {t('The Rolling Scopes School')}
         </Typography>
       </FooterItem>
