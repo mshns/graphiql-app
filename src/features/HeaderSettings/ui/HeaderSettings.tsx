@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Box, Button, Divider, Typography } from '@mui/material';
@@ -9,16 +9,15 @@ export const HeaderSettings: FC = () => {
   const { i18n, t } = useTranslation(['layout']);
 
   const handleChangeLanguage = () => {
-    if (i18n.language === 'en') {
-      i18n.changeLanguage('ru');
-      localStorage.setItem('language', 'ru');
-    } else {
-      i18n.changeLanguage('en');
-      localStorage.setItem('language', 'en');
-    }
+    i18n.language === 'en' ? i18n.changeLanguage('ru') : i18n.changeLanguage('en');
   };
 
   const { mode, toggleColorMode } = useContext(ColorModeContext);
+
+  useEffect(() => {
+    localStorage.setItem('mode', mode);
+    localStorage.setItem('language', i18n.language);
+  }, [i18n.language, mode]);
 
   return (
     <Box sx={{ width: 250, p: 2, display: 'flex', flexDirection: 'column' }}>

@@ -19,7 +19,9 @@ export const ColorModeContext = createContext<IColorModeContext>({
 });
 
 export const withMUI = (component: () => React.ReactNode) => () => {
-  const [mode, setMode] = useState<'light' | 'dark'>('light');
+  const currentMode: PaletteMode = localStorage.getItem('mode') === 'dark' ? 'dark' : 'light';
+  const [mode, setMode] = useState<PaletteMode>(currentMode);
+
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
