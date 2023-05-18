@@ -9,7 +9,7 @@ export const WelcomeTitle = () => {
       <Typography variant="h4" component="h2" color="secondary.main" sx={{ textAlign: 'center' }}>
         {t('title')}
       </Typography>
-      <Typography variant="h5" component="h3" sx={{ textAlign: 'center' }}>
+      <Typography variant="h5" component="h3" color="text.primary" sx={{ textAlign: 'center' }}>
         {t('subtitle')}
       </Typography>
     </Box>

@@ -1,4 +1,3 @@
-import { blueGrey } from '@mui/material/colors';
 import { PaletteMode } from '@mui/material';
 
 export const getTheme = (mode: PaletteMode) => ({
@@ -6,38 +5,44 @@ export const getTheme = (mode: PaletteMode) => ({
     mode,
     ...(mode === 'light'
       ? {
-          // palette values for light mode
           primary: {
-            main: blueGrey[900],
+            main: '#292a2d',
             contrastText: '#fff'
           },
-          secondary: {
-            main: '#e535ab'
-          },
-          divider: blueGrey[200],
           text: {
-            primary: blueGrey[900],
-            secondary: blueGrey[800]
+            primary: '#292a2d',
+            secondary: '#292a2d75'
+          },
+          background: {
+            default: '#f1f1f1',
+            paper: '#e6e8ec'
           }
         }
       : {
-          // palette values for dark mode
-          primary: blueGrey,
-          divider: blueGrey[700],
-          background: {
-            default: blueGrey[900],
-            paper: blueGrey[900]
+          primary: {
+            main: '#292a2d',
+            contrastText: '#bbb'
           },
           text: {
-            primary: '#fff',
-            secondary: blueGrey[500]
+            primary: '#bbb',
+            secondary: '#f1f1f175'
+          },
+          background: {
+            default: '#202124',
+            paper: '#35363a'
           }
-        })
+        }),
+
+    secondary: {
+      main: '#E535AB'
+    },
+
+    divider: '#E535AB25'
   },
+
   typography: {
     h6: {
-      fontSize: 12,
-      color: 'red'
+      fontSize: 12
     }
   }
 });

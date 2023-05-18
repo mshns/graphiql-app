@@ -7,7 +7,7 @@ import { ROUTE, Spinner } from 'shared';
 export const Layout: FC = () => {
   const { pathname } = useLocation();
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'background.default' }}>
       <Header />
       <Box height="100%" display="flex">
         {[ROUTE.About, ROUTE.Playground].some((item) => item === pathname) && <Navbar />}

@@ -33,6 +33,7 @@ export const About: FC = () => {
               <Avatar alt={item.teammate} src={item.avatar} />
             </ListItemAvatar>
             <ListItemText
+              sx={{ color: 'text.primary', '& .MuiListItemText-secondary': { color: 'text.secondary' } }}
               primary={t(item.teammate, { ns: 'translation' })}
               secondary={t(item.position, { ns: 'translation' })}
             />
