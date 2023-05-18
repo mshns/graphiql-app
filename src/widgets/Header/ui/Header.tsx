@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import { LogoGraphQL } from 'shared';
 import { HeaderSettings } from 'features';
+import { HeaderScroll } from 'entities';
 import { LogoLink, HeaderButton } from './styled';
 
 export const Header: FC = () => {
@@ -19,28 +20,30 @@ export const Header: FC = () => {
   };
 
   return (
-    <AppBar position="sticky">
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <LogoLink href="/" underline="none">
-          <SvgIcon sx={{ width: 36, height: 36 }}>
-            <LogoGraphQL />
-          </SvgIcon>
-          {t('GraphiQL')}
-        </LogoLink>
+    <HeaderScroll>
+      <AppBar position="sticky">
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <LogoLink href="/" underline="none">
+            <SvgIcon sx={{ width: 36, height: 36 }}>
+              <LogoGraphQL />
+            </SvgIcon>
+            {t('GraphiQL')}
+          </LogoLink>
 
-        <ButtonGroup variant="contained" size="small" aria-label="header button group">
-          <HeaderButton>{t('Sign In')}</HeaderButton>
-          <HeaderButton>{t('Sign Up')}</HeaderButton>
-          <HeaderButton>
-            <Tooltip title={t('Settings')}>
-              <SettingsIcon fontSize="small" onClick={() => toggleSettings(true)} />
-            </Tooltip>
-          </HeaderButton>
-        </ButtonGroup>
-      </Toolbar>
-      <Drawer anchor="right" open={isSettingsOpen} onClose={() => toggleSettings(false)}>
-        <HeaderSettings />
-      </Drawer>
-    </AppBar>
+          <ButtonGroup variant="contained" size="small" aria-label="header button group">
+            <HeaderButton>{t('Sign In')}</HeaderButton>
+            <HeaderButton>{t('Sign Up')}</HeaderButton>
+            <HeaderButton>
+              <Tooltip title={t('Settings')}>
+                <SettingsIcon fontSize="small" onClick={() => toggleSettings(true)} />
+              </Tooltip>
+            </HeaderButton>
+          </ButtonGroup>
+        </Toolbar>
+        <Drawer anchor="right" open={isSettingsOpen} onClose={() => toggleSettings(false)}>
+          <HeaderSettings />
+        </Drawer>
+      </AppBar>
+    </HeaderScroll>
   );
 };
