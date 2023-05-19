@@ -1,10 +1,11 @@
-import { Box, styled } from '@mui/material';
+import { Paper, styled } from '@mui/material';
 
-export const FooterWrapper = styled(Box)(({ theme }) => ({
+export const FooterWrapper = styled(Paper)(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'space-around',
   alignContent: 'center',
   width: '100%',
-  backgroundColor: theme.palette.primary.main
+  marginTop: 'auto',
+  backgroundColor: theme.palette.background.paper
 }));

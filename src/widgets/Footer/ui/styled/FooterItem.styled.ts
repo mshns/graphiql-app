@@ -9,7 +9,6 @@ export const FooterItem = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
   justifyContent: 'end',
   alignItems: 'center',
-  borderTop: `1px solid ${theme.palette.secondary.main}`,
   '&:before, &:after': {
     position: 'absolute',
     content: "''",

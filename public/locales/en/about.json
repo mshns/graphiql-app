@@ -13,7 +13,7 @@
 
   "feature1": {
     "title": "Query Generation",
-    "subtitle": "Generate Graphql queries with random input data by extracting details from your graphql endpoint or schema text."
+    "subtitle": "Generate queries with random input data by extracting details from your graphql endpoint or schema text."
   },
 
   "feature2": {

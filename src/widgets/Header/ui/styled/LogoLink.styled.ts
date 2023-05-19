@@ -8,6 +8,6 @@ export const LogoLink = styled(Link)(({ theme }) => ({
   fontSize: 24,
   fontWeight: 500,
   '&:hover': {
-    color: theme.palette.primary.contrastText
+    color: theme.palette.text.primary
   }
 }));

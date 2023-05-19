@@ -12,6 +12,13 @@
   "Light": "Light",
   "Dark": "Dark",
 
+  "About": "About",
+  "Editor": "Editor",
+
+  "Page not found": "Page not found",
+  "Error 404": "Error 404",
+  "Back to main page": "Back to main page",
+
   "Created by Power Rangers": "Created by Power Rangers",
   "GraphiQL © 2023": "GraphiQL © 2023",
   "The Rolling Scopes School": "The Rolling Scopes School"
