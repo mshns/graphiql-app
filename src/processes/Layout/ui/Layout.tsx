@@ -11,7 +11,7 @@ export const Layout: FC = () => {
       <Header />
       <Box sx={{ display: 'flex' }}>
         {[ROUTE.About, ROUTE.Playground].some((item) => item === pathname) && <Navbar />}
-        <Box component="main" sx={{ width: 'calc(100% - 80px)', p: 2 }}>
+        <Box component="main" sx={{ width: '100%', p: 2 }}>
           <Suspense fallback={<Spinner />}>
             <Outlet />
           </Suspense>
