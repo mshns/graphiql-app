@@ -1,17 +1,18 @@
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { ButtonStyled } from 'features';
 
 export const SignButtons = () => {
   const { t } = useTranslation(['layout']);
 
   return (
     <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-      <Button variant="contained" sx={{ width: 200, m: 1, backgroundColor: 'secondary.main' }}>
+      <ButtonStyled variant="contained" sx={{ width: 200, m: 1 }}>
         {t('Sign In')}
-      </Button>
-      <Button variant="contained" sx={{ width: 200, m: 1, backgroundColor: 'secondary.main' }}>
+      </ButtonStyled>
+      <ButtonStyled variant="contained" sx={{ width: 200, m: 1 }}>
         {t('Sign Up')}
-      </Button>
+      </ButtonStyled>
     </Box>
   );
 };

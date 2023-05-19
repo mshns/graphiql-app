@@ -1,9 +1,10 @@
 import { FC, useContext, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { Box, Button, Divider, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { Box, Divider, Typography } from '@mui/material';
 
 import { ColorModeContext } from 'app';
+import { ButtonStyled } from 'features';
 
 export const HeaderSettings: FC = () => {
   const { i18n, t } = useTranslation(['layout']);
@@ -25,15 +26,15 @@ export const HeaderSettings: FC = () => {
       <Divider sx={{ mb: 3 }} />
       <Typography sx={{ fontSize: 20, color: 'secondary.main' }}>{t('Language')}</Typography>
       <Divider sx={{ mb: 1 }} />
-      <Button variant="contained" sx={{ mt: 1 }} onClick={handleChangeLanguage}>
+      <ButtonStyled variant="contained" sx={{ mt: 1 }} onClick={handleChangeLanguage}>
         {i18n.language === 'en' ? t('Russian') : t('English')}
-      </Button>
+      </ButtonStyled>
       <Divider sx={{ m: 3 }} />
       <Typography sx={{ fontSize: 20, color: 'secondary.main' }}>{t('Mode')}</Typography>
       <Divider sx={{ mb: 1 }} />
-      <Button variant="contained" sx={{ mt: 1 }} onClick={toggleColorMode}>
+      <ButtonStyled variant="contained" sx={{ mt: 1 }} onClick={toggleColorMode}>
         {mode === 'light' ? t('Dark') : t('Light')}
-      </Button>
+      </ButtonStyled>
       <Divider sx={{ m: 3 }} />
     </Box>
   );

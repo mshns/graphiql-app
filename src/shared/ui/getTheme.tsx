@@ -9,10 +9,16 @@ export const getTheme = (mode: PaletteMode) => ({
             main: '#292a2d',
             contrastText: '#fff'
           },
+
+          secondary: {
+            main: '#E535AB'
+          },
+
           text: {
             primary: '#292a2d',
             secondary: '#292a2d75'
           },
+
           background: {
             default: '#f1f1f1',
             paper: '#e6e8ec'
@@ -23,19 +29,21 @@ export const getTheme = (mode: PaletteMode) => ({
             main: '#292a2d',
             contrastText: '#bbb'
           },
+
+          secondary: {
+            main: '#AC498B'
+          },
+
           text: {
             primary: '#bbb',
             secondary: '#f1f1f175'
           },
+
           background: {
             default: '#202124',
             paper: '#35363a'
           }
         }),
-
-    secondary: {
-      main: '#E535AB'
-    },
 
     divider: '#E535AB25'
   },

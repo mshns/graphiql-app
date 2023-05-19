@@ -11,3 +11,4 @@ export * from './QueryConfigBar/ui/QueryConfigBar';
 export * from './EditorTools/ui/EditorTools';
 
 export * from './HeaderSettings/ui/HeaderSettings';
+export * from './ButtonStyled/ui/ButtonStyled';
