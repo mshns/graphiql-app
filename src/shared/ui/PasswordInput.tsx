@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useTranslation } from 'react-i18next';
 
 interface PasswordInputProps {
   value: string;
@@ -11,6 +12,7 @@ interface PasswordInputProps {
 
 export const PasswordInput = ({ setValue, value }: PasswordInputProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useTranslation(['authorization']);
 
   return (
     <TextField
@@ -19,7 +21,7 @@ export const PasswordInput = ({ setValue, value }: PasswordInputProps) => {
       fullWidth
       required
       value={value}
-      label="Password"
+      label={t('Password')}
       type={isVisible ? 'text' : 'password'}
       onChange={(e) => setValue(e.target.value)}
       InputProps={{

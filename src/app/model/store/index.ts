@@ -1,9 +1,10 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
-import { documentReducer, editorReducer } from 'shared';
+import { documentReducer, editorReducer, userReducer } from 'shared';
 
 const rootReducer = combineReducers({
   documentReducer,
-  editorReducer
+  editorReducer,
+  userReducer
 });
 
 export const setupStore = (preloadedState?: PreloadedState<TRootState>) => {

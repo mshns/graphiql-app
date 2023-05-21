@@ -1,26 +1,38 @@
-import { Box, Button, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { PasswordInput } from 'shared/ui/PasswordInput';
 
-interface FormProps {
+interface AuthorizationFormProps {
   title: string;
   buttonText: string;
-  onClick: () => void;
-  text: string;
+  onClick: (email: string, password: string) => void;
+  description: string;
   linkText: string;
   linkTo: string;
+  isLoading: boolean;
 }
 
-export const Form: FC<FormProps> = ({ buttonText, linkText, linkTo, onClick, text, title }) => {
+export const AuthorizationForm: FC<AuthorizationFormProps> = ({
+  buttonText,
+  linkText,
+  linkTo,
+  onClick,
+  description,
+  title,
+  isLoading
+}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { t } = useTranslation(['authorization']);
+
   return (
     <Paper
       elevation={12}
       sx={{
         padding: '2rem 1rem',
-        maxWidth: '400px',
+        maxWidth: '500px',
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
@@ -28,7 +40,8 @@ export const Form: FC<FormProps> = ({ buttonText, linkText, linkTo, onClick, tex
         alignSelf: 'center',
         margin: '0 auto',
         flexDirection: 'column',
-        rowGap: '1.5rem'
+        rowGap: '1.5rem',
+        textAlign: 'center'
       }}
     >
       <Typography variant="h4">{title}</Typography>
@@ -47,17 +60,23 @@ export const Form: FC<FormProps> = ({ buttonText, linkText, linkTo, onClick, tex
           value={email}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
           type="email"
-          label="E-mail"
+          label={t('E-mail')}
           size="small"
           fullWidth
         />
         <PasswordInput value={password} setValue={setPassword} />
-        <Button onClick={onClick} variant="contained" sx={{ width: 'max-content' }}>
+        <Button
+          endIcon={isLoading ? <CircularProgress color="secondary" size={16} /> : null}
+          disabled={isLoading}
+          onClick={() => onClick(email, password)}
+          variant="contained"
+          sx={{ width: 'max-content' }}
+        >
           {buttonText}
         </Button>
       </Box>
       <Typography>
-        {text} <Link to={linkTo}>{linkText}</Link>
+        {description} <Link to={linkTo}>{linkText}</Link>
       </Typography>
     </Paper>
   );
