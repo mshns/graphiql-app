@@ -3,11 +3,13 @@ import { Box, CircularProgress } from '@mui/material';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { Navbar, Footer, Header } from 'widgets';
-import { ROUTE, Spinner } from 'shared';
+import { ROUTE, Spinner, useAppActions } from 'shared';
 
 export const Layout: FC = () => {
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(true);
+  const { setIsLoggedIn } = useAppActions();
+
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -16,6 +18,11 @@ export const Layout: FC = () => {
       setIsLoading(false);
       if (user && [ROUTE.Login, ROUTE.SignUp].some((route) => route === pathname)) {
         navigate(ROUTE.Playground);
+      }
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
       }
     });
   });
