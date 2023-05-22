@@ -4,7 +4,12 @@ import Codemirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { graphql, updateSchema } from 'cm6-graphql';
 import { prettifyGraphql, useAppActions, useAppSelector, EXTENTIONS } from 'shared';
 
-export const QueryTerminal: FC<{ schema: GraphQLSchema | undefined }> = ({ schema }) => {
+type Props = {
+  schema: GraphQLSchema | undefined;
+  isOpenConfig: boolean;
+};
+
+export const QueryTerminal: FC<Props> = ({ schema, isOpenConfig }) => {
   const codemirror = useRef<ReactCodeMirrorRef | null>(null);
   const { setQuery } = useAppActions();
   const { query } = useAppSelector((state) => state.editorReducer);
@@ -31,7 +36,7 @@ export const QueryTerminal: FC<{ schema: GraphQLSchema | undefined }> = ({ schem
 
   return (
     <Codemirror
-      style={{ overflow: 'hidden', maxHeight: '100%', flex: '1 1 auto' }}
+      style={{ overflow: 'hidden', maxHeight: isOpenConfig ? '70%' : '100%', flex: '1 1 auto' }}
       ref={codemirror}
       height="100%"
       value={query}

@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { type FC, MutableRefObject } from 'react';
 import { Link } from 'react-router-dom';
 
 import { SpeedDialAction, Typography } from '@mui/material';
@@ -14,9 +14,11 @@ import { SvgIconLogo } from './SvgIconLogo.styled';
 
 import { ReactComponent as LogoRSS } from './assets/rs_school_js.svg';
 
-export const Footer: FC = () => {
+type Props = { footer: MutableRefObject<HTMLDivElement | null> };
+
+export const Footer: FC<Props> = ({ footer }) => {
   return (
-    <FooterWrapper theme={theme}>
+    <FooterWrapper ref={footer} theme={theme}>
       <FooterItem theme={theme}>
         <AuthorListLogo
           ariaLabel="application authors"

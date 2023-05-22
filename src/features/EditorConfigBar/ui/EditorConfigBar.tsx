@@ -1,40 +1,56 @@
-import { FC, useState } from 'react';
-import { default as ArrowClose } from '@mui/icons-material/KeyboardDoubleArrowDownRounded';
-import { default as ArrowOpen } from '@mui/icons-material/KeyboardDoubleArrowUpRounded';
-import { Box, Button, Typography } from '@mui/material';
+import { Dispatch, FC, MouseEvent, SetStateAction, useState } from 'react';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Typography } from '@mui/material';
 import { QueryVariables, QueryHeaders } from 'entities';
 import { theme } from 'shared';
 
-export const EditorConfigBar: FC = () => {
-  const [tab, setTab] = useState('variables');
-  const [isOpenConfig, setIsOpenConfig] = useState(false);
+type Props = {
+  isOpenConfig: boolean;
+  setIsOpenConfig: Dispatch<SetStateAction<boolean>>;
+};
 
-  const barPicker = () => (tab === 'variables' ? <QueryVariables /> : <QueryHeaders />);
+export const EditorConfigBar: FC<Props> = ({ isOpenConfig, setIsOpenConfig }) => {
+  const [tab, setTab] = useState('variables');
 
   const setVisibilityHandler = () => setIsOpenConfig(!isOpenConfig);
+
+  const setBar = (barName: 'variables' | 'headers', event: MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    setTab(barName);
+
+    if (!isOpenConfig) {
+      setIsOpenConfig(true);
+    }
+  };
 
   const setActiveColor = (barName: string) =>
     barName === tab && isOpenConfig ? theme.palette.primary.dark : 'transparent';
 
   return (
-    <Box sx={{ maxHeight: '40%', flex: '1 1 auto' }}>
-      <Box sx={{ display: 'flex', p: 1, justifyContent: 'space-between' }}>
-        <Box>
-          <Button onClick={() => setTab('variables')} sx={{ backgroundColor: setActiveColor('variables') }}>
+    <Accordion
+      disableGutters
+      expanded={isOpenConfig}
+      onChange={setVisibilityHandler}
+      sx={{ height: isOpenConfig ? '30%' : 'auto', overflow: 'auto' }}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon sx={{ transform: 'rotate(180deg)' }} />}
+        aria-controls="panel-config"
+      >
+        <Box display="flex" gap="0.5em">
+          <Button onClick={(event) => setBar('variables', event)} sx={{ backgroundColor: setActiveColor('variables') }}>
             <Typography variant="caption">Variables</Typography>
           </Button>
 
-          <Button onClick={() => setTab('headers')} sx={{ backgroundColor: setActiveColor('headers') }}>
+          <Button onClick={(event) => setBar('headers', event)} sx={{ backgroundColor: setActiveColor('headers') }}>
             <Typography variant="caption">Headers</Typography>
           </Button>
         </Box>
+      </AccordionSummary>
 
-        <Button onClick={setVisibilityHandler} sx={{ minWidth: 'auto' }}>
-          {isOpenConfig ? <ArrowClose sx={{ fontSize: '1.5em' }} /> : <ArrowOpen sx={{ fontSize: '1.5em' }} />}
-        </Button>
-      </Box>
-
-      <Box>{isOpenConfig ? barPicker() : null}</Box>
-    </Box>
+      <AccordionDetails sx={{}}>
+        <Box>{tab === 'variables' ? <QueryVariables /> : <QueryHeaders />}</Box>
+      </AccordionDetails>
+    </Accordion>
   );
 };

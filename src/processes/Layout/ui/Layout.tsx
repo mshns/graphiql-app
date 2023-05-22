@@ -1,24 +1,29 @@
 import { Suspense, type FC } from 'react';
-import { Box, Divider } from '@mui/material';
+import { Box, Container, Divider } from '@mui/material';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Navbar, Footer, Header } from 'widgets';
 import { ROUTE, Spinner } from 'shared';
+import { usePlaygroundHeight } from '../../hooks/usePlaygroundHeight';
 
 export const Layout: FC = () => {
   const { pathname } = useLocation();
+  const { header, footer, playgroundHeight } = usePlaygroundHeight();
+
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      <Header />
-      <Box height="100%" display="flex">
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Header header={header} />
+      <Container disableGutters maxWidth={false} sx={{ display: 'flex', flex: '1 0 auto' }}>
         {[ROUTE.About, ROUTE.Playground].some((item) => item === pathname) && <Navbar />}
+
         <Divider orientation="vertical" />
-        <Box component="main" sx={{ flexGrow: 1, p: 2, position: 'relative' }}>
+
+        <Box display="flex" component="main" p={2} width="100%" position="relative">
           <Suspense fallback={<Spinner />}>
-            <Outlet />
+            <Outlet context={{ playgroundHeight }} />
           </Suspense>
         </Box>
-      </Box>
-      <Footer />
+      </Container>
+      <Footer footer={footer} />
     </Box>
   );
 };

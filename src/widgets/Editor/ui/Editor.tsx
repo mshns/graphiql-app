@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Divider, Paper } from '@mui/material';
 import { QueryTerminal } from 'entities';
 import { EditorConfigBar, EditorTools } from 'features';
@@ -6,6 +6,7 @@ import { useIntrospection } from 'shared';
 
 export const Editor: FC = () => {
   const { schema } = useIntrospection();
+  const [isOpenConfig, setIsOpenConfig] = useState(false);
 
   return (
     <Paper
@@ -18,13 +19,13 @@ export const Editor: FC = () => {
         height: '100%'
       }}
     >
-      <QueryTerminal schema={schema} />
+      <QueryTerminal schema={schema} isOpenConfig={isOpenConfig} />
 
       <EditorTools />
 
       <Divider />
 
-      <EditorConfigBar />
+      <EditorConfigBar isOpenConfig={isOpenConfig} setIsOpenConfig={setIsOpenConfig} />
     </Paper>
   );
 };
