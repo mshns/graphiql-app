@@ -19,10 +19,12 @@ export const QuestionAccordion = () => {
       {QUESTIONLIST.map((question) => (
         <Accordion key={question} expanded={expanded === question} onChange={handleChange(question)}>
           <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'secondary.main' }} />}>
-            <Typography sx={{ width: '33%', flexShrink: 0, color: 'secondary.main' }}>
+            <Typography sx={{ width: { md: '35%', xs: '100%' }, flexShrink: 0, color: 'secondary.main' }}>
               {t(`${question}.title`)}
             </Typography>
-            <Typography sx={{ color: 'text.primary' }}>{t(`${question}.subtitle`)}</Typography>
+            <Typography display={{ xs: 'none', md: 'block' }} sx={{ color: 'text.secondary' }}>
+              {t(`${question}.subtitle`)}
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>{t(`${question}.answer`)}</Typography>

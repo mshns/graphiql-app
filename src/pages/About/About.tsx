@@ -17,7 +17,7 @@ export const About: FC = () => {
       <PageDivider title={t('Features of GraphiQL')} />
       <CardList>
         {FEATURELIST.map((feature) => (
-          <Paper key={feature} sx={{ width: 280, p: 1, m: 1 }}>
+          <Paper key={feature} sx={{ width: { sm: '90%', md: '40%', xl: '20%' }, p: 1, mb: 5 }}>
             <Typography sx={{ color: 'secondary.main', width: 1 }}>{t(`${feature}.title`)}</Typography>
             <Divider />
             <Typography sx={{ color: 'text.primary' }}>{t(`${feature}.subtitle`)}</Typography>

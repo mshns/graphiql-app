@@ -40,6 +40,7 @@ export const Header: FC = () => {
             </HeaderButton>
           </ButtonGroup>
         </Toolbar>
+
         <Drawer anchor="right" open={isSettingsOpen} onClose={() => toggleSettings(false)}>
           <HeaderSettings />
         </Drawer>

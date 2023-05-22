@@ -6,8 +6,8 @@ export const getTheme = (mode: PaletteMode) => ({
     ...(mode === 'light'
       ? {
           primary: {
-            main: '#292a2d',
-            contrastText: '#fff'
+            main: '#292A2D',
+            contrastText: '#FFF'
           },
 
           secondary: {
@@ -15,19 +15,19 @@ export const getTheme = (mode: PaletteMode) => ({
           },
 
           text: {
-            primary: '#292a2d',
-            secondary: '#292a2d75'
+            primary: '#292A2D',
+            secondary: '#292A2D75'
           },
 
           background: {
-            default: '#f1f1f1',
-            paper: '#e6e8ec'
+            default: '#F1F1F1',
+            paper: '#E6E8EC'
           }
         }
       : {
           primary: {
-            main: '#292a2d',
-            contrastText: '#bbb'
+            main: '#292A2D',
+            contrastText: '#BBB'
           },
 
           secondary: {
@@ -35,13 +35,13 @@ export const getTheme = (mode: PaletteMode) => ({
           },
 
           text: {
-            primary: '#bbb',
-            secondary: '#f1f1f175'
+            primary: '#BBB',
+            secondary: '#F1F1F175'
           },
 
           background: {
             default: '#202124',
-            paper: '#35363a'
+            paper: '#35363A'
           }
         }),
 

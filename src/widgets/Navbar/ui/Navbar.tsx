@@ -1,42 +1,43 @@
-import { useState, type FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
-
-import BottomNavigation from '@mui/material/BottomNavigation';
+import { type FC, Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Box, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, SvgIcon, useTheme } from '@mui/material';
 
 import { useTranslation } from 'react-i18next';
 import { NAVIGATION } from '../constants';
-import { BottomNavigationItem } from './styled/BottomNavigationItem.styled';
+import { NavigationList } from './styled/NavigationList.styled';
 
 export const Navbar: FC = () => {
   const { t } = useTranslation(['layout']);
-
-  const navigate = useNavigate();
-
-  const [value, setValue] = useState('About');
-
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
+  const theme = useTheme();
 
   return (
-    <Box sx={{ backgroundColor: 'background.paper', width: '80px' }}>
-      <BottomNavigation
-        showLabels
-        sx={{ flexDirection: 'column', width: 80, height: 'auto', position: 'sticky', top: 60 }}
-        value={value}
-        onChange={handleChange}
-      >
+    <Box sx={{ backgroundColor: 'background.paper' }}>
+      <NavigationList>
         {NAVIGATION.map((nav) => (
-          <BottomNavigationItem
-            key={nav.id}
-            label={t(nav.name)}
-            value={nav.name}
-            icon={nav.icon}
-            onClick={() => navigate(nav.route)}
-          />
+          <Fragment key={nav.id}>
+            <NavLink
+              to={nav.route}
+              style={({ isActive }) => ({
+                color: isActive ? theme.palette.secondary.main : theme.palette.text.primary,
+                textDecoration: 'none'
+              })}
+            >
+              <ListItem disablePadding>
+                <ListItemButton sx={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', pb: 0 }}>
+                  <ListItemIcon sx={{ minWidth: 1, justifyContent: 'center', color: 'text.secondary' }}>
+                    <SvgIcon sx={{ fontSize: { xs: 24, sm: 32 } }}>{nav.icon}</SvgIcon>
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={t(nav.name)}
+                    primaryTypographyProps={{ fontSize: 14, fontWeight: 600, display: { xs: 'none', sm: 'block' } }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </NavLink>
+            <Divider />
+          </Fragment>
         ))}
-      </BottomNavigation>
+      </NavigationList>
     </Box>
   );
 };

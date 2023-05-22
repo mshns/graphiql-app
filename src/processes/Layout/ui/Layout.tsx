@@ -1,13 +1,17 @@
 import { Suspense, type FC } from 'react';
-import { Box } from '@mui/material';
 import { Outlet, useLocation } from 'react-router-dom';
+
+import { Box } from '@mui/material';
+
 import { Navbar, Footer, Header } from 'widgets';
 import { ROUTE, Spinner } from 'shared';
+
+import { LayoutWrapper } from './styled/LayoutWrapper.styled';
 
 export const Layout: FC = () => {
   const { pathname } = useLocation();
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'background.default' }}>
+    <LayoutWrapper>
       <Header />
       <Box sx={{ display: 'flex' }}>
         {[ROUTE.About, ROUTE.Playground].some((item) => item === pathname) && <Navbar />}
@@ -18,6 +22,6 @@ export const Layout: FC = () => {
         </Box>
       </Box>
       <Footer />
-    </Box>
+    </LayoutWrapper>
   );
 };
