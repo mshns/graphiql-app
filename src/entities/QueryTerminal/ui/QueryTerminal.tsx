@@ -3,7 +3,7 @@ import { GraphQLSchema } from 'graphql';
 // import { diagnosticCount } from '@codemirror/lint';
 import Codemirror from '@uiw/react-codemirror';
 import { graphql, updateSchema } from 'cm6-graphql';
-import { prettifyGraphql, useAppActions, useAppSelector, EXTENTIONS, EditorContext } from 'shared';
+import { prettifyGraphql, useAppActions, useAppSelector, EXTENTIONS, EditorContext, lintEditorErrors } from 'shared';
 
 type Props = {
   schema: GraphQLSchema | undefined;
@@ -16,19 +16,9 @@ export const QueryTerminal: FC<Props> = ({ schema }) => {
   const onChange = useCallback(
     (value: string) => {
       setQuery(value);
-
-      if (queryRef.current?.view?.state) {
-        // console.log(diagnosticCount(codemirror.current?.view?.state));
-      }
     },
-    [setQuery, queryRef]
+    [setQuery]
   );
-
-  const prettifyHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
-      prettifyGraphql(query, setQuery);
-    }
-  };
 
   useEffect(() => {
     if (queryRef && schema) {
@@ -37,6 +27,16 @@ export const QueryTerminal: FC<Props> = ({ schema }) => {
       }
     }
   }, [schema, queryRef]);
+
+  const prettifyHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
+      const isQueryError = lintEditorErrors(queryRef, 'query');
+
+      if (!isQueryError) {
+        prettifyGraphql(query, setQuery);
+      }
+    }
+  };
 
   return (
     <Codemirror

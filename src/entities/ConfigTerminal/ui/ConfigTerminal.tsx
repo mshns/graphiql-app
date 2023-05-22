@@ -22,11 +22,11 @@ export const ConfigTerminal: FC<Props> = ({ editorRef, action, state, terminalNa
 
   const prettifyHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
-      if (lintEditorErrors(editorRef, terminalName)) {
-        return;
-      }
+      const isEditorError = lintEditorErrors(editorRef, terminalName);
 
-      jsonParseGuard(state, action, terminalName);
+      if (!isEditorError) {
+        jsonParseGuard(state, action, terminalName);
+      }
     }
   };
 
