@@ -6,7 +6,7 @@ import { Avatar, Box, Divider, ListItem, ListItemAvatar, ListItemText, Paper, Ty
 import { PageDivider, QuestionAccordion, SignButtons, WelcomeTitle } from 'entities';
 import { useAppSelector } from 'shared';
 import { CardList } from './ui/styled';
-import { FEATURELIST, TEAMLIST } from './constants';
+import { FEATURELIST, TEAMLIST, ICONLIST } from './constants';
 
 export const About: FC = () => {
   const { t } = useTranslation(['about', 'translation', 'layout']);
@@ -16,7 +16,7 @@ export const About: FC = () => {
     <Box sx={{ flexDirection: 'column' }}>
       <WelcomeTitle />
       {!isLoggedIn && <SignButtons />}
-      <PageDivider title={t('Features of GraphiQL')} />
+      <PageDivider title={t('Features of GraphiQL')} icon={ICONLIST.check} />
       <CardList>
         {FEATURELIST.map((feature) => (
           <Paper key={feature} sx={{ width: { sm: '90%', md: '40%', xl: '20%' }, p: 1, mb: 5 }}>
@@ -26,9 +26,9 @@ export const About: FC = () => {
           </Paper>
         ))}
       </CardList>
-      <PageDivider title={t('How it works?')} />
+      <PageDivider title={t('How it works?')} icon={ICONLIST.question} />
       <QuestionAccordion />
-      <PageDivider title={t('Our Team')} />
+      <PageDivider title={t('Our Team')} icon={ICONLIST.team} />
       <CardList>
         {TEAMLIST.map((item) => (
           <ListItem key={item.teammate} sx={{ width: 250 }}>
