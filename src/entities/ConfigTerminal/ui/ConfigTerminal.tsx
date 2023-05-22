@@ -1,35 +1,42 @@
-import { FC, useCallback, useRef } from 'react';
-import { default as jsonbeautify } from 'json-beautify';
+import { FC, KeyboardEvent, MutableRefObject, useCallback } from 'react';
 import Codemirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { linter } from '@codemirror/lint';
 import { json, jsonParseLinter } from '@codemirror/lang-json';
-import { useAppActions, useAppSelector, EXTENTIONS } from 'shared';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import { EXTENTIONS, jsonParseGuard, lintEditorErrors } from 'shared';
 
-export const QueryVariables: FC = () => {
-  const codemirror = useRef<ReactCodeMirrorRef | null>(null);
-  const { setVariables } = useAppActions();
-  const { variables } = useAppSelector((state) => state.editorReducer);
+type Props = {
+  editorRef: MutableRefObject<ReactCodeMirrorRef | null>;
+  action: ActionCreatorWithPayload<string, 'Editor/setVariables' | 'Editor/setHeaders'>;
+  state: string;
+  terminalName: 'variables' | 'headers';
+};
 
+export const ConfigTerminal: FC<Props> = ({ editorRef, action, state, terminalName }) => {
   const onChange = useCallback(
     (value: string) => {
-      setVariables(value);
+      action(value);
     },
-    [setVariables]
+    [action]
   );
 
-  const prettifyHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const prettifyHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
-      setVariables(jsonbeautify(JSON.parse(variables), null!, 1, 5));
+      if (lintEditorErrors(editorRef, terminalName)) {
+        return;
+      }
+
+      jsonParseGuard(state, action, terminalName);
     }
   };
 
   return (
     <Codemirror
-      ref={codemirror}
+      ref={editorRef}
       style={{ overflow: 'hidden', maxHeight: '100%', flex: '1 1 auto' }}
       max-height="100%"
       theme={'none'}
-      value={variables}
+      value={state}
       onChange={onChange}
       onKeyDown={prettifyHandler}
       indentWithTab={false}

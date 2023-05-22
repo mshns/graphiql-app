@@ -1,30 +1,27 @@
-import { Dispatch, FC, MouseEvent, SetStateAction, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Typography } from '@mui/material';
-import { QueryVariables, QueryHeaders } from 'entities';
-import { theme } from 'shared';
+import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/material';
+import { ConfigTerminal, ConfigbarButton } from 'entities';
+import { EditorContext, useAppActions, useAppSelector } from 'shared';
 
-type Props = {
-  isOpenConfig: boolean;
-  setIsOpenConfig: Dispatch<SetStateAction<boolean>>;
-};
-
-export const EditorConfigBar: FC<Props> = ({ isOpenConfig, setIsOpenConfig }) => {
+export const EditorConfigBar: FC = () => {
   const [tab, setTab] = useState('variables');
+  const { isOpenConfig, setIsOpenConfig } = useContext(EditorContext);
+
+  const isVariablesTab = tab === 'variables';
+
+  const { variablesRef, headersRef } = useContext(EditorContext);
+  const { setVariables, setHeaders } = useAppActions();
+  const { variables, headers } = useAppSelector((state) => state.editorReducer);
 
   const setVisibilityHandler = () => setIsOpenConfig(!isOpenConfig);
 
-  const setBar = (barName: 'variables' | 'headers', event: MouseEvent<HTMLElement>) => {
-    event.stopPropagation();
-    setTab(barName);
-
-    if (!isOpenConfig) {
-      setIsOpenConfig(true);
-    }
+  const configTerminalOptions = {
+    editorRef: isVariablesTab ? variablesRef : headersRef,
+    state: isVariablesTab ? variables : headers,
+    action: isVariablesTab ? setVariables : setHeaders,
+    terminalName: (isVariablesTab ? 'variables' : 'headers') as 'variables' | 'headers'
   };
-
-  const setActiveColor = (barName: string) =>
-    barName === tab && isOpenConfig ? theme.palette.primary.dark : 'transparent';
 
   return (
     <Accordion
@@ -38,18 +35,15 @@ export const EditorConfigBar: FC<Props> = ({ isOpenConfig, setIsOpenConfig }) =>
         aria-controls="panel-config"
       >
         <Box display="flex" gap="0.5em">
-          <Button onClick={(event) => setBar('variables', event)} sx={{ backgroundColor: setActiveColor('variables') }}>
-            <Typography variant="caption">Variables</Typography>
-          </Button>
-
-          <Button onClick={(event) => setBar('headers', event)} sx={{ backgroundColor: setActiveColor('headers') }}>
-            <Typography variant="caption">Headers</Typography>
-          </Button>
+          <ConfigbarButton {...{ tab, setTab, buttonName: 'variables' }} />
+          <ConfigbarButton {...{ tab, setTab, buttonName: 'headers' }} />
         </Box>
       </AccordionSummary>
 
-      <AccordionDetails sx={{}}>
-        <Box>{tab === 'variables' ? <QueryVariables /> : <QueryHeaders />}</Box>
+      <AccordionDetails>
+        <Box>
+          <ConfigTerminal {...configTerminalOptions} />
+        </Box>
       </AccordionDetails>
     </Accordion>
   );

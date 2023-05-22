@@ -1,12 +1,17 @@
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import { Divider, Paper } from '@mui/material';
+import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { QueryTerminal } from 'entities';
 import { EditorConfigBar, EditorTools } from 'features';
-import { useIntrospection } from 'shared';
+import { useIntrospection, EditorContext } from 'shared';
 
 export const Editor: FC = () => {
   const { schema } = useIntrospection();
   const [isOpenConfig, setIsOpenConfig] = useState(false);
+
+  const queryRef = useRef<ReactCodeMirrorRef | null>(null);
+  const headersRef = useRef<ReactCodeMirrorRef | null>(null);
+  const variablesRef = useRef<ReactCodeMirrorRef | null>(null);
 
   return (
     <Paper
@@ -19,13 +24,15 @@ export const Editor: FC = () => {
         height: '100%'
       }}
     >
-      <QueryTerminal schema={schema} isOpenConfig={isOpenConfig} />
+      <EditorContext.Provider value={{ queryRef, headersRef, variablesRef, isOpenConfig, setIsOpenConfig }}>
+        <QueryTerminal schema={schema} />
 
-      <EditorTools />
+        <EditorTools />
 
-      <Divider />
+        <Divider />
 
-      <EditorConfigBar isOpenConfig={isOpenConfig} setIsOpenConfig={setIsOpenConfig} />
+        <EditorConfigBar />
+      </EditorContext.Provider>
     </Paper>
   );
 };
