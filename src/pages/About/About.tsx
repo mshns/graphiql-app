@@ -4,16 +4,18 @@ import { useTranslation } from 'react-i18next';
 import { Avatar, Box, Divider, ListItem, ListItemAvatar, ListItemText, Paper, Typography } from '@mui/material';
 
 import { PageDivider, QuestionAccordion, SignButtons, WelcomeTitle } from 'entities';
+import { useAppSelector } from 'shared';
 import { CardList } from './ui/styled';
 import { FEATURELIST, TEAMLIST } from './constants';
 
 export const About: FC = () => {
   const { t } = useTranslation(['about', 'translation', 'layout']);
+  const { isLoggedIn } = useAppSelector((state) => state.userReducer);
 
   return (
     <Box sx={{ flexDirection: 'column' }}>
       <WelcomeTitle />
-      <SignButtons />
+      {!isLoggedIn && <SignButtons />}
       <PageDivider title={t('Features of GraphiQL')} />
       <CardList>
         {FEATURELIST.map((feature) => (
