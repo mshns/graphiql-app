@@ -9,3 +9,4 @@ export * from './SignButtons/ui/SignButtons';
 export * from './WelcomeTitle/ui/WelcomeTitle';
 export * from './QuestionAccordion/ui/QuestionAccordion';
 export * from './HeaderScroll/ui/HeaderScroll';
+export * from './HeaderButtonList/ui/HeaderButtonList';
