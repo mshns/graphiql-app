@@ -1,11 +1,12 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useRef } from 'react';
 import { default as jsonbeautify } from 'json-beautify';
-import Codemirror from '@uiw/react-codemirror';
+import Codemirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { linter } from '@codemirror/lint';
 import { json, jsonParseLinter } from '@codemirror/lang-json';
 import { useAppActions, useAppSelector, EXTENTIONS } from 'shared';
 
 export const QueryVariables: FC = () => {
+  const codemirror = useRef<ReactCodeMirrorRef | null>(null);
   const { setVariables } = useAppActions();
   const { variables } = useAppSelector((state) => state.editorReducer);
 
@@ -24,6 +25,7 @@ export const QueryVariables: FC = () => {
 
   return (
     <Codemirror
+      ref={codemirror}
       style={{ overflow: 'hidden', maxHeight: '100%', flex: '1 1 auto' }}
       max-height="100%"
       theme={'none'}

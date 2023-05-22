@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useEffect, useRef } from 'react';
 import { GraphQLSchema } from 'graphql';
+// import { diagnosticCount } from '@codemirror/lint';
 import Codemirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { graphql, updateSchema } from 'cm6-graphql';
 import { prettifyGraphql, useAppActions, useAppSelector, EXTENTIONS } from 'shared';
@@ -16,6 +17,10 @@ export const QueryTerminal: FC<Props> = ({ schema, isOpenConfig }) => {
   const onChange = useCallback(
     (value: string) => {
       setQuery(value);
+
+      if (codemirror.current?.view?.state) {
+        // console.log(diagnosticCount(codemirror.current?.view?.state));
+      }
     },
     [setQuery]
   );
