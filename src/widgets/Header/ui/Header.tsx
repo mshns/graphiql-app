@@ -1,27 +1,35 @@
 import { type FC, MutableRefObject } from 'react';
+
+import { useTranslation } from 'react-i18next';
+
+import { SvgIcon, Toolbar } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import { Button, ButtonGroup, IconButton, Toolbar, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+
+import { LogoGraphQL } from 'shared';
+import { HeaderButtonList, HeaderScroll } from 'entities';
+
+import { LogoLink } from './styled/LogoLink.styled';
 
 type Props = {
   header: MutableRefObject<HTMLDivElement | null>;
 };
 
 export const Header: FC<Props> = ({ header }) => {
+  const { t } = useTranslation(['layout']);
+
   return (
-    <AppBar ref={header} position="sticky">
-      <Toolbar>
-        <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h5" component="div" sx={{ flexGrow: 1, color: 'secondary.main' }}>
-          GraphiQL
-        </Typography>
-        <ButtonGroup size="small" color="secondary" aria-label="small button group">
-          <Button sx={{ color: 'primary.contrastText' }}>Sign In</Button>
-          <Button sx={{ color: 'primary.contrastText' }}>Sign Up</Button>
-        </ButtonGroup>
-      </Toolbar>
-    </AppBar>
+    <HeaderScroll>
+      <AppBar ref={header} position="sticky">
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <LogoLink href="/" underline="none">
+            <SvgIcon sx={{ width: 36, height: 36 }}>
+              <LogoGraphQL />
+            </SvgIcon>
+            {t('GraphiQL')}
+          </LogoLink>
+          <HeaderButtonList />
+        </Toolbar>
+      </AppBar>
+    </HeaderScroll>
   );
 };

@@ -1,3 +1,5 @@
 export * from './assets';
-export * from './Theme';
+export * from './getTheme';
 export * from './Spinner';
+export * from './PasswordInput';
+export * from './AuthorizationForm';

@@ -1,5 +1,7 @@
-import { CircularProgress } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 
 export const Spinner = () => (
-  <CircularProgress sx={{ display: 'flex', position: 'absolute', top: '44%', left: '44%' }} />
+  <Box sx={{ display: 'flex', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+    <CircularProgress />
+  </Box>
 );

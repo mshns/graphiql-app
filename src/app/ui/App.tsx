@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { ToastContainer } from 'react-toastify';
 import { withProviders } from '../providers';
 import { Router } from '../router';
@@ -5,10 +6,10 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 const App = () => {
   return (
-    <div className="app">
+    <Box position="relative">
       <Router />
       <ToastContainer />
-    </div>
+    </Box>
   );
 };
 

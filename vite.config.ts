@@ -7,9 +7,6 @@ export default defineConfig({
   base: '/',
   plugins: [react(), svgr(), tsconfigPaths()],
   build: {
-    sourcemap: true,
-    rollupOptions: {
-      external: ['@lezer/lr', '@lezer/highlight', '@lezer/common', '@codemirror/lint']
-    }
+    sourcemap: true
   }
 });
