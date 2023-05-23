@@ -1,10 +1,10 @@
 export * from './DocumentTypeRow/ui/DocumentTypeRow';
-export * from './DocumentButton/ui/DocumentButton';
 export * from './DocumentTypeHeader/ui/DocumentTypeHeader';
 
-export * from './ConfigTerminal/ui/ConfigTerminal';
-export * from './QueryTerminal/ui/QueryTerminal';
+export * from './TerminalConfig/ui/TerminalConfig';
+export * from './TerminalQuery/ui/TerminalQuery';
 
-export * from './RequestButton/ui/RequestButton';
-export * from './PrettifyButton/ui/PrettifyButton';
-export * from './ConfigbarButton/ui/ConfigbarButton';
+export * from './ButtonDocument/ui/ButtonDocument';
+export * from './ButtonRequest/ui/ButtonRequest';
+export * from './ButtonPrettify/ui/ButtonPrettify';
+export * from './ButtonConfigbar/ui/ButtonConfigbar';

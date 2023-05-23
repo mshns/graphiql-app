@@ -9,7 +9,7 @@ type Props = {
   schema: GraphQLSchema | undefined;
 };
 
-export const QueryTerminal: FC<Props> = ({ schema }) => {
+export const TerminalQuery: FC<Props> = ({ schema }) => {
   const { queryRef, isOpenConfig } = useContext(EditorContext);
   const { setQuery } = useAppActions();
   const { query } = useAppSelector((state) => state.editorReducer);

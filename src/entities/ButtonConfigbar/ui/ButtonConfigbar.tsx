@@ -10,7 +10,7 @@ type Props = {
   setTab: Dispatch<SetStateAction<string>>;
 };
 
-export const ConfigbarButton: FC<Props> = ({ setTab, tab, buttonName }) => {
+export const ButtonConfigbar: FC<Props> = ({ setTab, tab, buttonName }) => {
   const { isOpenConfig, setIsOpenConfig } = useContext(EditorContext);
   const theme = useTheme();
 

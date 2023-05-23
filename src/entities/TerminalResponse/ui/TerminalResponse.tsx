@@ -7,7 +7,7 @@ import { EditorState } from '@codemirror/state';
 import { Spinner, useAppSelector, EXTENTIONS } from 'shared';
 import { useGetResponse } from '../model';
 
-export const ResponseBar: FC = () => {
+export const TerminalResponse: FC = () => {
   const { requestObject } = useAppSelector((state) => state.editorReducer);
   const { response, isLoading } = useGetResponse(requestObject);
 

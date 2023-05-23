@@ -29,8 +29,8 @@ export const DocumentTypeRow: FC<Props> = ({ type, name }) => {
           onClick={() => setBreadCrumbs(type.ofType.name)}
           sx={{ display: 'flex', gap: '0.5em' }}
         >
-          <Typography variant="body2">{name}: </Typography>
-          <Typography variant="body2"> {isNonNull ? `${type.ofType.name}!` : `[${type.ofType.name}]`} </Typography>
+          <Typography variant="body1">{name}: </Typography>
+          <Typography variant="body1"> {isNonNull ? `${type.ofType.name}!` : `[${type.ofType.name}]`} </Typography>
         </Link>
       );
     }
@@ -43,8 +43,8 @@ export const DocumentTypeRow: FC<Props> = ({ type, name }) => {
           onClick={() => setBreadCrumbs(type.name)}
           sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.5em' }}
         >
-          <Typography variant="body2">{name}: </Typography>
-          <Typography variant="body2">{type.name}</Typography>
+          <Typography variant="body1">{name}: </Typography>
+          <Typography variant="body1">{type.name}</Typography>
         </Link>
       );
     }

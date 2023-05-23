@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { FC } from 'react';
-import { PrettifyButton, RequestButton } from 'entities';
+import { ButtonPrettify, ButtonRequest } from 'entities';
 
 export const EditorTools: FC = () => {
   return (
@@ -14,8 +14,8 @@ export const EditorTools: FC = () => {
         right: '1.2em'
       }}
     >
-      <RequestButton />
-      <PrettifyButton />
+      <ButtonRequest />
+      <ButtonPrettify />
     </Box>
   );
 };

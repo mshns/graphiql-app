@@ -9,7 +9,7 @@ type Props = {
   setIsDocumentOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export const DocumentButton: FC<Props> = ({ docButton, isDocumentOpen, setIsDocumentOpen }) => {
+export const ButtonDocument: FC<Props> = ({ docButton, isDocumentOpen, setIsDocumentOpen }) => {
   return (
     <Button
       ref={docButton}

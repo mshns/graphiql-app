@@ -5,7 +5,7 @@ import { gql } from 'graphql-request';
 import { Button } from '@mui/material';
 import { useAppActions, useAppSelector } from 'shared';
 
-export const RequestButton: FC = () => {
+export const ButtonRequest: FC = () => {
   const { query, variables, headers } = useAppSelector((state) => state.editorReducer);
   const { setRequestObject } = useAppActions();
 

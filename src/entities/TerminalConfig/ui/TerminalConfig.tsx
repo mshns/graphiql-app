@@ -12,7 +12,7 @@ type Props = {
   terminalName: 'variables' | 'headers';
 };
 
-export const ConfigTerminal: FC<Props> = ({ editorRef, action, state, terminalName }) => {
+export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalName }) => {
   const handleChange = useCallback(
     (value: string) => {
       action(value);

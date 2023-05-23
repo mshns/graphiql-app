@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from 'react';
 import { Divider, Paper } from '@mui/material';
 import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
-import { QueryTerminal } from 'entities';
+import { TerminalQuery } from 'entities';
 import { EditorConfigBar, EditorTools } from 'features';
 import { useIntrospection, EditorContext } from 'shared';
 
@@ -25,7 +25,7 @@ export const Editor: FC = () => {
       }}
     >
       <EditorContext.Provider value={{ queryRef, headersRef, variablesRef, isOpenConfig, setIsOpenConfig }}>
-        <QueryTerminal schema={schema} />
+        <TerminalQuery schema={schema} />
 
         <EditorTools />
 

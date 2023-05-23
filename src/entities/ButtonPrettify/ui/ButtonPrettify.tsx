@@ -10,7 +10,7 @@ import {
   lintEditorErrors
 } from 'shared';
 
-export const PrettifyButton: FC = () => {
+export const ButtonPrettify: FC = () => {
   const { query, variables, headers } = useAppSelector((state) => state.editorReducer);
   const { setQuery, setVariables, setHeaders } = useAppActions();
   const { headersRef, queryRef, variablesRef } = useContext(EditorContext);

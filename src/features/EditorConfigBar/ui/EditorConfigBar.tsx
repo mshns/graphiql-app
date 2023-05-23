@@ -1,7 +1,7 @@
 import { FC, useContext, useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/material';
-import { ConfigTerminal, ConfigbarButton } from 'entities';
+import { TerminalConfig, ButtonConfigbar } from 'entities';
 import { EditorContext, useAppActions, useAppSelector } from 'shared';
 
 export const EditorConfigBar: FC = () => {
@@ -35,14 +35,14 @@ export const EditorConfigBar: FC = () => {
         aria-controls="panel-config"
       >
         <Box display="flex" gap="0.5em">
-          <ConfigbarButton {...{ tab, setTab, buttonName: 'variables' }} />
-          <ConfigbarButton {...{ tab, setTab, buttonName: 'headers' }} />
+          <ButtonConfigbar {...{ tab, setTab, buttonName: 'variables' }} />
+          <ButtonConfigbar {...{ tab, setTab, buttonName: 'headers' }} />
         </Box>
       </AccordionSummary>
 
       <AccordionDetails>
         <Box>
-          <ConfigTerminal {...configTerminalOptions} />
+          <TerminalConfig {...configTerminalOptions} />
         </Box>
       </AccordionDetails>
     </Accordion>
