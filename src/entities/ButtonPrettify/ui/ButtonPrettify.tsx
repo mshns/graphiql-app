@@ -17,18 +17,18 @@ export const ButtonPrettify: FC = () => {
 
   const prettifyHandler = () => {
     const isQueryError = lintEditorErrors(queryRef, 'query');
-    const isVarialesError = lintEditorErrors(headersRef, 'headers');
-    const isHeadersError = lintEditorErrors(variablesRef, 'variables');
+    const isHeadersError = lintEditorErrors(headersRef, 'headers');
+    const isVarialesError = lintEditorErrors(variablesRef, 'variables');
 
     if (!isQueryError) {
       prettifyGraphql(query, setQuery);
     }
 
-    if (isVarialesError) {
+    if (!isVarialesError) {
       jsonParseGuard(variables, setVariables, 'variables');
     }
 
-    if (isHeadersError) {
+    if (!isHeadersError) {
       jsonParseGuard(headers, setHeaders, 'headers');
     }
   };
