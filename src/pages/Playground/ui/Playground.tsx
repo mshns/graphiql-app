@@ -5,18 +5,18 @@ import { Editor } from 'widgets';
 import { DocumentButton } from 'entities';
 import { Spinner, getLazyComponent, useAppSelector } from 'shared';
 
-type OutletContext = { playgroundHeight: number };
+type OutletContext = { barsHeight: number };
 
 const DocumentationSideBar = getLazyComponent('widgets', 'DocumentSideBar');
 const ResponseBar = getLazyComponent('features', 'ResponseBar');
 
 export const PlayGround: FC = () => {
-  const { playgroundHeight } = useOutletContext<OutletContext>();
+  const { barsHeight } = useOutletContext<OutletContext>();
   const [isDocumentOpen, setIsDocumentOpen] = useState(false);
   const { requestObject } = useAppSelector((state) => state.editorReducer);
 
   return (
-    <Grid container height={playgroundHeight}>
+    <Grid container height={`calc(100vh - ${barsHeight}px)`}>
       <Grid
         height="100%"
         overflow="auto"

@@ -7,7 +7,7 @@ import { usePlaygroundHeight } from '../../hooks/usePlaygroundHeight';
 
 export const Layout: FC = () => {
   const { pathname } = useLocation();
-  const { header, footer, playgroundHeight } = usePlaygroundHeight();
+  const { header, footer, barsHeight } = usePlaygroundHeight();
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -19,7 +19,7 @@ export const Layout: FC = () => {
 
         <Box display="flex" component="main" p={2} width="100%" position="relative">
           <Suspense fallback={<Spinner />}>
-            <Outlet context={{ playgroundHeight }} />
+            <Outlet context={{ barsHeight }} />
           </Suspense>
         </Box>
       </Container>

@@ -3,8 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 export const usePlaygroundHeight = () => {
   const header = useRef<HTMLDivElement | null>(null);
   const footer = useRef<HTMLDivElement | null>(null);
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const [playgroundHeight, setPlaygroundHeight] = useState(0);
+  const [barsHeight, setBarsHeight] = useState(0);
 
   useEffect(() => {
     if (header && footer) {
@@ -12,16 +11,10 @@ export const usePlaygroundHeight = () => {
       const footerHeight = footer.current?.clientHeight;
 
       if (headerHeight && footerHeight) {
-        setPlaygroundHeight(windowHeight - headerHeight - footerHeight - 32);
+        setBarsHeight(headerHeight + footerHeight + 32);
       }
     }
+  }, [header, footer]);
 
-    window.onresize = () => {
-      if (windowHeight !== window.innerHeight) {
-        setWindowHeight(window.innerHeight);
-      }
-    };
-  }, [header, footer, windowHeight]);
-
-  return { header, footer, playgroundHeight };
+  return { header, footer, barsHeight };
 };

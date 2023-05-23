@@ -28,7 +28,7 @@ export const EditorConfigBar: FC = () => {
       disableGutters
       expanded={isOpenConfig}
       onChange={setVisibilityHandler}
-      sx={{ height: isOpenConfig ? '30%' : 'auto', overflow: 'auto' }}
+      sx={{ flex: '0 0 auto', height: isOpenConfig ? '30%' : 'auto', overflow: 'auto' }}
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon sx={{ transform: 'rotate(180deg)' }} />}
