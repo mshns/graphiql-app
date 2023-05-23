@@ -1,13 +1,13 @@
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { TOAST_MESSAGES, TOAST_TYPES } from 'shared/constants';
-import { throwToastify } from '../lib';
+import { throwToastify } from '.';
 
-export const prettifyGraphql = async (query: string, action: ActionCreatorWithPayload<string, 'Editor/setQuery'>) => {
+export const graphqlParseGuard = async (query: string, action: ActionCreatorWithPayload<string, 'Editor/setQuery'>) => {
   const prettier = await import('https://unpkg.com/prettier@2.8.8/esm/standalone.mjs'!);
   const parserGraphql = await import(`https://unpkg.com/prettier@2.8.8/esm/parser-graphql.mjs`!);
 
   if (!query) {
-    return;
+    return true;
   }
 
   try {
@@ -17,7 +17,11 @@ export const prettifyGraphql = async (query: string, action: ActionCreatorWithPa
     });
 
     action(result);
+
+    return true;
   } catch (error) {
     throwToastify(TOAST_MESSAGES.queryParse, TOAST_TYPES.error);
+
+    return false;
   }
 };

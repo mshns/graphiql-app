@@ -7,7 +7,7 @@ import {
   IntrospectionType,
   IntrospectionTypeRef
 } from 'graphql';
-import { INTROSPECTION_TYPES } from './constants';
+import { INTROSPECTION_TYPES } from '../../constants';
 
 export function isIntrospectionType(type: IntrospectionTypeRef): type is IntrospectionType {
   return INTROSPECTION_TYPES.some((arrType) => type?.kind === arrType);

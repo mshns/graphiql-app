@@ -4,12 +4,11 @@ import Codemirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
 import { EditorView } from '@codemirror/view';
 import { EditorState } from '@codemirror/state';
-import { Spinner, useAppSelector, EXTENTIONS } from 'shared';
+import { Spinner, EXTENTIONS } from 'shared';
 import { useGetResponse } from '../model';
 
 export const TerminalResponse: FC = () => {
-  const { requestObject } = useAppSelector((state) => state.editorReducer);
-  const { response, isLoading } = useGetResponse(requestObject);
+  const { response, isLoading } = useGetResponse();
 
   if (isLoading) {
     return <Spinner />;

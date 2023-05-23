@@ -16,9 +16,9 @@ export const lintEditorErrors: LintEditorErrors = (editorRef, terminalName) => {
     if (isAnyLintErrors) {
       throwToastify(TOAST_MESSAGES[`${terminalName}Lint`], TOAST_TYPES.warning);
 
-      return true;
+      return false;
     }
   }
 
-  return false;
+  return true;
 };

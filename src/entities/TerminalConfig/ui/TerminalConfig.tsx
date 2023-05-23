@@ -22,9 +22,9 @@ export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalNa
 
   const handlePrettify = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
-      const isEditorError = lintEditorErrors(editorRef, terminalName);
+      const isEditorPass = lintEditorErrors(editorRef, terminalName);
 
-      if (!isEditorError) {
+      if (isEditorPass) {
         jsonParseGuard(state, action, terminalName);
       }
     }

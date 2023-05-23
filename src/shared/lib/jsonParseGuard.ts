@@ -8,12 +8,16 @@ export const jsonParseGuard = (
   name: 'variables' | 'headers'
 ) => {
   if (!state) {
-    return;
+    return true;
   }
 
   try {
-    action(jsonbeautify(JSON.parse(state), null!, 1, 5));
+    action(jsonbeautify(JSON.parse(state), null!, 1, 80));
+
+    return true;
   } catch (error) {
     throwToastify(TOAST_MESSAGES[`${name}Parse`], TOAST_TYPES.error);
+
+    return false;
   }
 };

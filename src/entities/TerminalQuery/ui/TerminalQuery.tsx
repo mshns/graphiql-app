@@ -1,9 +1,8 @@
 import React, { FC, useCallback, useContext, useEffect } from 'react';
 import { GraphQLSchema } from 'graphql';
-// import { diagnosticCount } from '@codemirror/lint';
 import Codemirror from '@uiw/react-codemirror';
 import { graphql, updateSchema } from 'cm6-graphql';
-import { prettifyGraphql, useAppActions, useAppSelector, EXTENTIONS, EditorContext, lintEditorErrors } from 'shared';
+import { graphqlParseGuard, useAppActions, useAppSelector, EXTENTIONS, EditorContext, lintEditorErrors } from 'shared';
 
 type Props = {
   schema: GraphQLSchema | undefined;
@@ -31,10 +30,10 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
 
   const handlePrettify = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
-      const isQueryError = lintEditorErrors(queryRef, 'query');
+      const isQueryPass = lintEditorErrors(queryRef, 'query');
 
-      if (!isQueryError) {
-        prettifyGraphql(query, setQuery);
+      if (isQueryPass) {
+        graphqlParseGuard(query, setQuery);
       }
     }
   };

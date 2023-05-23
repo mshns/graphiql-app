@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { GraphQLClientRequestHeaders } from 'graphql-request/build/esm/types';
 
 export interface IRequestObject {
   query: string;
   variables?: { [key: string]: string | number };
-  headers?: { [key: string]: string | number };
+  headers?: GraphQLClientRequestHeaders;
 }
 
 export interface IEditor {
