@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { uid } from 'uid';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { QUESTIONLIST } from '../constants';
+import { QUESTION_LIST } from '../constants';
 
-export const QuestionAccordion = () => {
+export const AboutFAQ = () => {
   const { t } = useTranslation(['about']);
 
   const [expanded, setExpanded] = useState<string | false>('question2');
@@ -16,8 +16,8 @@ export const QuestionAccordion = () => {
 
   return (
     <>
-      {QUESTIONLIST.map((question) => (
-        <Accordion key={question} expanded={expanded === question} onChange={handleChange(question)}>
+      {QUESTION_LIST.map((question) => (
+        <Accordion key={uid()} expanded={expanded === question} onChange={handleChange(question)}>
           <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'secondary.main' }} />}>
             <Typography
               sx={{ width: { md: '35%', xs: '100%' }, flexShrink: 0, color: 'secondary.main', fontWeight: 500 }}

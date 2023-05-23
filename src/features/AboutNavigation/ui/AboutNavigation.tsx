@@ -1,11 +1,9 @@
-import { Box } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Box } from '@mui/material';
+import { useAppSelector, ButtonStyled, ROUTE } from 'shared';
 
-import { useAppSelector, ROUTE } from 'shared';
-import { ButtonStyled } from 'features';
-
-export const SignButtons = () => {
+export const AboutNavigation = () => {
   const { t } = useTranslation(['layout']);
   const navigate = useNavigate();
   const { isLoggedIn } = useAppSelector((state) => state.userReducer);

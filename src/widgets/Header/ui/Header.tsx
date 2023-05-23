@@ -1,13 +1,9 @@
 import { type FC, MutableRefObject } from 'react';
-
 import { useTranslation } from 'react-i18next';
-
 import { SvgIcon, Toolbar } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-
 import { LogoGraphQL } from 'shared';
 import { HeaderButtonList, HeaderScroll } from 'entities';
-
 import { LogoLink } from './styled/LogoLink.styled';
 
 type Props = {

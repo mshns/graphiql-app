@@ -1,10 +1,8 @@
 import { FC, useContext, useEffect } from 'react';
-
 import { useTranslation } from 'react-i18next';
 import { Box, Divider, Typography } from '@mui/material';
-
 import { ColorModeContext } from 'app';
-import { ButtonStyled } from 'features';
+import { ButtonStyled } from 'shared';
 
 export const HeaderSettings: FC = () => {
   const { i18n, t } = useTranslation(['layout']);

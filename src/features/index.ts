@@ -12,4 +12,12 @@ export * from './EditorConfigBar/ui/EditorConfigBar';
 export * from './AuthorizationForm/ui/AuthorizationForm';
 
 export * from './HeaderSettings/ui/HeaderSettings';
-export * from './ButtonStyled/ui/ButtonStyled';
+
+export * from './FooterAuthors/ui/FooterAuthors';
+export * from './FooterGraphql/ui/FooterGraphql';
+export * from './FooterRSSchool/ui/FooterRSSchool';
+
+export * from './AboutNavigation/ui/AboutNavigation';
+export * from './AboutFeatures/ui/AboutFeatures';
+export * from './AboutFAQ/ui/AboutFAQ';
+export * from './AboutTeam/ui/AboutTeam';

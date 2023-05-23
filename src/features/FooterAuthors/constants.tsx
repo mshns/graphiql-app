@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 
-export const AUTHORLIST = [
+export const AUTHOR_LIST = [
   {
     icon: (
       <Link to="https://github.com/mshns">

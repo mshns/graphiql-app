@@ -1,5 +1,6 @@
 import { type FC, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+import { uid } from 'uid';
 import {
   Box,
   Divider,
@@ -11,7 +12,6 @@ import {
   Tooltip,
   useTheme
 } from '@mui/material';
-
 import { useTranslation } from 'react-i18next';
 import { NAVIGATION } from '../constants';
 import { NavigationList } from './styled/NavigationList.styled';
@@ -24,7 +24,7 @@ export const Navbar: FC = () => {
     <Box sx={{ backgroundColor: 'background.paper' }}>
       <NavigationList>
         {NAVIGATION.map((nav) => (
-          <Fragment key={nav.id}>
+          <Fragment key={uid()}>
             <NavLink
               to={nav.route}
               style={({ isActive }) => ({

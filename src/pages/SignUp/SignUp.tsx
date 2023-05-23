@@ -9,7 +9,6 @@ export const SignUp: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const { setIsLoggedIn } = useAppActions();
-
   const { t } = useTranslation(['authorization']);
 
   const auth = getAuth();

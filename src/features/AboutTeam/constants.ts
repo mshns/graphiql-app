@@ -1,4 +1,4 @@
-export const TEAMLIST = [
+export const TEAM_LIST = [
   {
     teammate: 'Nikita Kisly',
     avatar: 'https://avatars.githubusercontent.com/u/83978362?v=4',
