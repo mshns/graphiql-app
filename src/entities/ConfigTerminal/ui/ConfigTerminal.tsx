@@ -13,20 +13,26 @@ type Props = {
 };
 
 export const ConfigTerminal: FC<Props> = ({ editorRef, action, state, terminalName }) => {
-  const onChange = useCallback(
+  const handleChange = useCallback(
     (value: string) => {
       action(value);
     },
     [action]
   );
 
-  const prettifyHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handlePrettify = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
       const isEditorError = lintEditorErrors(editorRef, terminalName);
 
       if (!isEditorError) {
         jsonParseGuard(state, action, terminalName);
       }
+    }
+  };
+
+  const handleBlur = () => {
+    if (!state) {
+      action('{}');
     }
   };
 
@@ -37,8 +43,9 @@ export const ConfigTerminal: FC<Props> = ({ editorRef, action, state, terminalNa
       max-height="100%"
       theme={'none'}
       value={state}
-      onChange={onChange}
-      onKeyDown={prettifyHandler}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      onKeyDown={handlePrettify}
       indentWithTab={false}
       basicSetup={{
         highlightActiveLine: false,

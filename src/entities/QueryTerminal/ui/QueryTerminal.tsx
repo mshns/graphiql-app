@@ -13,12 +13,6 @@ export const QueryTerminal: FC<Props> = ({ schema }) => {
   const { queryRef, isOpenConfig } = useContext(EditorContext);
   const { setQuery } = useAppActions();
   const { query } = useAppSelector((state) => state.editorReducer);
-  const onChange = useCallback(
-    (value: string) => {
-      setQuery(value);
-    },
-    [setQuery]
-  );
 
   useEffect(() => {
     if (queryRef && schema) {
@@ -28,7 +22,14 @@ export const QueryTerminal: FC<Props> = ({ schema }) => {
     }
   }, [schema, queryRef]);
 
-  const prettifyHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleChange = useCallback(
+    (value: string) => {
+      setQuery(value);
+    },
+    [setQuery]
+  );
+
+  const handlePrettify = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
       const isQueryError = lintEditorErrors(queryRef, 'query');
 
@@ -45,8 +46,8 @@ export const QueryTerminal: FC<Props> = ({ schema }) => {
       height="100%"
       value={query}
       theme={'none'}
-      onChange={onChange}
-      onKeyDown={prettifyHandler}
+      onChange={handleChange}
+      onKeyDown={handlePrettify}
       indentWithTab={false}
       extensions={[...EXTENTIONS, graphql()]}
       basicSetup={{

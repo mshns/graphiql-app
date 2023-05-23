@@ -7,6 +7,10 @@ export const jsonParseGuard = (
   action: ActionCreatorWithPayload<string, 'Editor/setVariables' | 'Editor/setHeaders'>,
   name: 'variables' | 'headers'
 ) => {
+  if (!state) {
+    return;
+  }
+
   try {
     action(jsonbeautify(JSON.parse(state), null!, 1, 5));
   } catch (error) {

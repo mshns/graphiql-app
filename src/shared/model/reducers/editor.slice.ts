@@ -23,8 +23,8 @@ const initialState: IEditor = {
     }
   }
 }`,
-  variables: '',
-  headers: '',
+  variables: '{}',
+  headers: '{}',
   variablesKeymap: [],
   requestObject: null
 };
