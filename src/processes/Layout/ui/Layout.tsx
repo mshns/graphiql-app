@@ -5,6 +5,8 @@ import { getAuth } from 'firebase/auth';
 import { Navbar, Footer, Header } from 'widgets';
 import { ROUTE, Spinner, useAppActions } from 'shared';
 
+import { LayoutWrapper } from './styled/LayoutWrapper.styled';
+
 export const Layout: FC = () => {
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +30,7 @@ export const Layout: FC = () => {
   });
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'background.default' }}>
+    <LayoutWrapper>
       <Header />
       <Box sx={{ display: 'flex', flex: '1 1 auto' }}>
         {[ROUTE.About, ROUTE.Playground].some((item) => item === pathname) && <Navbar />}
@@ -47,6 +49,6 @@ export const Layout: FC = () => {
         </Box>
       </Box>
       <Footer />
-    </Box>
+    </LayoutWrapper>
   );
 };

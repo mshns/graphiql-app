@@ -1,82 +1,31 @@
-import { useState, type FC } from 'react';
+import { type FC } from 'react';
 
-import { ButtonGroup, Drawer, SvgIcon, Toolbar, Tooltip } from '@mui/material';
-import AppBar from '@mui/material/AppBar';
-import SettingsIcon from '@mui/icons-material/Settings';
 import { useTranslation } from 'react-i18next';
 
-import { useNavigate } from 'react-router-dom';
-import { getAuth, signOut } from 'firebase/auth';
-import { LogoGraphQL, ROUTE, useAppSelector } from 'shared';
-import { HeaderSettings } from 'features';
-import { LogoLink, HeaderButton } from './styled';
+import { SvgIcon, Toolbar } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+
+import { LogoGraphQL } from 'shared';
+import { HeaderButtonList, HeaderScroll } from 'entities';
+
+import { LogoLink } from './styled/LogoLink.styled';
 
 export const Header: FC = () => {
   const { t } = useTranslation(['layout']);
 
-  const [isSettingsOpen, setSettingsOpen] = useState(false);
-  const { isLoggedIn } = useAppSelector((state) => state.userReducer);
-
-  const navigate = useNavigate();
-
-  const auth = getAuth();
-
-  const toggleSettings = (open: boolean) => {
-    setSettingsOpen(open);
-  };
-
-  const handleSignOut = async () => {
-    await signOut(auth);
-    navigate(ROUTE.About);
-  };
-
-  const renderHeaderButtons = () => {
-    if (isLoggedIn) {
-      return <HeaderButton onClick={handleSignOut}>{t('Sign Out')}</HeaderButton>;
-    }
-
-    return (
-      <>
-        <HeaderButton
-          onClick={() => {
-            navigate(ROUTE.Login);
-          }}
-        >
-          {t('Sign In')}
-        </HeaderButton>
-        <HeaderButton
-          onClick={() => {
-            navigate(ROUTE.SignUp);
-          }}
-        >
-          {t('Sign Up')}
-        </HeaderButton>
-      </>
-    );
-  };
-
   return (
-    <AppBar position="sticky">
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <LogoLink href="/" underline="none">
-          <SvgIcon sx={{ width: 36, height: 36 }}>
-            <LogoGraphQL />
-          </SvgIcon>
-          {t('GraphiQL')}
-        </LogoLink>
-
-        <ButtonGroup variant="contained" size="small" aria-label="header button group">
-          {renderHeaderButtons()}
-          <HeaderButton>
-            <Tooltip title={t('Settings')}>
-              <SettingsIcon fontSize="small" onClick={() => toggleSettings(true)} />
-            </Tooltip>
-          </HeaderButton>
-        </ButtonGroup>
-      </Toolbar>
-      <Drawer anchor="right" open={isSettingsOpen} onClose={() => toggleSettings(false)}>
-        <HeaderSettings />
-      </Drawer>
-    </AppBar>
+    <HeaderScroll>
+      <AppBar position="sticky">
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <LogoLink href="/" underline="none">
+            <SvgIcon sx={{ width: 36, height: 36 }}>
+              <LogoGraphQL />
+            </SvgIcon>
+            {t('GraphiQL')}
+          </LogoLink>
+          <HeaderButtonList />
+        </Toolbar>
+      </AppBar>
+    </HeaderScroll>
   );
 };
