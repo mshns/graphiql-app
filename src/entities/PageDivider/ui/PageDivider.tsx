@@ -12,7 +12,11 @@ export const PageDivider: FC<IPageDivider> = ({ title, icon }: IPageDivider) => 
       <Tooltip title={title}>
         <SvgIcon sx={{ color: 'divider', width: 60, height: 60 }}>{icon}</SvgIcon>
       </Tooltip>
-      <Typography variant="h5" component="h4" sx={{ color: 'secondary.main', display: { sm: 'block', xs: 'none' } }}>
+      <Typography
+        variant="h5"
+        component="h4"
+        sx={{ color: 'secondary.main', letterSpacing: 4, display: { sm: 'block', xs: 'none' } }}
+      >
         {title}
       </Typography>
     </Divider>

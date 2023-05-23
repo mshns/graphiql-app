@@ -45,7 +45,7 @@ export const getTheme = (mode: PaletteMode) => ({
           }
         }),
 
-    divider: '#E535AB25'
+    divider: '#E535AB50'
   },
 
   typography: {

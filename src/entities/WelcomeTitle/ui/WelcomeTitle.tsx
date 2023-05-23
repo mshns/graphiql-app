@@ -6,9 +6,10 @@ export const WelcomeTitle = () => {
 
   return (
     <Box sx={{ flexDirection: 'column' }}>
-      <Typography variant="h4" component="h2" color="secondary.main" sx={{ textAlign: 'center' }}>
+      <Typography variant="h4" component="h2" color="secondary.main" sx={{ textAlign: 'center', mb: 2 }}>
         {t('title')}
       </Typography>
+
       <Typography variant="h5" component="h3" color="text.primary" sx={{ textAlign: 'center' }}>
         {t('subtitle')}
       </Typography>
