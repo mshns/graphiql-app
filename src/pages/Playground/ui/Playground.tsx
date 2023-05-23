@@ -34,7 +34,6 @@ export const PlayGround: FC = () => {
       <Grid
         display="flex"
         height="100%"
-        columnSpacing="0.5em"
         flexDirection="column"
         xl={isDocumentOpen ? 9 : 12}
         lg={isDocumentOpen ? 9 : 12}
@@ -42,7 +41,7 @@ export const PlayGround: FC = () => {
       >
         <ButtonDocument {...{ docButton, isDocumentOpen, setIsDocumentOpen }} />
 
-        <Grid container height={`calc(100% - ${buttonHeight || 0}px)`} item spacing={2} mt="0.1em" pl="1em">
+        <Grid container height={`calc(100% - ${buttonHeight || 0}px)`} columnSpacing="0.5em" item mt="0.5em" pl="1em">
           <Grid display="flex" height="100%" item xl={6} lg={6}>
             <Editor />
           </Grid>
