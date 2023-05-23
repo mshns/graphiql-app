@@ -1,12 +1,9 @@
 import { createContext, useMemo, useState } from 'react';
-
-import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@emotion/react';
-
+import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme } from '@mui/material/styles';
 import { PaletteMode } from '@mui/material';
-
-import { getTheme } from 'shared';
+import { getTheme } from '../api';
 
 interface IColorModeContext {
   toggleColorMode: () => void;

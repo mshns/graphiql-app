@@ -1,10 +1,10 @@
+import { Link } from 'react-router-dom';
 import { Box, Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { PasswordInput } from 'shared/ui/PasswordInput';
+import { PasswordInput } from 'entities';
 
-interface AuthorizationFormProps {
+type Props = {
   title: string;
   buttonText: string;
   onClick: (email: string, password: string) => void;
@@ -12,9 +12,9 @@ interface AuthorizationFormProps {
   linkText: string;
   linkTo: string;
   isLoading: boolean;
-}
+};
 
-export const AuthorizationForm: FC<AuthorizationFormProps> = ({
+export const AuthorizationForm: FC<Props> = ({
   buttonText,
   linkText,
   linkTo,

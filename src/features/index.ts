@@ -7,8 +7,9 @@ export * from './DocumentPossibleTypes/ui/DocumentPossibleTypes';
 export * from './DocumentMetaData/ui/DocumentMetaData';
 
 export * from './EditorTools/ui/EditorTools';
-
 export * from './EditorConfigBar/ui/EditorConfigBar';
+
+export * from './AuthorizationForm/ui/AuthorizationForm';
 
 export * from './HeaderSettings/ui/HeaderSettings';
 export * from './ButtonStyled/ui/ButtonStyled';
