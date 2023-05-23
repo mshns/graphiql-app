@@ -19,9 +19,9 @@ export const Editor: FC = () => {
         display: 'flex',
         flexDirection: 'column',
         flex: '0 0 100%',
-        boxShadow: 3,
         position: 'relative',
-        height: '100%'
+        height: '100%',
+        boxShadow: 3
       }}
     >
       <EditorContext.Provider value={{ queryRef, headersRef, variablesRef, isOpenConfig, setIsOpenConfig }}>

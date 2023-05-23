@@ -4,6 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 import { Editor } from 'widgets';
 import { DocumentButton } from 'entities';
 import { Spinner, getLazyComponent, useAppSelector } from 'shared';
+import { useButtonHeight } from '../hooks/useButtonHeight';
 
 type OutletContext = { barsHeight: number };
 
@@ -11,6 +12,8 @@ const DocumentationSideBar = getLazyComponent('widgets', 'DocumentSideBar');
 const ResponseBar = getLazyComponent('features', 'ResponseBar');
 
 export const PlayGround: FC = () => {
+  const { docButton, buttonHeight } = useButtonHeight();
+
   const { barsHeight } = useOutletContext<OutletContext>();
   const [isDocumentOpen, setIsDocumentOpen] = useState(false);
   const { requestObject } = useAppSelector((state) => state.editorReducer);
@@ -37,9 +40,9 @@ export const PlayGround: FC = () => {
         lg={isDocumentOpen ? 9 : 12}
         item
       >
-        <DocumentButton isDocumentOpen={isDocumentOpen} setIsOpen={setIsDocumentOpen} />
+        <DocumentButton {...{ docButton, isDocumentOpen, setIsDocumentOpen }} />
 
-        <Grid container height="97%" item spacing={2} pl="1em">
+        <Grid container height={`calc(100% - ${buttonHeight || 0}px)`} item spacing={2} mt="0.1em" pl="1em">
           <Grid display="flex" height="100%" item xl={6} lg={6}>
             <Editor />
           </Grid>
