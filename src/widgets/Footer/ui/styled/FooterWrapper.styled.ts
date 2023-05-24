@@ -7,6 +7,6 @@ export const FooterWrapper = styled(Paper)(({ theme }) => ({
   alignContent: 'center',
   width: '100%',
   marginTop: 'auto',
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.palette.barsColor.main,
   borderRadius: 0
 }));

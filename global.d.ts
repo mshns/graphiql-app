@@ -18,3 +18,14 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+export * from '@mui/material/styles';
+declare module '@mui/material/styles' {
+  interface Palette {
+    barsColor: Palette['primary'];
+  }
+
+  interface PaletteOptions {
+    barsColor?: PaletteOptions['primary'];
+  }
+}

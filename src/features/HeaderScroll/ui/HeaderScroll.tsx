@@ -19,7 +19,7 @@ export const HeaderScroll: FC<Props> = ({ children, window }) => {
   return cloneElement(children, {
     elevation: trigger ? 2 : 1,
     sx: {
-      backgroundColor: trigger ? theme.palette.background.paper : theme.palette.background.default,
+      backgroundColor: trigger ? theme.palette.barsColor.main : theme.palette.barsColor.light,
       transition: trigger ? '0.2s' : '0.3s'
     }
   });

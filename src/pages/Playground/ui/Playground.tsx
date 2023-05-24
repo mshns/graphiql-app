@@ -9,7 +9,7 @@ import { useButtonHeight } from '../hooks/useButtonHeight';
 type OutletContext = { barsHeight: number };
 
 const DocumentationSideBar = getLazyComponent('widgets', 'DocumentSideBar');
-const ResponseBar = getLazyComponent('entities', 'TerminalResponse');
+const TerminalResponse = getLazyComponent('entities', 'TerminalResponse');
 
 export const PlayGround: FC = () => {
   const { docButton, buttonHeight } = useButtonHeight();
@@ -47,7 +47,7 @@ export const PlayGround: FC = () => {
           </Grid>
 
           <Grid display="flex" position="relative" height="100%" justifyContent="center" item xl={6} lg={6}>
-            <Suspense fallback={<Spinner />}>{!!requestObject && <ResponseBar />}</Suspense>
+            <Suspense fallback={<Spinner />}>{!!requestObject && <TerminalResponse />}</Suspense>
           </Grid>
         </Grid>
       </Grid>

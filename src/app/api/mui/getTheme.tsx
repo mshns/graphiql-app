@@ -1,56 +1,50 @@
-import { PaletteMode } from '@mui/material';
+import { PaletteMode, ThemeOptions } from '@mui/material';
 
-export const getTheme = (mode: PaletteMode) => ({
-  palette: {
-    mode,
-    ...(mode === 'light'
-      ? {
-          primary: {
-            main: '#292A2D',
-            contrastText: '#FFF'
-          },
+export const getTheme = (mode: PaletteMode): ThemeOptions => {
+  const isLight = mode === 'light';
 
-          secondary: {
-            main: '#E535AB'
-          },
+  return {
+    palette: {
+      mode,
+      primary: {
+        main: '#292A2D',
+        contrastText: isLight ? '#FFF' : '#BBB'
+      },
 
-          text: {
-            primary: '#292A2D',
-            secondary: '#292A2D75'
-          },
+      secondary: {
+        main: isLight ? '#E535AB' : '#e660ba'
+      },
 
-          background: {
-            default: '#F1F1F1',
-            paper: '#E6E8EC'
-          }
-        }
-      : {
-          primary: {
-            main: '#292A2D',
-            contrastText: '#BBB'
-          },
+      text: {
+        primary: isLight ? '#292A2D' : '#BBB',
+        secondary: isLight ? '#292A2D75' : '#F1F1F175'
+      },
 
-          secondary: {
-            main: '#AC498B'
-          },
+      background: {
+        default: isLight ? '#FFFFFF' : '#202124',
+        paper: isLight ? '#E6E8EC' : '#35363A'
+      },
 
-          text: {
-            primary: '#BBB',
-            secondary: '#F1F1F175'
-          },
+      barsColor: {
+        main: isLight ? '#E6E8EC' : '#35363A',
+        light: isLight ? '#f4f3f3' : '#4c4c4d'
+      },
 
-          background: {
-            default: '#202124',
-            paper: '#35363A'
-          }
-        }),
+      success: {
+        main: '#98c379'
+      },
 
-    divider: '#E535AB50'
-  },
+      error: {
+        main: '#e06c75'
+      },
 
-  typography: {
-    h6: {
-      fontSize: 12
+      divider: '#E535AB50'
+    },
+
+    typography: {
+      h6: {
+        fontSize: 12
+      }
     }
-  }
-});
+  };
+};

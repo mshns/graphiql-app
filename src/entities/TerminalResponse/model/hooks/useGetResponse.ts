@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { request } from 'graphql-request';
-import { isGraphqlError, throwToastify, useAppSelector } from 'shared';
+import { RESPONSE_CODES, isGraphqlError, throwToastify, useAppSelector } from 'shared';
 
 export const useGetResponse = () => {
   const [response, setResponse] = useState<unknown>();
   const [isLoading, setIsLoading] = useState(false);
+  const [responseStatus, setResponseStatus] = useState(0);
 
   const { requestObject } = useAppSelector((state) => state.editorReducer);
 
@@ -18,8 +19,11 @@ export const useGetResponse = () => {
           const data = await request<unknown>(import.meta.env.VITE_GRAPH_API, query, variables, headers);
 
           setResponse(data);
+          setResponseStatus(RESPONSE_CODES.ok);
         } catch (error) {
           setIsLoading(false);
+          setResponseStatus(RESPONSE_CODES.serverError);
+
           const errorObj = JSON.parse(JSON.stringify(error));
 
           if (isGraphqlError(errorObj)) {
@@ -38,5 +42,5 @@ export const useGetResponse = () => {
     }
   }, [requestObject]);
 
-  return { response, isLoading };
+  return { response, isLoading, responseStatus };
 };
