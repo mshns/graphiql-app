@@ -15,7 +15,7 @@ export const FooterRSSchool: FC = () => {
           <LogoRSS />
         </SvgIconLogo>
       </Link>
-      <Typography variant="h6" component="div" sx={{ mt: 0.7, color: 'secondary.main' }}>
+      <Typography fontWeight={600} variant="body1" component="div" sx={{ mt: 0.7, color: 'secondary.main' }}>
         {t('The Rolling Scopes School')}
       </Typography>
     </>

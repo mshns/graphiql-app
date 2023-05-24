@@ -24,7 +24,7 @@ export const FooterAuthors: FC = () => {
           <SpeedDialAction key={uid()} icon={action.icon} tooltipTitle={action.name} />
         ))}
       </AuthorListLogo>
-      <Typography variant="h6" component="div" sx={{ color: 'secondary.main' }}>
+      <Typography fontWeight={600} variant="body1" component="div" sx={{ color: 'secondary.main' }}>
         {t('Created by Power Rangers')}
       </Typography>
     </>

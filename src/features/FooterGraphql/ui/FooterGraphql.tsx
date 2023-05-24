@@ -15,7 +15,7 @@ export const FooterGraphql: FC = () => {
         </SvgIconLogo>
       </Link>
 
-      <Typography variant="h6" component="div" sx={{ color: 'secondary.main' }}>
+      <Typography fontWeight={600} variant="body1" component="div" sx={{ color: 'secondary.main' }}>
         {t('GraphiQL © 2023')}
       </Typography>
     </>

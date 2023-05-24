@@ -39,12 +39,6 @@ export const getTheme = (mode: PaletteMode): ThemeOptions => {
       },
 
       divider: '#E535AB50'
-    },
-
-    typography: {
-      h6: {
-        fontSize: 12
-      }
     }
   };
 };

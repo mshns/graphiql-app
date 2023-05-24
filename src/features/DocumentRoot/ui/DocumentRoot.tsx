@@ -1,16 +1,19 @@
 import { FC } from 'react';
 import { IntrospectionQuery } from 'graphql';
+import { Box, Divider } from '@mui/material';
 import { DocumentTypeHeader, DocumentTypeRow } from 'entities';
 
 export const DocumentRoot: FC<{ introspection?: IntrospectionQuery }> = ({ introspection }) => {
   return (
-    <section>
+    <Box>
       <DocumentTypeHeader>Root Types</DocumentTypeHeader>
-      <div>
+
+      <Divider variant="middle" />
+      <Box p={1}>
         <DocumentTypeRow name={'query'} type={introspection?.__schema.queryType} />
         <DocumentTypeRow name={'mutation'} type={introspection?.__schema.mutationType} />
         <DocumentTypeRow name={'subscription'} type={introspection?.__schema.subscriptionType} />
-      </div>
-    </section>
+      </Box>
+    </Box>
   );
 };

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import { Spinner, useAppSelector, useIntrospection } from 'shared';
 import {
   DocumentBreadCrumbs,
@@ -19,7 +19,7 @@ export const DocumentSideBar: FC = () => {
   const { breadCrumbs } = breadCrumbsState;
 
   return (
-    <Box>
+    <Box color="text.primary">
       <Typography variant="h6" sx={{ mb: 2 }}>
         Documentation
       </Typography>
@@ -33,14 +33,25 @@ export const DocumentSideBar: FC = () => {
           {breadCrumbs.length < 2 ? (
             <DocumentRoot introspection={introspection} />
           ) : (
-            <Box>
+            <Box p={1}>
               <DocumentTypeHeader typeAsField={typeAsField} />
 
-              {typeAsField?.description ? <Typography variant="body2">{typeAsField?.description}</Typography> : null}
+              {typeAsField?.description ? (
+                <Box>
+                  <Typography p={1} variant="body2">
+                    {typeAsField?.description}
+                  </Typography>
+
+                  <Divider variant="middle" />
+                </Box>
+              ) : null}
 
               <DocumentArgs {...{ typeAsField }} />
+
               <DocumentMetaData {...{ currentType }} />
+
               <DocumentFields {...{ currentType }} />
+
               <DocumentPossibleTypes {...{ currentType, introspection }} />
             </Box>
           )}

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { uid } from 'uid';
 import { IntrospectionField } from 'graphql';
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import { DocumentTypeHeader, DocumentTypeRow } from 'entities';
 import { sortAlphabetArray } from 'shared';
 
@@ -10,9 +10,12 @@ export const DocumentArgs: FC<{ typeAsField?: IntrospectionField }> = ({ typeAsF
     return (
       <Box>
         <DocumentTypeHeader>Arguments</DocumentTypeHeader>
+
         {sortAlphabetArray(typeAsField?.args).map((arg) => (
           <DocumentTypeRow key={uid()} name={arg.name} type={arg.type} />
         ))}
+
+        <Divider variant="middle" sx={{ marginTop: 1 }} />
       </Box>
     );
   }

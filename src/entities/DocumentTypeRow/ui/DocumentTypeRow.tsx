@@ -24,6 +24,9 @@ export const DocumentTypeRow: FC<Props> = ({ type, name }) => {
     if (isNonNull || isList) {
       return (
         <Link
+          pl={1}
+          py={0.2}
+          color="inherit"
           underline="hover"
           href="#"
           onClick={() => setBreadCrumbs(type.ofType.name)}
@@ -38,6 +41,9 @@ export const DocumentTypeRow: FC<Props> = ({ type, name }) => {
     if (isNamed) {
       return (
         <Link
+          pl={1}
+          py={0.2}
+          color="inherit"
           underline="hover"
           href="#"
           onClick={() => setBreadCrumbs(type.name)}
