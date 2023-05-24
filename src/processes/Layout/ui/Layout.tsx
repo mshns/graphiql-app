@@ -1,44 +1,15 @@
-import { Suspense, type FC, useEffect, useState } from 'react';
+import { Suspense, type FC } from 'react';
 import { Box, Container } from '@mui/material';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Navbar, Footer, Header } from 'widgets';
-import { ROUTE, Spinner, useAppActions, useAppSelector } from 'shared';
-import { isBoolean } from 'shared/utils';
-import { usePlaygroundHeight } from '../../hooks/usePlaygroundHeight';
-
-import { LayoutWrapper } from './styled/LayoutWrapper.styled';
+import { ROUTE, Spinner } from 'shared';
+import { usePlaygroundHeight, useAuth } from '../../hooks';
+import { LayoutWrapper } from './LayoutWrapper.styled';
 
 export const Layout: FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
   const { pathname } = useLocation();
-
-  const { isLoggedIn } = useAppSelector((state) => state.userReducer);
-  const { setIsLoggedIn } = useAppActions();
-
   const { header, footer, barsHeight } = usePlaygroundHeight();
-  const auth = getAuth();
-
-  useEffect(() => {
-    if (isBoolean(isLoggedIn) && !isLoggedIn && pathname === ROUTE.Playground) {
-      navigate(ROUTE.Login);
-    }
-  }, [isLoggedIn, pathname, navigate]);
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setIsLoading(false);
-      if (user && [ROUTE.Login, ROUTE.SignUp].some((route) => route === pathname)) {
-        navigate(ROUTE.Playground);
-      }
-      if (user) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-    });
-  });
+  const { isLoading } = useAuth();
 
   return (
     <LayoutWrapper>

@@ -1,15 +1,14 @@
 import { FC, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { AuthorizationForm, useAppActions } from 'shared';
-import { ROUTE } from 'shared/constants';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { AuthorizationForm } from 'features';
+import { useAppActions, ROUTE } from 'shared';
 
 export const SignUp: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const { setIsLoggedIn } = useAppActions();
-
   const { t } = useTranslation(['authorization']);
 
   const auth = getAuth();

@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { Divider, SvgIcon, Tooltip, Typography } from '@mui/material';
 
-interface IPageDivider {
+type Props = {
   title: string;
   icon: JSX.Element;
-}
+};
 
-export const PageDivider: FC<IPageDivider> = ({ title, icon }: IPageDivider) => {
+export const PageDivider: FC<Props> = ({ title, icon }) => {
   return (
     <Divider textAlign="center" sx={{ m: 5 }}>
       <Tooltip title={title}>

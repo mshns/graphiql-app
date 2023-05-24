@@ -1,33 +1,33 @@
-import { type FC, MutableRefObject } from 'react';
-
-import { useTranslation } from 'react-i18next';
-
-import { SvgIcon, Toolbar } from '@mui/material';
+import { type FC, MutableRefObject, useState } from 'react';
+import { ButtonGroup, Drawer, Toolbar } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-
-import { LogoGraphQL } from 'shared';
-import { HeaderButtonList, HeaderScroll } from 'entities';
-
-import { LogoLink } from './styled/LogoLink.styled';
+import { HeaderLogo, HeaderSettingsButton } from 'entities';
+import { HeaderAuthButtons, HeaderScroll, HeaderSettingsMenu } from 'features';
 
 type Props = {
   header: MutableRefObject<HTMLDivElement | null>;
 };
 
 export const Header: FC<Props> = ({ header }) => {
-  const { t } = useTranslation(['layout']);
+  const [isSettingsOpen, setSettingsOpen] = useState(false);
+  const toggleSettings = (open: boolean) => {
+    setSettingsOpen(open);
+  };
 
   return (
     <HeaderScroll>
       <AppBar ref={header} position="sticky">
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <LogoLink href="/" underline="none">
-            <SvgIcon sx={{ width: 36, height: 36 }}>
-              <LogoGraphQL />
-            </SvgIcon>
-            {t('GraphiQL')}
-          </LogoLink>
-          <HeaderButtonList />
+          <HeaderLogo />
+
+          <ButtonGroup variant="contained" size="small" aria-label="header button group">
+            <HeaderAuthButtons />
+            <HeaderSettingsButton {...{ toggleSettings }} />
+          </ButtonGroup>
+
+          <Drawer anchor="right" open={isSettingsOpen} onClose={() => toggleSettings(false)}>
+            <HeaderSettingsMenu />
+          </Drawer>
         </Toolbar>
       </AppBar>
     </HeaderScroll>

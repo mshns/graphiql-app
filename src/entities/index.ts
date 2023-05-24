@@ -9,10 +9,11 @@ export * from './ButtonRequest/ui/ButtonRequest';
 export * from './ButtonPrettify/ui/ButtonPrettify';
 export * from './ButtonConfigbar/ui/ButtonConfigbar';
 
+export * from './PasswordInput/ui/PasswordInput';
+
 export * from './PageDivider/ui/PageDivider';
-export * from './SignButtons/ui/SignButtons';
-export * from './WelcomeTitle/ui/WelcomeTitle';
-export * from './QuestionAccordion/ui/QuestionAccordion';
-export * from './HeaderScroll/ui/HeaderScroll';
-export * from './HeaderButtonList/ui/HeaderButtonList';
-export * from './FeatureList/ui/FeatureList';
+
+export * from './HeaderLogo/ui/HeaderLogo';
+export * from './HeaderSettingsButton/ui/HeaderSettingsButton';
+
+export * from './NavigationBarLink/ui/NavigationBarLink';
