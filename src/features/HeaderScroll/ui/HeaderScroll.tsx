@@ -1,13 +1,13 @@
-import { cloneElement } from 'react';
+import { FC, cloneElement } from 'react';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { useTheme } from '@mui/material/styles';
 
-interface IProps {
+type Props = {
   window?: () => Window;
   children: React.ReactElement;
-}
+};
 
-export const HeaderScroll = ({ children, window }: IProps) => {
+export const HeaderScroll: FC<Props> = ({ children, window }) => {
   const theme = useTheme();
 
   const trigger = useScrollTrigger({

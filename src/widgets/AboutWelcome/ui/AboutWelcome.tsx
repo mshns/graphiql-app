@@ -18,7 +18,9 @@ export const AboutWelcome: FC = () => {
         </Typography>
       </Box>
 
-      <AboutNavigation />
+      <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <AboutNavigation />
+      </Box>
     </>
   );
 };

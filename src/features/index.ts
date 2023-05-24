@@ -11,7 +11,9 @@ export * from './EditorConfigBar/ui/EditorConfigBar';
 
 export * from './AuthorizationForm/ui/AuthorizationForm';
 
-export * from './HeaderSettings/ui/HeaderSettings';
+export * from './HeaderSettingsMenu/ui/HeaderSettingsMenu';
+export * from './HeaderScroll/ui/HeaderScroll';
+export * from './HeaderAuthButtons/ui/HeaderAuthButtons';
 
 export * from './FooterAuthors/ui/FooterAuthors';
 export * from './FooterGraphql/ui/FooterGraphql';

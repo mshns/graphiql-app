@@ -13,5 +13,5 @@ export * from './PasswordInput/ui/PasswordInput';
 
 export * from './PageDivider/ui/PageDivider';
 
-export * from './HeaderScroll/ui/HeaderScroll';
-export * from './HeaderButtonList/ui/HeaderButtonList';
+export * from './HeaderLogo/ui/HeaderLogo';
+export * from './HeaderSettingsButton/ui/HeaderSettingsButton';

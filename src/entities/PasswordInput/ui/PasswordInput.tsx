@@ -1,16 +1,16 @@
 import { IconButton, TextField } from '@mui/material';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useTranslation } from 'react-i18next';
 
-interface PasswordInputProps {
+interface Props {
   value: string;
   setValue: (value: string) => void;
 }
 
-export const PasswordInput = ({ setValue, value }: PasswordInputProps) => {
+export const PasswordInput: FC<Props> = ({ setValue, value }) => {
   const [isVisible, setIsVisible] = useState(false);
   const { t } = useTranslation(['authorization']);
 
