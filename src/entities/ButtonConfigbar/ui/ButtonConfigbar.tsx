@@ -15,7 +15,7 @@ export const ButtonConfigbar: FC<Props> = ({ setTab, tab, buttonName }) => {
   const theme = useTheme();
 
   const setActiveColor = (barName: string) =>
-    barName === tab && isOpenConfig ? theme.palette.primary.dark : 'transparent';
+    barName === tab && isOpenConfig ? theme.palette.barsColor.main : 'transparent';
 
   const setBar = (barName: 'variables' | 'headers', event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();

@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { gql } from 'graphql-request';
-import { Button } from '@mui/material';
-import { useAppActions, useAppSelector, usePrettifyEditors } from 'shared';
+import { ButtonStyled, useAppActions, useAppSelector, usePrettifyEditors } from 'shared';
 
 export const ButtonRequest: FC = () => {
   const { query, variables, headers } = useAppSelector((state) => state.editorReducer);
@@ -25,8 +24,8 @@ export const ButtonRequest: FC = () => {
   };
 
   return (
-    <Button onClick={() => requesthandler()} sx={{ minWidth: 'auto' }}>
+    <ButtonStyled onClick={() => requesthandler()} sx={{ minWidth: 'auto' }}>
       <PlayCircleOutlineIcon />
-    </Button>
+    </ButtonStyled>
   );
 };
