@@ -15,3 +15,5 @@ export * from './PageDivider/ui/PageDivider';
 
 export * from './HeaderLogo/ui/HeaderLogo';
 export * from './HeaderSettingsButton/ui/HeaderSettingsButton';
+
+export * from './NavigationBarLink/ui/NavigationBarLink';
