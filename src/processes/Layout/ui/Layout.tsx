@@ -1,54 +1,27 @@
-import { Suspense, type FC, useEffect, useState } from 'react';
-import { Box, CircularProgress } from '@mui/material';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
+import { Suspense, type FC } from 'react';
+import { Box, Container } from '@mui/material';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Navbar, Footer, Header } from 'widgets';
-import { ROUTE, Spinner, useAppActions } from 'shared';
-
-import { LayoutWrapper } from './styled/LayoutWrapper.styled';
+import { ROUTE, Spinner } from 'shared';
+import { usePlaygroundHeight, useAuth } from '../../hooks';
+import { LayoutWrapper } from './LayoutWrapper.styled';
 
 export const Layout: FC = () => {
   const { pathname } = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
-  const { setIsLoggedIn } = useAppActions();
-
-  const auth = getAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setIsLoading(false);
-      if (user && [ROUTE.Login, ROUTE.SignUp].some((route) => route === pathname)) {
-        navigate(ROUTE.Playground);
-      }
-      if (user) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-    });
-  });
+  const { header, footer, barsHeight } = usePlaygroundHeight();
+  const { isLoading } = useAuth();
 
   return (
     <LayoutWrapper>
-      <Header />
-      <Box sx={{ display: 'flex', flex: '1 1 auto' }}>
+      <Header header={header} />
+      <Container disableGutters maxWidth={false} sx={{ display: 'flex', flex: '1 0 auto' }}>
         {[ROUTE.About, ROUTE.Playground].some((item) => item === pathname) && <Navbar />}
-        <Box component="main" sx={{ width: '100%', p: 2 }}>
-          <Suspense fallback={<Spinner />}>
-            {isLoading ? (
-              <Box
-                sx={{ display: 'flex', width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}
-              >
-                <CircularProgress />
-              </Box>
-            ) : (
-              <Outlet />
-            )}
-          </Suspense>
+
+        <Box display="flex" component="main" p={2} width="100%" position="relative">
+          <Suspense fallback={<Spinner />}>{isLoading ? <Spinner /> : <Outlet context={{ barsHeight }} />}</Suspense>
         </Box>
-      </Box>
-      <Footer />
+      </Container>
+      <Footer footer={footer} />
     </LayoutWrapper>
   );
 };

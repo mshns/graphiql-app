@@ -1,27 +1,38 @@
-import { FC } from 'react';
+import { FC, useRef, useState } from 'react';
 import { Divider, Paper } from '@mui/material';
-import { EditorTools, QueryConfigBar, QueryTerminal } from 'features';
-import { useIntrospection } from 'shared';
+import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
+import { TerminalQuery } from 'entities';
+import { EditorConfigBar, EditorTools } from 'features';
+import { useIntrospection, EditorContext } from 'shared';
 
 export const Editor: FC = () => {
   const { schema } = useIntrospection();
+  const [isOpenConfig, setIsOpenConfig] = useState(false);
+
+  const queryRef = useRef<ReactCodeMirrorRef | null>(null);
+  const headersRef = useRef<ReactCodeMirrorRef | null>(null);
+  const variablesRef = useRef<ReactCodeMirrorRef | null>(null);
 
   return (
     <Paper
       sx={{
+        display: 'flex',
+        flexDirection: 'column',
         flex: '0 0 100%',
-        boxShadow: 3,
         position: 'relative',
-        height: '100%'
+        height: '100%',
+        boxShadow: 3
       }}
     >
-      <QueryTerminal schema={schema} />
+      <EditorContext.Provider value={{ queryRef, headersRef, variablesRef, isOpenConfig, setIsOpenConfig }}>
+        <TerminalQuery schema={schema} />
 
-      <EditorTools />
+        <EditorTools />
 
-      <Divider />
+        <Divider />
 
-      <QueryConfigBar schema={schema} />
+        <EditorConfigBar />
+      </EditorContext.Provider>
     </Paper>
   );
 };

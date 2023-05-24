@@ -36,10 +36,10 @@ export const DocumentSideBar: FC = () => {
 
               {typeAsField?.description ? <Typography variant="body2">{typeAsField?.description}</Typography> : null}
 
-              <DocumentArgs typeAsField={typeAsField} />
-              <DocumentMetaData currentType={currentType} />
-              <DocumentFields currentType={currentType} />
-              <DocumentPossibleTypes currentType={currentType} introspection={introspection} />
+              <DocumentArgs {...{ typeAsField }} />
+              <DocumentMetaData {...{ currentType }} />
+              <DocumentFields {...{ currentType }} />
+              <DocumentPossibleTypes {...{ currentType, introspection }} />
             </Box>
           )}
         </>

@@ -6,9 +6,20 @@ export * from './DocumentRoot/ui/DocumentRoot';
 export * from './DocumentPossibleTypes/ui/DocumentPossibleTypes';
 export * from './DocumentMetaData/ui/DocumentMetaData';
 
-export * from './QueryTerminal/ui/QueryTerminal';
-export * from './QueryConfigBar/ui/QueryConfigBar';
 export * from './EditorTools/ui/EditorTools';
+export * from './EditorConfigBar/ui/EditorConfigBar';
 
-export * from './HeaderSettings/ui/HeaderSettings';
-export * from './ButtonStyled/ui/ButtonStyled';
+export * from './AuthorizationForm/ui/AuthorizationForm';
+
+export * from './HeaderSettingsMenu/ui/HeaderSettingsMenu';
+export * from './HeaderScroll/ui/HeaderScroll';
+export * from './HeaderAuthButtons/ui/HeaderAuthButtons';
+
+export * from './FooterAuthors/ui/FooterAuthors';
+export * from './FooterGraphql/ui/FooterGraphql';
+export * from './FooterRSSchool/ui/FooterRSSchool';
+
+export * from './AboutNavigation/ui/AboutNavigation';
+export * from './AboutFeatures/ui/AboutFeatures';
+export * from './AboutFAQ/ui/AboutFAQ';
+export * from './AboutTeam/ui/AboutTeam';

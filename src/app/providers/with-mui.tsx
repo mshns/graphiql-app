@@ -1,22 +1,10 @@
-import { createContext, useMemo, useState } from 'react';
-
-import CssBaseline from '@mui/material/CssBaseline';
+import { useMemo, useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
-
+import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme } from '@mui/material/styles';
 import { PaletteMode } from '@mui/material';
-
-import { getTheme } from 'shared';
-
-interface IColorModeContext {
-  toggleColorMode: () => void;
-  mode: PaletteMode;
-}
-
-export const ColorModeContext = createContext<IColorModeContext>({
-  toggleColorMode: () => {},
-  mode: 'light'
-});
+import { ColorModeContext } from 'shared';
+import { getTheme } from '../api';
 
 export const withMUI = (component: () => React.ReactNode) => () => {
   const currentMode: PaletteMode = localStorage.getItem('mode') === 'dark' ? 'dark' : 'light';
