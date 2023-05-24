@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Box, Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PasswordInput } from 'entities';
+import { useAppActions, useAppSelector } from 'shared';
 
 type Props = {
   title: string;
@@ -23,9 +24,11 @@ export const AuthorizationForm: FC<Props> = ({
   title,
   isLoading
 }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { emailErrorMessage, isEmailError, passwordValue, emailValue } = useAppSelector((state) => state.userReducer);
+  const { setIsEmailError, setEmailValue } = useAppActions();
   const { t } = useTranslation(['authorization']);
+
+  const isButtonDisabled = isLoading || !emailValue.trim().length || !passwordValue.trim().length;
 
   return (
     <Paper
@@ -57,18 +60,26 @@ export const AuthorizationForm: FC<Props> = ({
         }}
       >
         <TextField
-          value={email}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+          color="secondary"
+          value={emailValue}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            if (isEmailError) {
+              setIsEmailError(false);
+            }
+            setEmailValue(e.target.value);
+          }}
+          error={isEmailError}
+          helperText={isEmailError && emailErrorMessage}
           type="email"
           label={t('E-mail')}
           size="small"
           fullWidth
         />
-        <PasswordInput value={password} setValue={setPassword} />
+        <PasswordInput />
         <Button
           endIcon={isLoading ? <CircularProgress color="secondary" size={16} /> : null}
-          disabled={isLoading}
-          onClick={() => onClick(email, password)}
+          disabled={isButtonDisabled}
+          onClick={() => onClick(emailValue, passwordValue)}
           variant="contained"
           sx={{ width: 'max-content' }}
         >

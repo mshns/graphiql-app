@@ -2,12 +2,23 @@ import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { FirebaseError } from 'firebase/app';
 import { AuthorizationForm } from 'features';
-import { ROUTE } from 'shared';
+import { FirebaseErrors, ROUTE, useAppActions } from 'shared';
 
 export const LogIn: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const {
+    setIsEmailError,
+    setEmailErrorMessage,
+    setIsPasswordError,
+    setPasswordErrorMessage,
+    setEmailValue,
+    setPasswordValue
+  } = useAppActions();
+
   const { t } = useTranslation(['layout', 'authorization']);
 
   const auth = getAuth();
@@ -17,10 +28,28 @@ export const LogIn: FC = () => {
       setIsLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
       setIsLoading(false);
+      setIsEmailError(false);
+      setEmailErrorMessage('');
+      setIsPasswordError(false);
+      setPasswordErrorMessage('');
+      setPasswordValue('');
+      setEmailValue('');
       navigate(ROUTE.Playground);
-    } catch {
+    } catch (e) {
       setIsLoading(false);
-      //TODO add error handling
+      const firebaseError = e as FirebaseError;
+      if (firebaseError.code === FirebaseErrors.InvalidEmail) {
+        setIsEmailError(true);
+        setEmailErrorMessage('Invalid email');
+      }
+      if (firebaseError.code === FirebaseErrors.WrongPassword) {
+        setIsPasswordError(true);
+        setPasswordErrorMessage('Invalid password');
+      }
+      if (firebaseError.code === FirebaseErrors.UserNotFound) {
+        setIsEmailError(true);
+        setEmailErrorMessage("User with a such e-mail doesn't exist");
+      }
     }
   };
 
