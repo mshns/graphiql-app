@@ -2,6 +2,7 @@ import React, { FC, useCallback, useContext, useEffect } from 'react';
 import { GraphQLSchema } from 'graphql';
 import Codemirror from '@uiw/react-codemirror';
 import { graphql, updateSchema } from 'cm6-graphql';
+import { useTheme } from '@mui/material';
 import { graphqlParseGuard, useAppActions, useAppSelector, EXTENTIONS, EditorContext, lintEditorErrors } from 'shared';
 
 type Props = {
@@ -12,6 +13,7 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
   const { queryRef, isOpenConfig } = useContext(EditorContext);
   const { setQuery } = useAppActions();
   const { query } = useAppSelector((state) => state.editorReducer);
+  const theme = useTheme();
 
   useEffect(() => {
     if (queryRef && schema) {
@@ -44,7 +46,7 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
       ref={queryRef}
       height="100%"
       value={query}
-      theme={'none'}
+      theme={theme.palette.mode}
       onChange={handleChange}
       onKeyDown={handlePrettify}
       indentWithTab={false}

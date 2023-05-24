@@ -1,6 +1,6 @@
-import { Button, Typography, useTheme } from '@mui/material';
+import { Typography, useTheme } from '@mui/material';
 import { Dispatch, FC, MouseEvent, SetStateAction, useContext } from 'react';
-import { EditorContext } from 'shared';
+import { ButtonStyled, EditorContext } from 'shared';
 
 type ButtonNames = 'variables' | 'headers';
 
@@ -27,8 +27,8 @@ export const ButtonConfigbar: FC<Props> = ({ setTab, tab, buttonName }) => {
   };
 
   return (
-    <Button onClick={(event) => setBar(buttonName, event)} sx={{ backgroundColor: setActiveColor(buttonName) }}>
+    <ButtonStyled onClick={(event) => setBar(buttonName, event)} sx={{ backgroundColor: setActiveColor(buttonName) }}>
       <Typography variant="caption">{buttonName}</Typography>
-    </Button>
+    </ButtonStyled>
   );
 };

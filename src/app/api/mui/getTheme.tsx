@@ -22,7 +22,7 @@ export const getTheme = (mode: PaletteMode): ThemeOptions => {
 
       background: {
         default: isLight ? '#FFFFFF' : '#202124',
-        paper: isLight ? '#E6E8EC' : '#35363A'
+        paper: isLight ? '#f4f3f3' : '#525254'
       },
 
       barsColor: {

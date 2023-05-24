@@ -31,7 +31,7 @@ export const EditorConfigBar: FC = () => {
       sx={{ flex: '0 0 auto', height: isOpenConfig ? '30%' : 'auto', overflow: 'auto' }}
     >
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon sx={{ transform: 'rotate(180deg)' }} />}
+        expandIcon={<ExpandMoreIcon sx={{ transform: 'rotate(180deg)', color: 'text.primary' }} />}
         aria-controls="panel-config"
       >
         <Box display="flex" gap="0.5em">

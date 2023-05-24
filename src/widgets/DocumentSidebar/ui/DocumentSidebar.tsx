@@ -23,11 +23,13 @@ export const DocumentSideBar: FC = () => {
       <Typography variant="h6" sx={{ mb: 2 }}>
         Documentation
       </Typography>
+
       {isLoading ? (
         <Spinner />
       ) : (
         <>
           <DocumentBreadCrumbs />
+
           {breadCrumbs.length < 2 ? (
             <DocumentRoot introspection={introspection} />
           ) : (

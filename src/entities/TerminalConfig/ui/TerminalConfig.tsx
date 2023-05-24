@@ -3,6 +3,7 @@ import Codemirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { linter } from '@codemirror/lint';
 import { json, jsonParseLinter } from '@codemirror/lang-json';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import { useTheme } from '@mui/material';
 import { EXTENTIONS, jsonParseGuard, lintEditorErrors } from 'shared';
 
 type Props = {
@@ -13,6 +14,8 @@ type Props = {
 };
 
 export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalName }) => {
+  const theme = useTheme();
+
   const handleChange = useCallback(
     (value: string) => {
       action(value);
@@ -41,7 +44,7 @@ export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalNa
       ref={editorRef}
       style={{ overflow: 'hidden', maxHeight: '100%', flex: '1 1 auto' }}
       max-height="100%"
-      theme={'none'}
+      theme={theme.palette.mode}
       value={state}
       onChange={handleChange}
       onBlur={handleBlur}
