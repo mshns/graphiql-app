@@ -1,9 +1,10 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { gql } from 'graphql-request';
-import { ButtonStyled, useAppActions, useAppSelector, usePrettifyEditors } from 'shared';
+import { ButtonStyled, DrawerContext, useAppActions, useAppSelector, usePrettifyEditors } from 'shared';
 
 export const ButtonRequest: FC = () => {
+  const { setIsResponseOpen } = useContext(DrawerContext);
   const { query, variables, headers } = useAppSelector((state) => state.editorReducer);
   const { setRequestObject } = useAppActions();
   const { prettifyHandler } = usePrettifyEditors();
@@ -19,6 +20,7 @@ export const ButtonRequest: FC = () => {
       const variablesRequest = JSON.parse(variables);
       const headersRequest = JSON.parse(headers);
 
+      setIsResponseOpen(true);
       setRequestObject({ query: queryRequest, variables: variablesRequest, headers: headersRequest });
     }
   };

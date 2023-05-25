@@ -11,7 +11,7 @@ export const usePlaygroundHeight = () => {
       const footerHeight = footer.current?.clientHeight;
 
       if (headerHeight && footerHeight) {
-        setBarsHeight(headerHeight + footerHeight + 32);
+        setBarsHeight(headerHeight + footerHeight + 40);
       }
     }
   }, [header, footer]);

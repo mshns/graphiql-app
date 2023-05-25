@@ -37,7 +37,7 @@ export const NavigationBarLink: FC<Props> = ({ nav }) => {
       >
         <ListItem disablePadding>
           <ListItemButton sx={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', pb: 0 }}>
-            <Tooltip title={t(name)}>
+            <Tooltip title={t(name)} disableInteractive>
               <ListItemIcon
                 sx={{ minWidth: 1, justifyContent: 'center', color: { xs: 'inherit', sm: 'text.secondary' } }}
               >

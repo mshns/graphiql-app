@@ -24,7 +24,6 @@ export const HeaderSettingsMenu: FC = () => {
         p: 2,
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'barsColor.main',
         height: '100%'
       }}
     >

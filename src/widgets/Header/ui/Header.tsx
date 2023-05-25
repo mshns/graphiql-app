@@ -10,6 +10,7 @@ type Props = {
 
 export const Header: FC<Props> = ({ header }) => {
   const [isSettingsOpen, setSettingsOpen] = useState(false);
+
   const toggleSettings = (open: boolean) => {
     setSettingsOpen(open);
   };
@@ -17,7 +18,7 @@ export const Header: FC<Props> = ({ header }) => {
   return (
     <HeaderScroll>
       <AppBar ref={header} position="sticky">
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Toolbar variant="dense" sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <HeaderLogo />
 
           <ButtonGroup variant="contained" size="small" aria-label="header button group">
@@ -25,7 +26,16 @@ export const Header: FC<Props> = ({ header }) => {
             <HeaderSettingsButton {...{ toggleSettings }} />
           </ButtonGroup>
 
-          <Drawer anchor="right" open={isSettingsOpen} onClose={() => toggleSettings(false)}>
+          <Drawer
+            anchor="right"
+            open={isSettingsOpen}
+            onClose={() => toggleSettings(false)}
+            sx={{
+              '& .MuiDrawer-paper': {
+                backgroundColor: 'background.default'
+              }
+            }}
+          >
             <HeaderSettingsMenu />
           </Drawer>
         </Toolbar>

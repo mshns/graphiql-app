@@ -12,7 +12,7 @@ export const EditorTools: FC = () => {
       gap={theme.spacing(1)}
       position="absolute"
       top={theme.spacing(1)}
-      right={theme.spacing(1)}
+      right={theme.spacing(3)}
     >
       <ButtonRequest />
       <ButtonPrettify />
