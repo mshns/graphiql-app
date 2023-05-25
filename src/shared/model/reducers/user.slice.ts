@@ -1,9 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface UserInitial {
-  isLoggedIn: boolean | null;
-  isEmailError: boolean;
-  isPasswordError: boolean;
+  isLoggedIn: boolean;
   emailErrorMessage: string;
   passwordErrorMessage: string;
   emailValue: string;
@@ -11,9 +9,7 @@ interface UserInitial {
 }
 
 const initialState: UserInitial = {
-  isLoggedIn: null,
-  isEmailError: false,
-  isPasswordError: false,
+  isLoggedIn: false,
   emailErrorMessage: '',
   passwordErrorMessage: '',
   emailValue: '',
@@ -26,12 +22,6 @@ export const userSlice = createSlice({
   reducers: {
     setIsLoggedIn(state, { payload }: PayloadAction<boolean>) {
       state.isLoggedIn = payload;
-    },
-    setIsEmailError(state, { payload }: PayloadAction<boolean>) {
-      state.isEmailError = payload;
-    },
-    setIsPasswordError(state, { payload }: PayloadAction<boolean>) {
-      state.isPasswordError = payload;
     },
     setEmailErrorMessage(state, { payload }: PayloadAction<string>) {
       state.emailErrorMessage = payload;

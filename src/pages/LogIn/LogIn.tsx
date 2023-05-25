@@ -1,66 +1,22 @@
-import { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { FirebaseError } from 'firebase/app';
 import { AuthorizationForm } from 'features';
-import { FirebaseErrors, ROUTE, useAppActions } from 'shared';
+import { ROUTE, useAuthorizationForm } from 'shared';
 
 export const LogIn: FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
-
-  const {
-    setIsEmailError,
-    setEmailErrorMessage,
-    setIsPasswordError,
-    setPasswordErrorMessage,
-    setEmailValue,
-    setPasswordValue
-  } = useAppActions();
-
   const { t } = useTranslation(['layout', 'authorization']);
 
-  const auth = getAuth();
-
-  const handleLogin = async (email: string, password: string) => {
-    try {
-      setIsLoading(true);
-      await signInWithEmailAndPassword(auth, email, password);
-      setIsLoading(false);
-      setIsEmailError(false);
-      setEmailErrorMessage('');
-      setIsPasswordError(false);
-      setPasswordErrorMessage('');
-      setPasswordValue('');
-      setEmailValue('');
-      navigate(ROUTE.Playground);
-    } catch (e) {
-      setIsLoading(false);
-      const firebaseError = e as FirebaseError;
-      if (firebaseError.code === FirebaseErrors.InvalidEmail) {
-        setIsEmailError(true);
-        setEmailErrorMessage('Invalid email');
-      }
-      if (firebaseError.code === FirebaseErrors.WrongPassword) {
-        setIsPasswordError(true);
-        setPasswordErrorMessage('Invalid password');
-      }
-      if (firebaseError.code === FirebaseErrors.UserNotFound) {
-        setIsEmailError(true);
-        setEmailErrorMessage("User with a such e-mail doesn't exist");
-      }
-    }
-  };
+  const { handleLogin, isLoading } = useAuthorizationForm();
 
   return (
     <AuthorizationForm
+      shouldHaveValidation={false}
       buttonText={t('Sign In')}
       linkText={t('Sign Up for free', { ns: 'authorization' })}
       linkTo={ROUTE.SignUp}
       description={t('Do not have an account', { ns: 'authorization' })}
       title={t('Sign in to your account', { ns: 'authorization' })}
-      onClick={handleLogin}
+      onSubmit={handleLogin}
       isLoading={isLoading}
     />
   );

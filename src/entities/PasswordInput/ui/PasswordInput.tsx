@@ -1,15 +1,15 @@
 import { IconButton, TextField } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, forwardRef, useState } from 'react';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useTranslation } from 'react-i18next';
 import { useAppActions, useAppSelector } from 'shared';
 
-export const PasswordInput: FC = () => {
+export const PasswordInput: FC = forwardRef<HTMLInputElement>((props, ref) => {
   const [isVisible, setIsVisible] = useState(false);
-  const { isPasswordError, passwordErrorMessage, passwordValue } = useAppSelector((state) => state.userReducer);
-  const { setIsPasswordError, setPasswordValue } = useAppActions();
+  const { passwordErrorMessage, passwordValue } = useAppSelector((state) => state.userReducer);
+  const { setPasswordValue, setPasswordErrorMessage } = useAppActions();
 
   const { t } = useTranslation(['authorization']);
 
@@ -19,14 +19,14 @@ export const PasswordInput: FC = () => {
       size="small"
       fullWidth
       required
-      error={isPasswordError}
-      helperText={isPasswordError && passwordErrorMessage}
+      error={!!passwordErrorMessage.length}
+      helperText={passwordErrorMessage}
       value={passwordValue}
       label={t('Password')}
       type={isVisible ? 'text' : 'password'}
       onChange={(e) => {
-        if (isPasswordError) {
-          setIsPasswordError(false);
+        if (passwordErrorMessage.length) {
+          setPasswordErrorMessage('');
         }
         setPasswordValue(e.target.value);
       }}
@@ -37,6 +37,8 @@ export const PasswordInput: FC = () => {
           </IconButton>
         )
       }}
+      {...props}
+      ref={ref}
     />
   );
-};
+});
