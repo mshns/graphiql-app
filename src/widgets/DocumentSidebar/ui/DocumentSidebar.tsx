@@ -3,7 +3,7 @@ import { Box, Divider, Typography } from '@mui/material';
 import { Spinner, useAppSelector, useIntrospection } from 'shared';
 import {
   DocumentBreadCrumbs,
-  DocumentTypeHeader,
+  DocumentTypeNav,
   DocumentArgs,
   DocumentFields,
   DocumentRoot,
@@ -34,7 +34,7 @@ export const DocumentSideBar: FC = () => {
             <DocumentRoot introspection={introspection} />
           ) : (
             <Box p={1}>
-              <DocumentTypeHeader typeAsField={typeAsField} />
+              <DocumentTypeNav typeAsField={typeAsField} />
 
               {typeAsField?.description ? (
                 <Box>

@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { IntrospectionTypeRef } from 'graphql';
-import { Link, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import {
   isIntrospectionListTypeRef,
   isIntrospectionNamedTypeRef,
   isIntrospectionNonNullTypeRef,
   useAppActions
 } from 'shared';
+import { LinkStyled } from './Link.styled';
 
 type Props = {
   type?: IntrospectionTypeRef | null;
@@ -23,35 +24,24 @@ export const DocumentTypeRow: FC<Props> = ({ type, name }) => {
   if (type && name) {
     if (isNonNull || isList) {
       return (
-        <Link
-          pl={1}
-          py={0.2}
-          color="inherit"
-          underline="hover"
-          href="#"
-          onClick={() => setBreadCrumbs(type.ofType.name)}
-          sx={{ display: 'flex', gap: '0.5em' }}
-        >
+        <LinkStyled px={1} py={0.2} href="#" onClick={() => setBreadCrumbs(type.ofType.name)}>
           <Typography variant="body1">{name}: </Typography>
-          <Typography variant="body1"> {isNonNull ? `${type.ofType.name}!` : `[${type.ofType.name}]`} </Typography>
-        </Link>
+          <Typography color="text.secondary" variant="body1">
+            {' '}
+            {isNonNull ? `${type.ofType.name}!` : `[${type.ofType.name}]`}{' '}
+          </Typography>
+        </LinkStyled>
       );
     }
 
     if (isNamed) {
       return (
-        <Link
-          pl={1}
-          py={0.2}
-          color="inherit"
-          underline="hover"
-          href="#"
-          onClick={() => setBreadCrumbs(type.name)}
-          sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.5em' }}
-        >
+        <LinkStyled px={1} py={0.2} href="#" onClick={() => setBreadCrumbs(type.name)}>
           <Typography variant="body1">{name}: </Typography>
-          <Typography variant="body1">{type.name}</Typography>
-        </Link>
+          <Typography color="text.secondary" variant="body1">
+            {type.name}
+          </Typography>
+        </LinkStyled>
       );
     }
   }
