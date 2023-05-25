@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Box, Divider, Typography } from '@mui/material';
 import { Spinner, useAppSelector, useIntrospection } from 'shared';
 import {
@@ -13,15 +14,18 @@ import {
 import { useTypesInfo } from '../model';
 
 export const DocumentSideBar: FC = () => {
-  const { introspection, isLoading } = useIntrospection();
+  const { t } = useTranslation(['playground']);
+
   const breadCrumbsState = useAppSelector((state) => state.documentReducer);
-  const { typeAsField, currentType } = useTypesInfo(breadCrumbsState, introspection);
   const { breadCrumbs } = breadCrumbsState;
+
+  const { introspection, isLoading } = useIntrospection();
+  const { typeAsField, currentType } = useTypesInfo(breadCrumbsState, introspection);
 
   return (
     <Box color="text.primary">
       <Typography variant="h6" sx={{ mb: 2 }}>
-        Documentation
+        {t('Documentation')}
       </Typography>
 
       {isLoading ? (

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { uid } from 'uid';
+import { useTranslation } from 'react-i18next';
 import { IntrospectionQuery, IntrospectionType } from 'graphql';
 import { Box } from '@mui/material';
 import { isIntrospectionInterfaceType, isIntrospectionObjectType, sortAlphabetArray } from 'shared';
@@ -11,6 +12,8 @@ type Props = {
 };
 
 export const DocumentPossibleTypes: FC<Props> = ({ currentType, introspection }) => {
+  const { t } = useTranslation(['playground']);
+
   const getType = (typeName: string) => {
     const type = introspection?.__schema.types.find((type) => type.name === typeName);
     if (isIntrospectionObjectType(type)) {
@@ -21,7 +24,7 @@ export const DocumentPossibleTypes: FC<Props> = ({ currentType, introspection })
   if (isIntrospectionInterfaceType(currentType)) {
     return (
       <Box>
-        <DocumentTypeHeader>Implementations</DocumentTypeHeader>
+        <DocumentTypeHeader>{t('Implementations')}</DocumentTypeHeader>
 
         {currentType.possibleTypes.map((type) => {
           return (

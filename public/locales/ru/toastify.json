@@ -1,0 +1,8 @@
+{
+  "Check your headers lint issues": "Проверьте хэдеры на ошибки линтера",
+  "Check your variables lint issues": "Проверьте переменные на ошибки линтера",
+  "Check your query lint issues": "Проверьте запрос на ошибки линтера",
+  "Query parse error": "Ошибка преобразования запроса",
+  "Headers JSON parse error": "Ошибка преобразования хедеров",
+  "Variables JSON parse error": "Ошибка переобразования переменных"
+}

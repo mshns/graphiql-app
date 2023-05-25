@@ -1,12 +1,15 @@
 import { FC } from 'react';
 import { IntrospectionQuery } from 'graphql';
+import { useTranslation } from 'react-i18next';
 import { Box, Divider } from '@mui/material';
 import { DocumentTypeHeader, DocumentTypeRow } from 'entities';
 
 export const DocumentRoot: FC<{ introspection?: IntrospectionQuery }> = ({ introspection }) => {
+  const { t } = useTranslation(['playground']);
+
   return (
     <Box>
-      <DocumentTypeHeader>Root Types</DocumentTypeHeader>
+      <DocumentTypeHeader>{t('Root types')}</DocumentTypeHeader>
 
       <Divider variant="middle" />
       <Box p={1}>

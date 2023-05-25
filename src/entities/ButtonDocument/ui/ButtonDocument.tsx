@@ -1,4 +1,5 @@
 import { Dispatch, FC, MutableRefObject, SetStateAction } from 'react';
+import { useTranslation } from 'react-i18next';
 import { default as ArrowClose } from '@mui/icons-material/KeyboardDoubleArrowLeftRounded';
 import { default as ArrowOpen } from '@mui/icons-material/KeyboardDoubleArrowRightRounded';
 import { Typography } from '@mui/material';
@@ -11,15 +12,13 @@ type Props = {
 };
 
 export const ButtonDocument: FC<Props> = ({ docButton, isDocumentOpen, setIsDocumentOpen }) => {
+  const { t } = useTranslation(['playground']);
+
   return (
-    <ButtonStyled
-      ref={docButton}
-      onClick={() => setIsDocumentOpen(!isDocumentOpen)}
-      sx={{ display: 'flex', alignItems: 'center', alignSelf: 'flex-start' }}
-    >
+    <ButtonStyled ref={docButton} onClick={() => setIsDocumentOpen(!isDocumentOpen)} sx={{ marginLeft: 1.5 }}>
       {isDocumentOpen ? <ArrowClose sx={{ fontSize: '1.5em' }} /> : <ArrowOpen sx={{ fontSize: '1.5em' }} />}
 
-      <Typography variant="caption">Documentation</Typography>
+      <Typography variant="caption">{t('Documentation')}</Typography>
     </ButtonStyled>
   );
 };

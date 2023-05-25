@@ -1,0 +1,8 @@
+{
+  "Check your headers lint issues": "Check your headers lint issues",
+  "Check your variables lint issues": "Check your variables lint issues",
+  "Check your query lint issues": "Check your query lint issues",
+  "Query parse error": "Query parse error",
+  "Headers JSON parse error": "Headers JSON parse error",
+  "Variables JSON parse error": "Variables JSON parse error"
+}
