@@ -5,8 +5,8 @@ export const LogoLink = styled(Link)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   transition: 'ease-in-out 0.2s',
-  fontSize: 24,
-  fontWeight: 500,
+  gap: theme.spacing(1),
+
   '&:hover': {
     color: theme.palette.text.primary
   }

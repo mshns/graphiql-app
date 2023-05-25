@@ -14,8 +14,6 @@ export const EditorConfigBar: FC = () => {
   const { setVariables, setHeaders } = useAppActions();
   const { variables, headers } = useAppSelector((state) => state.editorReducer);
 
-  const setVisibilityHandler = () => setIsOpenConfig(!isOpenConfig);
-
   const configTerminalOptions = {
     editorRef: isVariablesTab ? variablesRef : headersRef,
     state: isVariablesTab ? variables : headers,
@@ -27,8 +25,8 @@ export const EditorConfigBar: FC = () => {
     <Accordion
       disableGutters
       expanded={isOpenConfig}
-      onChange={setVisibilityHandler}
-      sx={{ flex: '0 0 auto', height: isOpenConfig ? '30%' : 'auto', overflow: 'auto' }}
+      onChange={() => setIsOpenConfig(!isOpenConfig)}
+      sx={{ flex: '0 0 auto', height: isOpenConfig ? '30%' : 'auto', overflow: 'auto', boxShadow: 'none' }}
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon sx={{ transform: 'rotate(180deg)', color: 'text.primary' }} />}

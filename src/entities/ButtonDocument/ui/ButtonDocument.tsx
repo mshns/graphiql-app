@@ -16,7 +16,7 @@ export const ButtonDocument: FC<Props> = ({ docButton, isDocumentOpen, setIsDocu
 
   return (
     <ButtonStyled ref={docButton} onClick={() => setIsDocumentOpen(!isDocumentOpen)} sx={{ marginLeft: 1.5 }}>
-      {isDocumentOpen ? <ArrowClose sx={{ fontSize: '1.5em' }} /> : <ArrowOpen sx={{ fontSize: '1.5em' }} />}
+      {isDocumentOpen ? <ArrowClose fontSize="small" /> : <ArrowOpen fontSize="small" />}
 
       <Typography variant="caption">{t('Documentation')}</Typography>
     </ButtonStyled>

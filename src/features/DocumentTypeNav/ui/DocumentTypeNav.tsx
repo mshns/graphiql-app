@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { IntrospectionField } from 'graphql';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Divider, Typography, useTheme } from '@mui/material';
 import { ButtonStyled, useAppActions, useAppSelector } from 'shared';
 
 export const DocumentTypeNav: FC<{ typeAsField?: IntrospectionField }> = ({ typeAsField }) => {
   const { setStepBack } = useAppActions();
   const { breadCrumbs, currentTypeName } = useAppSelector((state) => state.documentReducer);
+  const theme = useTheme();
 
   const stepBackHandler = () => {
     setStepBack();
@@ -15,12 +16,12 @@ export const DocumentTypeNav: FC<{ typeAsField?: IntrospectionField }> = ({ type
   if (breadCrumbs.length) {
     return (
       <>
-        <Box sx={{ display: 'flex', gap: '0.5em', alignItems: 'center', userSelect: 'none' }}>
+        <Box display="flex" alignItems="center" gap={theme.spacing(1)} sx={{ userSelect: 'none' }}>
           <ButtonStyled onClick={stepBackHandler} sx={{ minWidth: 'auto' }}>
-            <ArrowBackIcon sx={{ cursor: 'pointer', fontSize: '1.2rem' }} />
+            <ArrowBackIcon fontSize="small" />
           </ButtonStyled>
 
-          <Box sx={{ display: 'flex', gap: '0.5em', my: 1 }}>
+          <Box display="flex" gap={theme.spacing(1)} my={1}>
             {typeAsField?.name ? <Typography color="secondary.main">{typeAsField?.name}:</Typography> : null}
             <Typography color="text.secondary">{currentTypeName}</Typography>
           </Box>
