@@ -1,6 +1,7 @@
 import { FirebaseError } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE, useAppSelector, useAppActions, FirebaseErrorsCodes } from 'shared';
 
@@ -12,6 +13,8 @@ export const useAuthorizationForm = () => {
     useAppActions();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { t } = useTranslation(['authorization']);
 
   useEffect(() => {
     return () => {
@@ -25,16 +28,16 @@ export const useAuthorizationForm = () => {
 
   const handleFirebaseError = (error: FirebaseError) => {
     if (error.code === FirebaseErrorsCodes.InvalidEmail) {
-      setEmailErrorMessage('Invalid email');
+      setEmailErrorMessage(t('Invalid email'));
     }
     if (error.code === FirebaseErrorsCodes.WrongPassword) {
-      setPasswordErrorMessage('Invalid password');
+      setPasswordErrorMessage(t('Invalid Password'));
     }
     if (error.code === FirebaseErrorsCodes.UserNotFound) {
-      setEmailErrorMessage("User with a such e-mail doesn't exist");
+      setEmailErrorMessage(t('UserNotExist'));
     }
     if (error.code === FirebaseErrorsCodes.EmailInUse) {
-      setEmailErrorMessage('E-mail already exists');
+      setEmailErrorMessage(t('EmailExists'));
     }
   };
 

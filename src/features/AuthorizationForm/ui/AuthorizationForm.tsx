@@ -48,10 +48,10 @@ export const AuthorizationForm: FC<Props> = ({
       onSubmit();
     } else {
       if (!isPasswordValid) {
-        setPasswordErrorMessage('Invalid password');
+        setPasswordErrorMessage(t('Invalid Password'));
       }
       if (!isEmailValid) {
-        setEmailErrorMessage('Invalid email');
+        setEmailErrorMessage(t('Invalid email'));
       }
     }
   };
@@ -60,10 +60,7 @@ export const AuthorizationForm: FC<Props> = ({
 
   const renderPasswordInput = () => {
     return shouldHaveValidation ? (
-      <Tooltip
-        disableInteractive
-        title="Password must be minimum 8 characters; include at least one letter, at least one digit and at least one special character (@ $ ! % * # ? &)"
-      >
+      <Tooltip disableInteractive title={t('Tooltip')}>
         <PasswordInput />
       </Tooltip>
     ) : (
