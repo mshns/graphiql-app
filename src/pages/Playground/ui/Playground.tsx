@@ -1,8 +1,8 @@
 import { FC, Suspense, useState } from 'react';
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { useOutletContext } from 'react-router-dom';
 import { Editor } from 'widgets';
-import { ButtonDocument } from 'entities';
+import { ButtonDocument, ResponseStatus } from 'entities';
 import { Spinner, getLazyComponent, useAppSelector } from 'shared';
 import { useButtonHeight } from '../hooks/useButtonHeight';
 
@@ -12,11 +12,13 @@ const DocumentationSideBar = getLazyComponent('widgets', 'DocumentSideBar');
 const TerminalResponse = getLazyComponent('entities', 'TerminalResponse');
 
 export const PlayGround: FC = () => {
-  const { docButton, buttonHeight } = useButtonHeight();
+  const [responseStatus, setResponseStatus] = useState(0);
+  const [isDocumentOpen, setIsDocumentOpen] = useState(false);
 
   const { barsHeight } = useOutletContext<OutletContext>();
-  const [isDocumentOpen, setIsDocumentOpen] = useState(false);
   const { requestObject } = useAppSelector((state) => state.editorReducer);
+
+  const { docButton, buttonHeight } = useButtonHeight();
 
   return (
     <Grid container height={`calc(100vh - ${barsHeight}px)`}>
@@ -39,7 +41,10 @@ export const PlayGround: FC = () => {
         lg={isDocumentOpen ? 9 : 12}
         item
       >
-        <ButtonDocument {...{ docButton, isDocumentOpen, setIsDocumentOpen }} />
+        <Box display="flex" justifyContent="space-between">
+          <ButtonDocument {...{ docButton, isDocumentOpen, setIsDocumentOpen }} />
+          <ResponseStatus {...{ responseStatus }} />
+        </Box>
 
         <Grid container height={`calc(100% - ${buttonHeight || 0}px)`} columnSpacing="0.5em" item mt="0.5em" pl="1em">
           <Grid display="flex" height="100%" item xl={6} lg={6}>
@@ -47,7 +52,9 @@ export const PlayGround: FC = () => {
           </Grid>
 
           <Grid display="flex" position="relative" height="100%" justifyContent="center" item xl={6} lg={6}>
-            <Suspense fallback={<Spinner />}>{!!requestObject && <TerminalResponse />}</Suspense>
+            <Suspense fallback={<Spinner />}>
+              {!!requestObject && <TerminalResponse {...{ setResponseStatus }} />}
+            </Suspense>
           </Grid>
         </Grid>
       </Grid>

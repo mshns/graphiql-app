@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { request } from 'graphql-request';
 import { RESPONSE_CODES, isGraphqlError, throwToastify, useAppSelector } from 'shared';
 
-export const useGetResponse = () => {
+type Props = {
+  setResponseStatus: Dispatch<SetStateAction<number>>;
+};
+
+export const useGetResponse = ({ setResponseStatus }: Props) => {
   const [response, setResponse] = useState<unknown>();
   const [isLoading, setIsLoading] = useState(false);
-  const [responseStatus, setResponseStatus] = useState(0);
 
   const { requestObject } = useAppSelector((state) => state.editorReducer);
 
@@ -14,6 +17,7 @@ export const useGetResponse = () => {
       const { query, variables, headers } = requestObject;
       (async () => {
         setResponse('{}');
+        setResponseStatus(0);
         setIsLoading(true);
         try {
           const data = await request<unknown>(import.meta.env.VITE_GRAPH_API, query, variables, headers);
@@ -40,7 +44,7 @@ export const useGetResponse = () => {
         setIsLoading(false);
       })();
     }
-  }, [requestObject]);
+  }, [requestObject, setResponseStatus]);
 
-  return { response, isLoading, responseStatus };
+  return { response, isLoading };
 };
