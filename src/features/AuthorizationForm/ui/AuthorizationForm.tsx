@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Box, Button, CircularProgress, Paper, TextField, Tooltip, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Paper, TextField, Tooltip, Typography, useMediaQuery } from '@mui/material';
 import { ChangeEvent, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PasswordInput } from 'entities';
@@ -39,6 +39,7 @@ export const AuthorizationForm: FC<Props> = ({
 }) => {
   const { emailErrorMessage, passwordValue, emailValue } = useAppSelector((state) => state.userReducer);
   const { setEmailValue, setEmailErrorMessage, setPasswordErrorMessage } = useAppActions();
+  const match = useMediaQuery('(max-width: 425px');
   const { t } = useTranslation(['authorization']);
 
   const handleSubmit = () => {
@@ -85,7 +86,7 @@ export const AuthorizationForm: FC<Props> = ({
         textAlign: 'center'
       }}
     >
-      <Typography variant="h4">{title}</Typography>
+      <Typography variant={match ? 'h5' : 'h4'}>{title}</Typography>
       <Box
         component="form"
         sx={{
@@ -124,9 +125,10 @@ export const AuthorizationForm: FC<Props> = ({
           {buttonText}
         </Button>
       </Box>
-      <Typography>
-        {description} <Link to={linkTo}>{linkText}</Link>
-      </Typography>
+      <Typography>{description} </Typography>
+      <Button variant="text" color="secondary" component={Link} to={linkTo} sx={{ fontWeight: 600 }}>
+        {linkText}
+      </Button>
     </Paper>
   );
 };
