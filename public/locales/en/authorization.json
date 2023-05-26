@@ -8,5 +8,10 @@
   "Register": "Register",
   "Sign in": "Sign in",
   "Already have an account?": "Already have an account?",
-  "Create your account": "Create your account"
+  "Create your account": "Create your account",
+  "Tooltip": "Password must be minimum 8 characters; include at least one letter, at least one digit and at least one special character (@ $ ! % * # ? &)",
+  "Invalid Password": "Invalid password",
+  "Invalid email": "Invalid E-mail",
+  "UserNotExist": "User with a such e-mail doesn't exist",
+  "EmailExists": "E-mail already exists"
 }

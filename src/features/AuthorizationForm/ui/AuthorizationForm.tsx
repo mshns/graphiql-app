@@ -1,31 +1,73 @@
 import { Link } from 'react-router-dom';
-import { Box, Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
-import { ChangeEvent, FC, useState } from 'react';
+import { Box, Button, CircularProgress, Paper, TextField, Tooltip, Typography, useMediaQuery } from '@mui/material';
+import { ChangeEvent, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PasswordInput } from 'entities';
+import { useAppActions, useAppSelector } from 'shared';
 
 type Props = {
   title: string;
   buttonText: string;
-  onClick: (email: string, password: string) => void;
+  onSubmit: () => void;
   description: string;
   linkText: string;
   linkTo: string;
   isLoading: boolean;
+  shouldHaveValidation: boolean;
+};
+
+const validateFormInputs = (email: string, password: string) => {
+  const isPasswordValid = !!password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/);
+
+  const isEmailValid = !!email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,6}$/g);
+
+  return {
+    isEmailValid,
+    isPasswordValid
+  };
 };
 
 export const AuthorizationForm: FC<Props> = ({
   buttonText,
   linkText,
   linkTo,
-  onClick,
+  onSubmit,
   description,
   title,
-  isLoading
+  isLoading,
+  shouldHaveValidation
 }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { emailErrorMessage, passwordValue, emailValue } = useAppSelector((state) => state.userReducer);
+  const { setEmailValue, setEmailErrorMessage, setPasswordErrorMessage } = useAppActions();
+  const match = useMediaQuery('(max-width: 425px');
   const { t } = useTranslation(['authorization']);
+
+  const handleSubmit = () => {
+    const { isEmailValid, isPasswordValid } = validateFormInputs(emailValue, passwordValue);
+
+    if (isEmailValid && isPasswordValid) {
+      onSubmit();
+    } else {
+      if (!isPasswordValid) {
+        setPasswordErrorMessage(t('Invalid Password'));
+      }
+      if (!isEmailValid) {
+        setEmailErrorMessage(t('Invalid email'));
+      }
+    }
+  };
+
+  const isButtonDisabled = isLoading || !emailValue.trim().length || !passwordValue.trim().length;
+
+  const renderPasswordInput = () => {
+    return shouldHaveValidation ? (
+      <Tooltip disableInteractive title={t('Tooltip')}>
+        <PasswordInput />
+      </Tooltip>
+    ) : (
+      <PasswordInput />
+    );
+  };
 
   return (
     <Paper
@@ -44,7 +86,7 @@ export const AuthorizationForm: FC<Props> = ({
         textAlign: 'center'
       }}
     >
-      <Typography variant="h4">{title}</Typography>
+      <Typography variant={match ? 'h5' : 'h4'}>{title}</Typography>
       <Box
         component="form"
         sx={{
@@ -57,27 +99,36 @@ export const AuthorizationForm: FC<Props> = ({
         }}
       >
         <TextField
-          value={email}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+          color="secondary"
+          value={emailValue}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            if (emailErrorMessage.length) {
+              setEmailErrorMessage('');
+            }
+            setEmailValue(e.target.value);
+          }}
+          error={!!emailErrorMessage.length}
+          helperText={emailErrorMessage}
           type="email"
           label={t('E-mail')}
           size="small"
           fullWidth
         />
-        <PasswordInput value={password} setValue={setPassword} />
+        {renderPasswordInput()}
         <Button
           endIcon={isLoading ? <CircularProgress color="secondary" size={16} /> : null}
-          disabled={isLoading}
-          onClick={() => onClick(email, password)}
+          disabled={isButtonDisabled}
+          onClick={shouldHaveValidation ? handleSubmit : onSubmit}
           variant="contained"
           sx={{ width: 'max-content' }}
         >
           {buttonText}
         </Button>
       </Box>
-      <Typography>
-        {description} <Link to={linkTo}>{linkText}</Link>
-      </Typography>
+      <Typography>{description} </Typography>
+      <Button variant="text" color="secondary" component={Link} to={linkTo} sx={{ fontWeight: 600 }}>
+        {linkText}
+      </Button>
     </Paper>
   );
 };
