@@ -17,10 +17,10 @@ export const PlayGround: FC = () => {
 
   const { barsHeight } = useOutletContext<OutletContext>();
 
-  const { docButton, buttonHeight } = useButtonHeight();
+  const { playgroundTools, buttonHeight } = useButtonHeight();
 
   const playgroundContext = {
-    docButton,
+    playgroundTools,
     responseStatus,
     setResponseStatus,
     isDocumentOpen,

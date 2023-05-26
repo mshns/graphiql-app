@@ -1,7 +1,7 @@
 import { Dispatch, MutableRefObject, SetStateAction, createContext } from 'react';
 
 type PlaygroundContext = {
-  docButton: MutableRefObject<HTMLButtonElement | null>;
+  playgroundTools: MutableRefObject<HTMLButtonElement | null>;
   isDocumentOpen: boolean;
   isResponseOpen: boolean;
   responseStatus: number;

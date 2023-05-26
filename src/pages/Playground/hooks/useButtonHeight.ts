@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 
 export const useButtonHeight = () => {
-  const docButton = useRef<HTMLButtonElement | null>(null);
+  const playgroundTools = useRef<HTMLButtonElement | null>(null);
   const [buttonHeight, setButtonHeight] = useState<number | undefined>(0);
 
   useEffect(() => {
-    setButtonHeight(docButton.current?.clientHeight);
-  }, [docButton]);
+    setButtonHeight(playgroundTools.current?.clientHeight);
+  }, [playgroundTools]);
 
-  return { docButton, buttonHeight };
+  return { playgroundTools, buttonHeight };
 };

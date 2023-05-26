@@ -1,12 +1,16 @@
 import { Box } from '@mui/material';
-import { FC } from 'react';
-import { ButtonDocument, ResponseStatus } from 'entities';
+import { FC, useContext } from 'react';
+import { ButtonDocument, ButtonResponse, ResponseStatus } from 'entities';
+import { PlaygroundContext } from 'shared';
 
 export const PlaygroundTools: FC = () => {
+  const { playgroundTools } = useContext(PlaygroundContext);
+
   return (
-    <Box display="flex" justifyContent="space-between">
+    <Box ref={playgroundTools} display="flex" justifyContent="space-between">
       <ButtonDocument />
       <ResponseStatus />
+      <ButtonResponse />
     </Box>
   );
 };

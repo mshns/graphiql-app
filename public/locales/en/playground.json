@@ -1,6 +1,7 @@
 {
   "Documentation": "Documentation",
   "Status": "Status",
+  "Response": "Response",
   "variables": "Variables",
   "headers": "Headers",
   "Root types": "Root types",

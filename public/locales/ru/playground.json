@@ -1,6 +1,7 @@
 {
   "Documentation": "Документация",
   "Status": "Статус",
+  "Response": "Ответ",
   "variables": "Переменные",
   "headers": "Хэдеры",
   "Root types": "Корневые типы",
