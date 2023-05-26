@@ -1,12 +1,14 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Grid } from '@mui/material';
+import { PlaygroundContext } from 'shared';
 
 type Props = {
   children: JSX.Element;
-  isDocumentOpen: boolean;
 };
 
-export const WorkspaceGrid: FC<Props> = ({ children, isDocumentOpen }) => {
+export const WorkspaceGrid: FC<Props> = ({ children }) => {
+  const { isDocumentOpen } = useContext(PlaygroundContext);
+
   return (
     <Grid
       display="flex"

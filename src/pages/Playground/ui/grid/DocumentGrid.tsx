@@ -1,12 +1,14 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Grid } from '@mui/material';
+import { PlaygroundContext } from 'shared';
 
 type Props = {
   children: JSX.Element;
-  isDocumentOpen: boolean;
 };
 
-export const DocumentGrid: FC<Props> = ({ children, isDocumentOpen }) => {
+export const DocumentGrid: FC<Props> = ({ children }) => {
+  const { isDocumentOpen } = useContext(PlaygroundContext);
+
   return (
     <Grid
       height="100%"

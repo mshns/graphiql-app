@@ -1,16 +1,13 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC, useContext } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { getLazyComponent } from 'shared';
+import { PlaygroundContext, getLazyComponent } from 'shared';
 import { DocumentationDrawerStyled } from './DocumentationDrawer.styled';
-
-type Props = {
-  isDocumentOpen: boolean;
-  setIsDocumentOpen: Dispatch<SetStateAction<boolean>>;
-};
 
 const DocumentationSideBar = getLazyComponent('widgets', 'DocumentationSideBar');
 
-export const DocumentationDrawer: FC<Props> = ({ isDocumentOpen, setIsDocumentOpen }) => {
+export const DocumentationDrawer: FC = () => {
+  const { isDocumentOpen, setIsDocumentOpen } = useContext(PlaygroundContext);
+
   const theme = useTheme();
   const isLessLg = useMediaQuery(theme.breakpoints.down('lg'));
 

@@ -1,18 +1,14 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC, useContext } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { IRequestObject, getLazyComponent } from 'shared';
+import { PlaygroundContext, getLazyComponent, useAppSelector } from 'shared';
 import { ResponseDrawerStyled } from './ResponseDrawer.styled';
-
-type Props = {
-  requestObject: IRequestObject | null;
-  isResponseOpen: boolean;
-  setIsResponseOpen: Dispatch<SetStateAction<boolean>>;
-  setResponseStatus: Dispatch<SetStateAction<number>>;
-};
 
 const TerminalResponse = getLazyComponent('entities', 'TerminalResponse');
 
-export const ResponseSidebar: FC<Props> = ({ requestObject, isResponseOpen, setIsResponseOpen, setResponseStatus }) => {
+export const ResponseSidebar: FC = () => {
+  const { requestObject } = useAppSelector((state) => state.editorReducer);
+  const { isResponseOpen, setIsResponseOpen, setResponseStatus } = useContext(PlaygroundContext);
+
   const theme = useTheme();
   const isLessMd = useMediaQuery(theme.breakpoints.down('md'));
 

@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Paper, Typography } from '@mui/material';
-import { RESPONSE_CODES } from 'shared';
+import { PlaygroundContext, RESPONSE_CODES } from 'shared';
 
-export const ResponseStatus: FC<{ responseStatus: number }> = ({ responseStatus }) => {
+export const ResponseStatus: FC = () => {
   const { t } = useTranslation(['playground']);
+  const { responseStatus } = useContext(PlaygroundContext);
 
   if (!responseStatus) {
     return null;
