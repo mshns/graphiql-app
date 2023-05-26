@@ -1,1 +1,1 @@
-export * from './DocumentSidebar/ui/DocumentSidebar';
+export * from './DocumentationSidebar/ui/DocumentationSidebar';

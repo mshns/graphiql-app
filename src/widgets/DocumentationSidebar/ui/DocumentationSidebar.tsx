@@ -13,7 +13,7 @@ import {
 } from 'features';
 import { useTypesInfo } from '../model';
 
-export const DocumentSideBar: FC = () => {
+export const DocumentationSideBar: FC = () => {
   const { t } = useTranslation(['playground']);
 
   const breadCrumbsState = useAppSelector((state) => state.documentReducer);

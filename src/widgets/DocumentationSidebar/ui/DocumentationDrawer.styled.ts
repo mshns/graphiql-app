@@ -1,6 +1,6 @@
 import { Drawer, styled } from '@mui/material';
 
-export const DocDrawerStyled = styled(Drawer)(({ theme }) => ({
+export const DocumentationDrawerStyled = styled(Drawer)(({ theme }) => ({
   height: '100%',
 
   '& .MuiDrawer-paper': {

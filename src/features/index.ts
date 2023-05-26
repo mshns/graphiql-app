@@ -6,6 +6,7 @@ export * from './DocumentRoot/ui/DocumentRoot';
 export * from './DocumentPossibleTypes/ui/DocumentPossibleTypes';
 export * from './DocumentMetaData/ui/DocumentMetaData';
 
+export * from './PlaygroundTools/ui/PlaygroundTools';
 export * from './EditorTools/ui/EditorTools';
 export * from './EditorConfigBar/ui/EditorConfigBar';
 

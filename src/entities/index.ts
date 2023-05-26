@@ -3,6 +3,8 @@ export * from './DocumentTypeHeader/ui/DocumentTypeHeader';
 
 export * from './TerminalConfig/ui/TerminalConfig';
 export * from './TerminalQuery/ui/TerminalQuery';
+
+export * from './ResponseLoader/ui/ResponseLoader';
 export * from './ResponseStatus/ui/ResponseStatus';
 
 export * from './ButtonDocument/ui/ButtonDocument';
