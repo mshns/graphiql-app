@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
-import { ThemeProvider } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
-import { createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { PaletteMode } from '@mui/material';
 import { ColorModeContext } from 'shared';
 import { getTheme } from '../api';

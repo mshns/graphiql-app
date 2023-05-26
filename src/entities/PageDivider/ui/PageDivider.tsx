@@ -1,6 +1,5 @@
 import { FC } from 'react';
-import { Divider, SvgIcon, Tooltip, Typography, useMediaQuery } from '@mui/material';
-import { useTheme } from '@emotion/react';
+import { Divider, SvgIcon, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 type Props = {
   title: string;
