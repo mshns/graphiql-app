@@ -1,6 +1,8 @@
 import { FC, useContext } from 'react';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { gql } from 'graphql-request';
+import { Tooltip } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { ButtonStyled, PlaygroundContext, useAppActions, useAppSelector, usePrettifyEditors } from 'shared';
 
 export const ButtonRequest: FC = () => {
@@ -8,6 +10,7 @@ export const ButtonRequest: FC = () => {
   const { query, variables, headers } = useAppSelector((state) => state.editorReducer);
   const { setRequestObject } = useAppActions();
   const { prettifyHandler } = usePrettifyEditors();
+  const { t } = useTranslation('playground');
 
   const requesthandler = async () => {
     setResponseStatus(0);
@@ -27,8 +30,10 @@ export const ButtonRequest: FC = () => {
   };
 
   return (
-    <ButtonStyled onClick={() => requesthandler()} sx={{ minWidth: 'auto' }}>
-      <PlayCircleOutlineIcon />
-    </ButtonStyled>
+    <Tooltip title={t('Request')} disableInteractive>
+      <ButtonStyled onClick={() => requesthandler()} sx={{ minWidth: 'auto' }}>
+        <PlayCircleOutlineIcon />
+      </ButtonStyled>
+    </Tooltip>
   );
 };

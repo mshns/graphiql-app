@@ -1,4 +1,4 @@
-import { Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { default as ArrowClose } from '@mui/icons-material/KeyboardDoubleArrowLeftRounded';
@@ -19,10 +19,12 @@ export const ButtonResponse: FC = () => {
   }
 
   return (
-    <ButtonStyled onClick={() => setIsResponseOpen(!isResponseOpen)} sx={{ marginLeft: 1.5 }}>
-      {isResponseOpen ? <ArrowOpen fontSize="small" /> : <ArrowClose fontSize="small" />}
+    <Tooltip title={t('Response')} disableInteractive>
+      <ButtonStyled onClick={() => setIsResponseOpen(!isResponseOpen)}>
+        {isResponseOpen ? <ArrowOpen fontSize="small" /> : <ArrowClose fontSize="small" />}
 
-      {isLessMd ? <BackupIcon fontSize="medium" /> : <Typography variant="caption">{t('Response')}</Typography>}
-    </ButtonStyled>
+        {isLessMd ? <BackupIcon fontSize="medium" /> : <Typography variant="caption">{t('Response')}</Typography>}
+      </ButtonStyled>
+    </Tooltip>
   );
 };

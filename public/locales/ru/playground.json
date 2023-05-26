@@ -2,6 +2,8 @@
   "Documentation": "Документация",
   "Status": "Статус",
   "Response": "Ответ",
+  "Request": "Запрос",
+  "Prettify Shift + Alt + F": "Отформатировать Shift + Alt + F",
   "variables": "Переменные",
   "headers": "Хэдеры",
   "Root types": "Корневые типы",

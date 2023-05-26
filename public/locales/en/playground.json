@@ -2,6 +2,8 @@
   "Documentation": "Documentation",
   "Status": "Status",
   "Response": "Response",
+  "Request": "Request",
+  "Prettify Shift + Alt + F": "Prettify Shift + Alt + F",
   "variables": "Variables",
   "headers": "Headers",
   "Root types": "Root types",
