@@ -21,7 +21,6 @@ export const HeaderSettingsMenu: FC = () => {
     <Box
       sx={{
         width: 250,
-        p: 2,
         display: 'flex',
         flexDirection: 'column',
         height: '100%'
