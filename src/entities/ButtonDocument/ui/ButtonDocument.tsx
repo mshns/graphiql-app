@@ -14,7 +14,7 @@ export const ButtonDocument: FC = () => {
   const isLessMd = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <ButtonStyled onClick={() => setIsDocumentOpen(!isDocumentOpen)} sx={{ marginLeft: 1.5 }}>
+    <ButtonStyled onClick={() => setIsDocumentOpen(!isDocumentOpen)}>
       {isDocumentOpen ? <ArrowClose fontSize="small" /> : <ArrowOpen fontSize="small" />}
 
       {isLessMd ? <ArticleIcon fontSize="medium" /> : <Typography variant="caption">{t('Documentation')}</Typography>}

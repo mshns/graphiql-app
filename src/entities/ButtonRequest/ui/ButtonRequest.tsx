@@ -4,12 +4,13 @@ import { gql } from 'graphql-request';
 import { ButtonStyled, PlaygroundContext, useAppActions, useAppSelector, usePrettifyEditors } from 'shared';
 
 export const ButtonRequest: FC = () => {
-  const { setIsResponseOpen } = useContext(PlaygroundContext);
+  const { setIsResponseOpen, setResponseStatus } = useContext(PlaygroundContext);
   const { query, variables, headers } = useAppSelector((state) => state.editorReducer);
   const { setRequestObject } = useAppActions();
   const { prettifyHandler } = usePrettifyEditors();
 
   const requesthandler = async () => {
+    setResponseStatus(0);
     const isAllEditorsValid = await prettifyHandler();
 
     if (isAllEditorsValid) {

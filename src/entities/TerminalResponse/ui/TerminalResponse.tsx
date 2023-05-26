@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC } from 'react';
 import { default as jsonbeautify } from 'json-beautify';
 import Codemirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
@@ -8,12 +8,8 @@ import { Box, useTheme } from '@mui/material';
 import { Spinner, EXTENTIONS } from 'shared';
 import { useGetResponse } from '../model';
 
-type Props = {
-  setResponseStatus: Dispatch<SetStateAction<number>>;
-};
-
-export const TerminalResponse: FC<Props> = ({ setResponseStatus }) => {
-  const { response, isLoading } = useGetResponse({ setResponseStatus });
+export const TerminalResponse: FC = () => {
+  const { response, isLoading } = useGetResponse();
   const theme = useTheme();
 
   if (isLoading) {

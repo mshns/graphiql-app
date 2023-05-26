@@ -1,5 +1,5 @@
 import { FC, Suspense, useState } from 'react';
-import { Grid } from '@mui/material';
+import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { useOutletContext } from 'react-router-dom';
 import { DocumentationDrawer, Editor, ResponseSidebar } from 'widgets';
 import { PlaygroundContext, Spinner } from 'shared';
@@ -18,6 +18,9 @@ export const PlayGround: FC = () => {
   const { barsHeight } = useOutletContext<OutletContext>();
 
   const { playgroundTools, buttonHeight } = useButtonHeight();
+
+  const theme = useTheme();
+  const isLessLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   const playgroundContext = {
     playgroundTools,
@@ -39,10 +42,10 @@ export const PlayGround: FC = () => {
         </DocumentGrid>
 
         <WorkspaceGrid>
-          <>
+          <Box ml={isLessLg ? 0 : 1} height="100%">
             <PlaygroundTools />
 
-            <Grid container height={`calc(100% - ${buttonHeight || 0}px)`} item mt={1} pl={2}>
+            <Grid container height={`calc(100% - ${buttonHeight || 0}px)`} item mt={1}>
               <EditorGrid>
                 <Editor />
               </EditorGrid>
@@ -53,7 +56,7 @@ export const PlayGround: FC = () => {
                 </Suspense>
               </ResponseGrid>
             </Grid>
-          </>
+          </Box>
         </WorkspaceGrid>
       </Grid>
     </PlaygroundContext.Provider>

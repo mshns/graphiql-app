@@ -15,8 +15,14 @@ export const DocumentationDrawerStyled = styled(Drawer)(({ theme }) => ({
     '& .MuiDrawer-paper': {
       position: 'fixed',
       backgroundColor: theme.palette.background.default,
-      width: '500px',
+      width: '600px',
       padding: theme.spacing(2)
+    }
+  },
+
+  [theme.breakpoints.down('sm')]: {
+    '& .MuiDrawer-paper': {
+      width: '100%'
     }
   }
 }));
