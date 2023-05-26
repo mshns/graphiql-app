@@ -1,11 +1,19 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface UserInitial {
-  isLoggedIn: boolean | null;
+  isLoggedIn: boolean;
+  emailErrorMessage: string;
+  passwordErrorMessage: string;
+  emailValue: string;
+  passwordValue: string;
 }
 
 const initialState: UserInitial = {
-  isLoggedIn: null
+  isLoggedIn: false,
+  emailErrorMessage: '',
+  passwordErrorMessage: '',
+  emailValue: '',
+  passwordValue: ''
 };
 
 export const userSlice = createSlice({
@@ -14,6 +22,18 @@ export const userSlice = createSlice({
   reducers: {
     setIsLoggedIn(state, { payload }: PayloadAction<boolean>) {
       state.isLoggedIn = payload;
+    },
+    setEmailErrorMessage(state, { payload }: PayloadAction<string>) {
+      state.emailErrorMessage = payload;
+    },
+    setPasswordErrorMessage(state, { payload }: PayloadAction<string>) {
+      state.passwordErrorMessage = payload;
+    },
+    setEmailValue(state, { payload }: PayloadAction<string>) {
+      state.emailValue = payload;
+    },
+    setPasswordValue(state, { payload }: PayloadAction<string>) {
+      state.passwordValue = payload;
     }
   }
 });

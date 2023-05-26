@@ -1,17 +1,16 @@
 import { IconButton, TextField } from '@mui/material';
-import { FC, useState } from 'react';
+import { FC, forwardRef, useState } from 'react';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useTranslation } from 'react-i18next';
+import { useAppActions, useAppSelector } from 'shared';
 
-interface Props {
-  value: string;
-  setValue: (value: string) => void;
-}
-
-export const PasswordInput: FC<Props> = ({ setValue, value }) => {
+export const PasswordInput: FC = forwardRef<HTMLInputElement>((props, ref) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { passwordErrorMessage, passwordValue } = useAppSelector((state) => state.userReducer);
+  const { setPasswordValue, setPasswordErrorMessage } = useAppActions();
+
   const { t } = useTranslation(['authorization']);
 
   return (
@@ -20,10 +19,17 @@ export const PasswordInput: FC<Props> = ({ setValue, value }) => {
       size="small"
       fullWidth
       required
-      value={value}
+      error={!!passwordErrorMessage.length}
+      helperText={passwordErrorMessage}
+      value={passwordValue}
       label={t('Password')}
       type={isVisible ? 'text' : 'password'}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) => {
+        if (passwordErrorMessage.length) {
+          setPasswordErrorMessage('');
+        }
+        setPasswordValue(e.target.value);
+      }}
       InputProps={{
         endAdornment: (
           <IconButton color="secondary" onClick={() => setIsVisible(!isVisible)}>
@@ -31,6 +37,8 @@ export const PasswordInput: FC<Props> = ({ setValue, value }) => {
           </IconButton>
         )
       }}
+      {...props}
+      ref={ref}
     />
   );
-};
+});

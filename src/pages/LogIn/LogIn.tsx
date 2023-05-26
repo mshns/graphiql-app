@@ -1,37 +1,22 @@
-import { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { AuthorizationForm } from 'features';
-import { ROUTE } from 'shared';
+import { ROUTE, useAuthorizationForm } from 'shared';
 
 export const LogIn: FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
   const { t } = useTranslation(['layout', 'authorization']);
 
-  const auth = getAuth();
-
-  const handleLogin = async (email: string, password: string) => {
-    try {
-      setIsLoading(true);
-      await signInWithEmailAndPassword(auth, email, password);
-      setIsLoading(false);
-      navigate(ROUTE.Playground);
-    } catch {
-      setIsLoading(false);
-      //TODO add error handling
-    }
-  };
+  const { handleLogin, isLoading } = useAuthorizationForm();
 
   return (
     <AuthorizationForm
+      shouldHaveValidation={false}
       buttonText={t('Sign In')}
       linkText={t('Sign Up for free', { ns: 'authorization' })}
       linkTo={ROUTE.SignUp}
       description={t('Do not have an account', { ns: 'authorization' })}
       title={t('Sign in to your account', { ns: 'authorization' })}
-      onClick={handleLogin}
+      onSubmit={handleLogin}
       isLoading={isLoading}
     />
   );
