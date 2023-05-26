@@ -65,7 +65,13 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
         highlightActiveLine: false,
         highlightActiveLineGutter: false,
         defaultKeymap: false,
-        completionKeymap: false
+        completionKeymap: false,
+        bracketMatching: true,
+        closeBrackets: true,
+        history: true,
+        drawSelection: true,
+        indentOnInput: true,
+        lineNumbers: true
       }}
     />
   );

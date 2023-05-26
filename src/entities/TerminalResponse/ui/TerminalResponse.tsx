@@ -2,8 +2,6 @@ import { FC } from 'react';
 import { default as jsonbeautify } from 'json-beautify';
 import Codemirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
-import { EditorView } from '@codemirror/view';
-import { EditorState } from '@codemirror/state';
 import { Box, useTheme } from '@mui/material';
 import { Spinner, EXTENTIONS } from 'shared';
 import { useGetResponse } from '../model';
@@ -23,8 +21,10 @@ export const TerminalResponse: FC = () => {
         height="100%"
         theme={theme.palette.mode}
         value={jsonbeautify(response, null!, 1.5, 100)}
+        editable={false}
+        readOnly={true}
         basicSetup={{ highlightActiveLine: false, highlightActiveLineGutter: false }}
-        extensions={[...EXTENTIONS, json(), EditorView.editable.of(false), EditorState.readOnly.of(true)]}
+        extensions={[...EXTENTIONS, json()]}
       />
     </Box>
   );
