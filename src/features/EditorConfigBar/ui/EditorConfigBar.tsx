@@ -1,6 +1,6 @@
 import { FC, useContext, useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, Box } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Box, useMediaQuery, useTheme } from '@mui/material';
 import { TerminalConfig, ButtonConfigbar } from 'entities';
 import { EditorContext, useAppActions, useAppSelector } from 'shared';
 
@@ -14,6 +14,9 @@ export const EditorConfigBar: FC = () => {
   const { setVariables, setHeaders } = useAppActions();
   const { variables, headers } = useAppSelector((state) => state.editorReducer);
 
+  const theme = useTheme();
+  const isLessSm = useMediaQuery(theme.breakpoints.down('sm'));
+
   const configTerminalOptions = {
     editorRef: isVariablesTab ? variablesRef : headersRef,
     state: isVariablesTab ? variables : headers,
@@ -21,12 +24,14 @@ export const EditorConfigBar: FC = () => {
     terminalName: (isVariablesTab ? 'variables' : 'headers') as 'variables' | 'headers'
   };
 
+  const configOpenHeight = isLessSm ? '100%' : '50%';
+
   return (
     <Accordion
       disableGutters
       expanded={isOpenConfig}
       onChange={() => setIsOpenConfig(!isOpenConfig)}
-      sx={{ flex: '0 0 auto', height: isOpenConfig ? '30%' : 'auto', overflow: 'auto', boxShadow: 'none' }}
+      sx={{ flex: '0 0 auto', height: isOpenConfig ? configOpenHeight : 'auto', overflow: 'auto', boxShadow: 'none' }}
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon sx={{ transform: 'rotate(180deg)', color: 'text.primary' }} />}
