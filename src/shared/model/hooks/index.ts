@@ -6,3 +6,4 @@ export * from './useThrowToastify';
 export * from './useJsonParseGuard';
 export * from './useGraphqlParseGuard';
 export * from './useLintEditorErrors';
+export * from './useVariablesAutocomplition';

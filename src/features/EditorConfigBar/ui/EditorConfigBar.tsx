@@ -36,14 +36,15 @@ export const EditorConfigBar: FC = () => {
       <AccordionSummary
         expandIcon={<ExpandMoreIcon sx={{ transform: 'rotate(180deg)', color: 'text.primary' }} />}
         aria-controls="panel-config"
+        sx={{ padding: '0 10px' }}
       >
         <Box display="flex" alignItems="center" justifyContent="space-between" flex="1 1 100%">
-          <Box display="flex" gap="0.5em">
+          <Box display="flex">
             <ButtonConfigbar {...{ tab, setTab, buttonName: 'variables' }} />
             <ButtonConfigbar {...{ tab, setTab, buttonName: 'headers' }} />
           </Box>
 
-          <Typography mr={2} color="text.secondary" top={0} right={0} variant="caption">
+          <Typography mr={1} color="text.secondary" variant="caption">
             JSON
           </Typography>
         </Box>
