@@ -1,3 +1,4 @@
+import { useMediaQuery, useTheme } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 
 export const usePlaygroundHeight = () => {
@@ -5,7 +6,10 @@ export const usePlaygroundHeight = () => {
   const footer = useRef<HTMLDivElement | null>(null);
   const [barsHeight, setBarsHeight] = useState(0);
 
-  useEffect(() => {
+  const theme = useTheme();
+  const isLessMd = useMediaQuery(theme.breakpoints.down('md'));
+
+  const getHeight = () => {
     if (header && footer) {
       const headerHeight = header.current?.clientHeight;
       const footerHeight = footer.current?.clientHeight;
@@ -14,7 +18,11 @@ export const usePlaygroundHeight = () => {
         setBarsHeight(headerHeight + footerHeight + 40);
       }
     }
-  }, [header, footer]);
+  };
+
+  useEffect(() => getHeight());
+
+  useEffect(getHeight, [isLessMd]);
 
   return { header, footer, barsHeight };
 };

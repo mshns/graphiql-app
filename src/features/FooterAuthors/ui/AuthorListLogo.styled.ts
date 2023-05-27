@@ -12,7 +12,7 @@ export const AuthorListLogo = styled(SpeedDial)(({ theme }) => ({
     }
   },
 
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down('md')]: {
     bottom: 'auto'
   }
 }));

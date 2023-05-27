@@ -10,7 +10,7 @@ import { AuthorListLogo } from './AuthorListLogo.styled';
 export const FooterAuthors: FC = () => {
   const { t } = useTranslation(['layout']);
   const theme = useTheme();
-  const isLessSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const isLessMd = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <>
@@ -27,7 +27,7 @@ export const FooterAuthors: FC = () => {
         ))}
       </AuthorListLogo>
 
-      {!isLessSm && (
+      {!isLessMd && (
         <Typography fontWeight={600} variant="body1" component="div" sx={{ color: 'secondary.main' }}>
           {t('Created by Power Rangers')}
         </Typography>
