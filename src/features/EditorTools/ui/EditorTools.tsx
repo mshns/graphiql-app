@@ -6,14 +6,7 @@ export const EditorTools: FC = () => {
   const theme = useTheme();
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      gap={theme.spacing(1)}
-      position="absolute"
-      top={theme.spacing(1)}
-      right={theme.spacing(3)}
-    >
+    <Box m={1} display="flex" flexDirection="column" gap={theme.spacing(1)}>
       <ButtonRequest />
       <ButtonPrettify />
     </Box>
