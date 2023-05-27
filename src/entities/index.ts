@@ -1,8 +1,8 @@
 export * from './DocumentTypeRow/ui/DocumentTypeRow';
 export * from './DocumentTypeHeader/ui/DocumentTypeHeader';
 
-export * from './TerminalConfig/ui/TerminalConfig';
 export * from './TerminalQuery/ui/TerminalQuery';
+export * from './TerminalConfig/ui/TerminalConfig';
 
 export * from './ResponseLoader/ui/ResponseLoader';
 export * from './ResponseStatus/ui/ResponseStatus';

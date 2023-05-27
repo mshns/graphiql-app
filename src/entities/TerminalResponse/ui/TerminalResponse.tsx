@@ -3,12 +3,15 @@ import { default as jsonbeautify } from 'json-beautify';
 import Codemirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
 import { Box, useTheme } from '@mui/material';
-import { Spinner, EXTENTIONS } from 'shared';
-import { useGetResponse } from '../model';
+import { Spinner, EXTENTIONS, useAppSelector } from 'shared';
 
-export const TerminalResponse: FC = () => {
-  const { response, isLoading } = useGetResponse();
+type Props = {
+  isLoading: boolean;
+};
+
+export const TerminalResponse: FC<Props> = ({ isLoading }) => {
   const theme = useTheme();
+  const { response } = useAppSelector((state) => state.editorReducer);
 
   if (isLoading) {
     return <Spinner />;

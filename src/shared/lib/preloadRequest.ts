@@ -1,3 +1,4 @@
+import { DEFAULT_QUERY } from 'shared/constants';
 import { isRequestObject } from 'shared/lib/type-guard';
 
 export const preloadRequest = () => {
@@ -11,13 +12,5 @@ export const preloadRequest = () => {
     }
   }
 
-  return {
-    query: `query ($id: ID!) {
-  character(id: $id) {
-    name
-  }
-}`,
-    variables: '{ "id": "10" }',
-    headers: '{}'
-  };
+  return DEFAULT_QUERY;
 };

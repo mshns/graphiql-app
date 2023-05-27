@@ -5,7 +5,7 @@ import { linter } from '@codemirror/lint';
 import { json, jsonParseLinter } from '@codemirror/lang-json';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useTheme } from '@mui/material';
-import { EXTENTIONS, TOAST_MESSAGES, jsonParseGuard, lintEditorErrors } from 'shared';
+import { EXTENTIONS, TOAST_MESSAGES, useJsonParseGuard, useLintEditorErrors } from 'shared';
 
 type Props = {
   editorRef: MutableRefObject<ReactCodeMirrorRef | null>;
@@ -15,9 +15,10 @@ type Props = {
 };
 
 export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalName }) => {
-  const theme = useTheme();
-  const mode = theme.palette.mode;
+  const { jsonParseGuard } = useJsonParseGuard();
+  const { lintEditorErrors } = useLintEditorErrors();
 
+  const theme = useTheme();
   const { t } = useTranslation();
 
   const handleChange = useCallback(
@@ -29,10 +30,10 @@ export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalNa
 
   const handlePrettify = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
-      const isEditorPass = lintEditorErrors(editorRef, t(`${TOAST_MESSAGES[`${terminalName}Lint`]}`), mode);
+      const isEditorPass = lintEditorErrors(editorRef, t(`${TOAST_MESSAGES[`${terminalName}Lint`]}`));
 
       if (isEditorPass) {
-        jsonParseGuard(state, action, t(`${TOAST_MESSAGES[`${terminalName}Parse`]}`), mode);
+        jsonParseGuard(state, action, t(`${TOAST_MESSAGES[`${terminalName}Parse`]}`));
       }
     }
   };

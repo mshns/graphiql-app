@@ -1,22 +1,25 @@
 import { useContext, useEffect, useState } from 'react';
 import { request } from 'graphql-request';
-import { useTheme } from '@mui/material';
-import { PlaygroundContext, RESPONSE_CODES, isGraphqlError, throwToastify, useAppSelector } from 'shared';
+import {
+  PlaygroundContext,
+  RESPONSE_CODES,
+  isGraphqlError,
+  useThrowToastify,
+  useAppSelector,
+  useAppActions
+} from 'shared';
 
 export const useGetResponse = () => {
-  const [response, setResponse] = useState<unknown>();
   const [isLoading, setIsLoading] = useState(false);
-
   const { setResponseStatus } = useContext(PlaygroundContext);
   const { requestObject } = useAppSelector((state) => state.editorReducer);
-
-  const theme = useTheme();
+  const { setRequestObject, setResponse } = useAppActions();
+  const { throwToastify } = useThrowToastify();
 
   useEffect(() => {
     if (requestObject) {
       const { query, variables, headers } = requestObject;
       (async () => {
-        setResponse('{}');
         setIsLoading(true);
         try {
           const data = await request<unknown>(import.meta.env.VITE_GRAPH_API, query, variables, headers);
@@ -24,26 +27,25 @@ export const useGetResponse = () => {
           setResponse(data);
           setResponseStatus(RESPONSE_CODES.ok);
         } catch (error) {
-          setIsLoading(false);
+          setResponse('{}');
           setResponseStatus(RESPONSE_CODES.serverError);
 
           const errorObj = JSON.parse(JSON.stringify(error));
 
           if (isGraphqlError(errorObj)) {
             errorObj.response.errors.forEach((error) => {
-              throwToastify(`message: ${error.message}`, 'error', theme.palette.mode);
+              throwToastify(`message: ${error.message}`, 'error');
             });
-
-            return;
+          } else {
+            throwToastify(JSON.stringify(error), 'error');
           }
-
-          throwToastify(JSON.stringify(error), 'error', theme.palette.mode);
         }
 
         setIsLoading(false);
+        setRequestObject(null);
       })();
     }
-  }, [requestObject, setResponseStatus, theme.palette.mode]);
+  }, [requestObject, setResponseStatus, throwToastify, setRequestObject, setResponse]);
 
-  return { response, isLoading };
+  return { isLoading };
 };

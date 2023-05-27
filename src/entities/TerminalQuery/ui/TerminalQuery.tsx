@@ -5,12 +5,12 @@ import { graphql, updateSchema } from 'cm6-graphql';
 import { useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import {
-  graphqlParseGuard,
+  useGraphqlParseGuard,
   useAppActions,
   useAppSelector,
   EXTENTIONS,
   EditorContext,
-  lintEditorErrors,
+  useLintEditorErrors,
   TOAST_MESSAGES
 } from 'shared';
 
@@ -22,9 +22,10 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
   const { queryRef, isOpenConfig } = useContext(EditorContext);
   const { setQuery } = useAppActions();
   const { query } = useAppSelector((state) => state.editorReducer);
+  const { graphqlParseGuard } = useGraphqlParseGuard();
+  const { lintEditorErrors } = useLintEditorErrors();
 
   const theme = useTheme();
-  const mode = theme.palette.mode;
 
   const { t } = useTranslation('toastify');
 
@@ -45,10 +46,10 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
 
   const handlePrettify = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
-      const isQueryPass = lintEditorErrors(queryRef, t(`${TOAST_MESSAGES['queryLint']}`), mode);
+      const isQueryPass = lintEditorErrors(queryRef, t(`${TOAST_MESSAGES['queryLint']}`));
 
       if (isQueryPass) {
-        graphqlParseGuard(query, setQuery, mode);
+        graphqlParseGuard(query, setQuery);
       }
     }
   };
