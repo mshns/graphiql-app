@@ -20,7 +20,6 @@ export const HeaderSettingsMenu: FC = () => {
   return (
     <Box
       sx={{
-        width: 250,
         display: 'flex',
         flexDirection: 'column',
         height: '100%'

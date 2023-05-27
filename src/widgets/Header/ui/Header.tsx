@@ -1,11 +1,9 @@
-import { type FC, MutableRefObject, useState } from 'react';
+import { type FC, MutableRefObject, useState, Suspense } from 'react';
 import { ButtonGroup, Drawer, Toolbar } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { useTranslation } from 'react-i18next';
-import { HeaderLogo, HeaderSettingsButton } from 'entities';
+import { ButtonClose, HeaderLogo, HeaderSettingsButton } from 'entities';
 import { HeaderAuthButtons, HeaderScroll, HeaderSettingsMenu } from 'features';
-import { ButtonStyled } from 'shared';
+import { Spinner } from 'shared';
 
 type Props = {
   header: MutableRefObject<HTMLDivElement | null>;
@@ -13,8 +11,6 @@ type Props = {
 
 export const Header: FC<Props> = ({ header }) => {
   const [isSettingsOpen, setSettingsOpen] = useState(false);
-
-  const { t } = useTranslation('playground');
 
   const toggleSettings = () => {
     setSettingsOpen(!isSettingsOpen);
@@ -37,17 +33,17 @@ export const Header: FC<Props> = ({ header }) => {
             onClose={toggleSettings}
             sx={{
               '& .MuiDrawer-paper': {
+                width: '250px',
                 padding: 2,
                 backgroundColor: 'background.default'
               }
             }}
           >
-            <ButtonStyled onClick={toggleSettings}>
-              {t('close')}
-              <ChevronRightIcon fontSize="medium" />
-            </ButtonStyled>
+            <Suspense fallback={<Spinner />}>
+              <ButtonClose side="right" handler={toggleSettings} />
 
-            <HeaderSettingsMenu />
+              <HeaderSettingsMenu />
+            </Suspense>
           </Drawer>
         </Toolbar>
       </AppBar>

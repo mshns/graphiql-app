@@ -12,6 +12,7 @@ export * from './ButtonRequest/ui/ButtonRequest';
 export * from './ButtonPrettify/ui/ButtonPrettify';
 export * from './ButtonConfigbar/ui/ButtonConfigbar';
 export * from './ButtonResponse/ui/ButtonResponse';
+export * from './ButtonClose/ui/ButtonClose';
 
 export * from './PasswordInput/ui/PasswordInput';
 

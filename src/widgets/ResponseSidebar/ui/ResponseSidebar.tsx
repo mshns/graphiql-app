@@ -1,8 +1,7 @@
-import { FC, useContext } from 'react';
+import { FC, Suspense, useContext } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { ButtonStyled, PlaygroundContext, getLazyComponent, useAppSelector } from 'shared';
+import { PlaygroundContext, getLazyComponent, useAppSelector, Spinner } from 'shared';
+import { ButtonClose } from 'entities';
 import { ResponseDrawerStyled } from './ResponseDrawer.styled';
 
 const TerminalResponse = getLazyComponent('entities', 'TerminalResponse');
@@ -13,8 +12,6 @@ export const ResponseSidebar: FC = () => {
 
   const theme = useTheme();
   const isLessMd = useMediaQuery(theme.breakpoints.down('md'));
-
-  const { t } = useTranslation('playground');
 
   const handleClose = () => setIsResponseOpen(false);
 
@@ -29,14 +26,11 @@ export const ResponseSidebar: FC = () => {
       open={isResponseOpen}
       onClose={handleClose}
     >
-      {isLessMd ? (
-        <ButtonStyled onClick={handleClose}>
-          {t('close')}
-          <ChevronRightIcon fontSize="medium" />
-        </ButtonStyled>
-      ) : null}
+      {isLessMd ? <ButtonClose side="right" handler={handleClose} /> : null}
 
-      <TerminalResponse />
+      <Suspense fallback={<Spinner />}>
+        <TerminalResponse />
+      </Suspense>
     </ResponseDrawerStyled>
   );
 };

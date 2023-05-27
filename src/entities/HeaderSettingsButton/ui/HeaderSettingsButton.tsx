@@ -5,14 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { ButtonTitle, HeaderButton } from 'shared';
 
 type Props = {
-  toggleSettings: (open: boolean) => void;
+  toggleSettings: () => void;
 };
 
 export const HeaderSettingsButton: FC<Props> = ({ toggleSettings }) => {
   const { t } = useTranslation(['layout']);
 
   return (
-    <HeaderButton onClick={() => toggleSettings(true)}>
+    <HeaderButton onClick={toggleSettings}>
       <Tooltip title={t('Settings')}>
         <SettingsIcon fontSize="small" />
       </Tooltip>
