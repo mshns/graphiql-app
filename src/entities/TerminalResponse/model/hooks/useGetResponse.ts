@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { request } from 'graphql-request';
+import { useTheme } from '@mui/material';
 import { PlaygroundContext, RESPONSE_CODES, isGraphqlError, throwToastify, useAppSelector } from 'shared';
 
 export const useGetResponse = () => {
@@ -7,8 +8,9 @@ export const useGetResponse = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { setResponseStatus } = useContext(PlaygroundContext);
-
   const { requestObject } = useAppSelector((state) => state.editorReducer);
+
+  const theme = useTheme();
 
   useEffect(() => {
     if (requestObject) {
@@ -29,19 +31,19 @@ export const useGetResponse = () => {
 
           if (isGraphqlError(errorObj)) {
             errorObj.response.errors.forEach((error) => {
-              throwToastify(`message: ${error.message}`, 'error');
+              throwToastify(`message: ${error.message}`, 'error', theme.palette.mode);
             });
 
             return;
           }
 
-          throwToastify(JSON.stringify(error), 'error');
+          throwToastify(JSON.stringify(error), 'error', theme.palette.mode);
         }
 
         setIsLoading(false);
       })();
     }
-  }, [requestObject, setResponseStatus]);
+  }, [requestObject, setResponseStatus, theme.palette.mode]);
 
   return { response, isLoading };
 };

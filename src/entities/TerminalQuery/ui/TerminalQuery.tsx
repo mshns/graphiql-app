@@ -22,7 +22,10 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
   const { queryRef, isOpenConfig } = useContext(EditorContext);
   const { setQuery } = useAppActions();
   const { query } = useAppSelector((state) => state.editorReducer);
+
   const theme = useTheme();
+  const mode = theme.palette.mode;
+
   const { t } = useTranslation('toastify');
 
   useEffect(() => {
@@ -42,10 +45,10 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
 
   const handlePrettify = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
-      const isQueryPass = lintEditorErrors(queryRef, t(`${TOAST_MESSAGES['queryLint']}`));
+      const isQueryPass = lintEditorErrors(queryRef, t(`${TOAST_MESSAGES['queryLint']}`), mode);
 
       if (isQueryPass) {
-        graphqlParseGuard(query, setQuery);
+        graphqlParseGuard(query, setQuery, mode);
       }
     }
   };

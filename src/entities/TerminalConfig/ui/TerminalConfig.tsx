@@ -16,6 +16,8 @@ type Props = {
 
 export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalName }) => {
   const theme = useTheme();
+  const mode = theme.palette.mode;
+
   const { t } = useTranslation();
 
   const handleChange = useCallback(
@@ -27,10 +29,10 @@ export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalNa
 
   const handlePrettify = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
-      const isEditorPass = lintEditorErrors(editorRef, t(`${TOAST_MESSAGES[`${terminalName}Lint`]}`));
+      const isEditorPass = lintEditorErrors(editorRef, t(`${TOAST_MESSAGES[`${terminalName}Lint`]}`), mode);
 
       if (isEditorPass) {
-        jsonParseGuard(state, action, t(`${TOAST_MESSAGES[`${terminalName}Parse`]}`));
+        jsonParseGuard(state, action, t(`${TOAST_MESSAGES[`${terminalName}Parse`]}`), mode);
       }
     }
   };
