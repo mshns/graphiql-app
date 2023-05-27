@@ -1,7 +1,7 @@
 import { FC, useContext, useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, Box, useMediaQuery, useTheme } from '@mui/material';
-import { TerminalConfig, ButtonConfigbar } from 'entities';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { ButtonConfigbar, TerminalConfig } from 'entities';
 import { EditorContext, useAppActions, useAppSelector } from 'shared';
 
 export const EditorConfigBar: FC = () => {
@@ -37,9 +37,15 @@ export const EditorConfigBar: FC = () => {
         expandIcon={<ExpandMoreIcon sx={{ transform: 'rotate(180deg)', color: 'text.primary' }} />}
         aria-controls="panel-config"
       >
-        <Box display="flex" gap="0.5em">
-          <ButtonConfigbar {...{ tab, setTab, buttonName: 'variables' }} />
-          <ButtonConfigbar {...{ tab, setTab, buttonName: 'headers' }} />
+        <Box display="flex" alignItems="center" justifyContent="space-between" flex="1 1 100%">
+          <Box display="flex" gap="0.5em">
+            <ButtonConfigbar {...{ tab, setTab, buttonName: 'variables' }} />
+            <ButtonConfigbar {...{ tab, setTab, buttonName: 'headers' }} />
+          </Box>
+
+          <Typography mr={2} color="text.secondary" top={0} right={0} variant="caption">
+            JSON
+          </Typography>
         </Box>
       </AccordionSummary>
 
