@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GraphQLClientRequestHeaders } from 'graphql-request/build/esm/types';
+import { preloadRequest } from 'shared/lib';
 
 export interface IRequestObject {
   query: string;
@@ -15,17 +16,12 @@ export interface IEditor {
   requestObject: IRequestObject | null;
 }
 
+const requestObj = preloadRequest();
+
 const initialState: IEditor = {
-  query: `query {
-  allFilms {
-    films {
-      director
-      created
-    }
-  }
-}`,
-  variables: '{}',
-  headers: '{}',
+  query: requestObj.query,
+  variables: requestObj.variables,
+  headers: requestObj.headers,
   variablesKeymap: [],
   requestObject: null
 };

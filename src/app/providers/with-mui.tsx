@@ -6,7 +6,7 @@ import { ColorModeContext } from 'shared';
 import { getTheme } from '../api';
 
 export const withMUI = (component: () => React.ReactNode) => () => {
-  const currentMode: PaletteMode = localStorage.getItem('mode') === 'dark' ? 'dark' : 'light';
+  const currentMode: PaletteMode = localStorage.getItem('[graphiql]mode') === 'dark' ? 'dark' : 'light';
   const [mode, setMode] = useState<PaletteMode>(currentMode);
 
   const colorMode = useMemo(
