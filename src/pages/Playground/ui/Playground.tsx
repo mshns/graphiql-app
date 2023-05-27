@@ -1,56 +1,64 @@
 import { FC, Suspense, useState } from 'react';
-import { Grid } from '@mui/material';
+import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { useOutletContext } from 'react-router-dom';
-import { Editor } from 'widgets';
-import { ButtonDocument } from 'entities';
-import { Spinner, getLazyComponent, useAppSelector } from 'shared';
+import { DocumentationDrawer, Editor, ResponseSidebar } from 'widgets';
+import { PlaygroundContext, Spinner } from 'shared';
+import { PlaygroundTools } from 'features';
+import { ResponseLoader } from 'entities';
 import { useButtonHeight } from '../hooks/useButtonHeight';
+import { DocumentGrid, WorkspaceGrid, ResponseGrid, EditorGrid } from './grid';
 
 type OutletContext = { barsHeight: number };
 
-const DocumentationSideBar = getLazyComponent('widgets', 'DocumentSideBar');
-const ResponseBar = getLazyComponent('entities', 'TerminalResponse');
-
 export const PlayGround: FC = () => {
-  const { docButton, buttonHeight } = useButtonHeight();
+  const [responseStatus, setResponseStatus] = useState(0);
+  const [isDocumentOpen, setIsDocumentOpen] = useState(false);
+  const [isResponseOpen, setIsResponseOpen] = useState(false);
 
   const { barsHeight } = useOutletContext<OutletContext>();
-  const [isDocumentOpen, setIsDocumentOpen] = useState(false);
-  const { requestObject } = useAppSelector((state) => state.editorReducer);
+
+  const { playgroundTools, buttonHeight } = useButtonHeight();
+
+  const theme = useTheme();
+  const isLessLg = useMediaQuery(theme.breakpoints.down('lg'));
+
+  const playgroundContext = {
+    playgroundTools,
+    responseStatus,
+    setResponseStatus,
+    isDocumentOpen,
+    setIsDocumentOpen,
+    isResponseOpen,
+    setIsResponseOpen
+  };
 
   return (
-    <Grid container height={`calc(100vh - ${barsHeight}px)`}>
-      <Grid
-        height="100%"
-        overflow="auto"
-        position="relative"
-        xl={isDocumentOpen ? 3 : 0}
-        lg={isDocumentOpen ? 3 : 0}
-        item
-      >
-        <Suspense fallback={<Spinner />}>{isDocumentOpen && <DocumentationSideBar />}</Suspense>
+    <PlaygroundContext.Provider value={playgroundContext}>
+      <Grid container height={`calc(100vh - ${barsHeight}px)`}>
+        <DocumentGrid>
+          <Suspense fallback={<Spinner />}>
+            <DocumentationDrawer />
+          </Suspense>
+        </DocumentGrid>
+
+        <WorkspaceGrid>
+          <Box ml={isLessLg ? 0 : 1} height="100%">
+            <PlaygroundTools />
+
+            <Grid container height={`calc(100% - ${buttonHeight || 0}px)`} item mt={1}>
+              <EditorGrid>
+                <Editor />
+              </EditorGrid>
+
+              <ResponseGrid>
+                <Suspense fallback={<ResponseLoader />}>
+                  <ResponseSidebar />
+                </Suspense>
+              </ResponseGrid>
+            </Grid>
+          </Box>
+        </WorkspaceGrid>
       </Grid>
-
-      <Grid
-        display="flex"
-        height="100%"
-        flexDirection="column"
-        xl={isDocumentOpen ? 9 : 12}
-        lg={isDocumentOpen ? 9 : 12}
-        item
-      >
-        <ButtonDocument {...{ docButton, isDocumentOpen, setIsDocumentOpen }} />
-
-        <Grid container height={`calc(100% - ${buttonHeight || 0}px)`} columnSpacing="0.5em" item mt="0.5em" pl="1em">
-          <Grid display="flex" height="100%" item xl={6} lg={6}>
-            <Editor />
-          </Grid>
-
-          <Grid display="flex" position="relative" height="100%" justifyContent="center" item xl={6} lg={6}>
-            <Suspense fallback={<Spinner />}>{!!requestObject && <ResponseBar />}</Suspense>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
+    </PlaygroundContext.Provider>
   );
 };

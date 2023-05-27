@@ -1,8 +1,10 @@
 import { FC } from 'react';
 import { uid } from 'uid';
+import { useTranslation } from 'react-i18next';
 import { IntrospectionQuery, IntrospectionType } from 'graphql';
+import { Box } from '@mui/material';
 import { isIntrospectionInterfaceType, isIntrospectionObjectType, sortAlphabetArray } from 'shared';
-import { DocumentTypeRow } from 'entities';
+import { DocumentTypeHeader, DocumentTypeRow } from 'entities';
 
 type Props = {
   currentType?: IntrospectionType;
@@ -10,6 +12,8 @@ type Props = {
 };
 
 export const DocumentPossibleTypes: FC<Props> = ({ currentType, introspection }) => {
+  const { t } = useTranslation(['playground']);
+
   const getType = (typeName: string) => {
     const type = introspection?.__schema.types.find((type) => type.name === typeName);
     if (isIntrospectionObjectType(type)) {
@@ -19,11 +23,13 @@ export const DocumentPossibleTypes: FC<Props> = ({ currentType, introspection })
 
   if (isIntrospectionInterfaceType(currentType)) {
     return (
-      <section>
+      <Box>
+        <DocumentTypeHeader>{t('Implementations')}</DocumentTypeHeader>
+
         {currentType.possibleTypes.map((type) => {
           return (
-            <section key={uid()}>
-              <h4>{type.name}</h4>
+            <Box pl={1} key={uid()}>
+              <DocumentTypeHeader>{type.name}</DocumentTypeHeader>
 
               {getType(type.name) ? (
                 <>
@@ -32,10 +38,10 @@ export const DocumentPossibleTypes: FC<Props> = ({ currentType, introspection })
                   ))}
                 </>
               ) : null}
-            </section>
+            </Box>
           );
         })}
-      </section>
+      </Box>
     );
   }
 

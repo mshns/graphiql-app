@@ -1,24 +1,25 @@
-import { Dispatch, FC, MutableRefObject, SetStateAction } from 'react';
+import { FC, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { default as ArrowClose } from '@mui/icons-material/KeyboardDoubleArrowLeftRounded';
 import { default as ArrowOpen } from '@mui/icons-material/KeyboardDoubleArrowRightRounded';
-import { Button, Typography } from '@mui/material';
+import ArticleIcon from '@mui/icons-material/Article';
+import { ButtonStyled, PlaygroundContext } from 'shared';
 
-type Props = {
-  docButton: MutableRefObject<HTMLButtonElement | null>;
-  isDocumentOpen: boolean;
-  setIsDocumentOpen: Dispatch<SetStateAction<boolean>>;
-};
+export const ButtonDocument: FC = () => {
+  const { t } = useTranslation(['playground']);
+  const { isDocumentOpen, setIsDocumentOpen } = useContext(PlaygroundContext);
 
-export const ButtonDocument: FC<Props> = ({ docButton, isDocumentOpen, setIsDocumentOpen }) => {
+  const theme = useTheme();
+  const isLessMd = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
-    <Button
-      ref={docButton}
-      onClick={() => setIsDocumentOpen(!isDocumentOpen)}
-      sx={{ display: 'flex', alignItems: 'center', alignSelf: 'flex-start' }}
-    >
-      {isDocumentOpen ? <ArrowClose sx={{ fontSize: '1.5em' }} /> : <ArrowOpen sx={{ fontSize: '1.5em' }} />}
+    <Tooltip title={t('Documentation')} disableInteractive>
+      <ButtonStyled onClick={() => setIsDocumentOpen(!isDocumentOpen)}>
+        {isDocumentOpen ? <ArrowClose fontSize="small" /> : <ArrowOpen fontSize="small" />}
 
-      <Typography variant="caption">Documentation</Typography>
-    </Button>
+        {isLessMd ? <ArticleIcon fontSize="medium" /> : <Typography variant="caption">{t('Documentation')}</Typography>}
+      </ButtonStyled>
+    </Tooltip>
   );
 };

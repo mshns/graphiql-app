@@ -1,9 +1,11 @@
 import { FC, KeyboardEvent, MutableRefObject, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import Codemirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { linter } from '@codemirror/lint';
 import { json, jsonParseLinter } from '@codemirror/lang-json';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { EXTENTIONS, jsonParseGuard, lintEditorErrors } from 'shared';
+import { useTheme } from '@mui/material';
+import { EXTENTIONS, TOAST_MESSAGES, jsonParseGuard, lintEditorErrors } from 'shared';
 
 type Props = {
   editorRef: MutableRefObject<ReactCodeMirrorRef | null>;
@@ -13,6 +15,9 @@ type Props = {
 };
 
 export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalName }) => {
+  const theme = useTheme();
+  const { t } = useTranslation();
+
   const handleChange = useCallback(
     (value: string) => {
       action(value);
@@ -22,10 +27,10 @@ export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalNa
 
   const handlePrettify = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
-      const isEditorPass = lintEditorErrors(editorRef, terminalName);
+      const isEditorPass = lintEditorErrors(editorRef, t(`${TOAST_MESSAGES[`${terminalName}Lint`]}`));
 
       if (isEditorPass) {
-        jsonParseGuard(state, action, terminalName);
+        jsonParseGuard(state, action, t(`${TOAST_MESSAGES[`${terminalName}Parse`]}`));
       }
     }
   };
@@ -41,7 +46,7 @@ export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalNa
       ref={editorRef}
       style={{ overflow: 'hidden', maxHeight: '100%', flex: '1 1 auto' }}
       max-height="100%"
-      theme={'none'}
+      theme={theme.palette.mode}
       value={state}
       onChange={handleChange}
       onBlur={handleBlur}

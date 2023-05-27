@@ -1,0 +1,16 @@
+{
+  "Documentation": "Документация",
+  "Status": "Статус",
+  "Response": "Ответ",
+  "Request": "Запрос",
+  "Prettify Shift + Alt + F": "Отформатировать Shift + Alt + F",
+  "variables": "Переменные",
+  "headers": "Хэдеры",
+  "Root types": "Корневые типы",
+  "Arguments": "Аргументы",
+  "Metadata": "Метаданные для",
+  "Type": "типа",
+  "Fields": "Поля",
+  "Implementations": "Имплементации",
+  "Close": "Закрыть"
+}

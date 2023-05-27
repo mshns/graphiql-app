@@ -1,11 +1,12 @@
 export * from './DocumentBreadCrumbs/ui/DocumentBreadCrumbs';
-export * from './DocumentTypeHeader/ui/DocumentTypeHeader';
+export * from './DocumentTypeNav/ui/DocumentTypeNav';
 export * from './DocumentArgs/ui/DocumentArgs';
 export * from './DocumentFields/ui/DocumentFields';
 export * from './DocumentRoot/ui/DocumentRoot';
 export * from './DocumentPossibleTypes/ui/DocumentPossibleTypes';
 export * from './DocumentMetaData/ui/DocumentMetaData';
 
+export * from './PlaygroundTools/ui/PlaygroundTools';
 export * from './EditorTools/ui/EditorTools';
 export * from './EditorConfigBar/ui/EditorConfigBar';
 

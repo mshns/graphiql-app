@@ -1,4 +1,6 @@
 import { useCallback, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { TOAST_MESSAGES } from '../../constants';
 import { EditorContext } from '../context';
 import { useAppActions, useAppSelector } from '../hooks';
 import { lintEditorErrors, graphqlParseGuard, jsonParseGuard } from '../../lib';
@@ -7,11 +9,12 @@ export const usePrettifyEditors = () => {
   const { query, variables, headers } = useAppSelector((state) => state.editorReducer);
   const { setQuery, setVariables, setHeaders } = useAppActions();
   const { headersRef, queryRef, variablesRef } = useContext(EditorContext);
+  const { t } = useTranslation('toastify');
 
   const prettifyHandler = useCallback(async () => {
-    const isQueryPass = lintEditorErrors(queryRef, 'query');
-    const isHeadersPass = lintEditorErrors(headersRef, 'headers');
-    const isVarialesPass = lintEditorErrors(variablesRef, 'variables');
+    const isQueryPass = lintEditorErrors(queryRef, t(`${TOAST_MESSAGES['queryLint']}`));
+    const isHeadersPass = lintEditorErrors(headersRef, t(`${TOAST_MESSAGES['headersLint']}`));
+    const isVarialesPass = lintEditorErrors(variablesRef, t(`${TOAST_MESSAGES['variablesLint']}`));
 
     let isQueryParsed = false;
     let isVarsParsed = false;
@@ -22,15 +25,15 @@ export const usePrettifyEditors = () => {
     }
 
     if (isVarialesPass) {
-      isVarsParsed = jsonParseGuard(variables, setVariables, 'variables');
+      isVarsParsed = jsonParseGuard(variables, setVariables, t(`${TOAST_MESSAGES['variablesParse']}`));
     }
 
     if (isHeadersPass) {
-      isHeadersParsed = jsonParseGuard(headers, setHeaders, 'headers');
+      isHeadersParsed = jsonParseGuard(headers, setHeaders, t(`${TOAST_MESSAGES['headersParse']}`));
     }
 
     return isQueryParsed && isVarsParsed && isHeadersParsed;
-  }, [headersRef, queryRef, variablesRef, headers, variables, query, setHeaders, setQuery, setVariables]);
+  }, [headersRef, queryRef, variablesRef, headers, variables, query, setHeaders, setQuery, setVariables, t]);
 
   return { prettifyHandler };
 };

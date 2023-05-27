@@ -1,9 +1,10 @@
 import { FC } from 'react';
-import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { Box, Divider, Typography } from '@mui/material';
 import { Spinner, useAppSelector, useIntrospection } from 'shared';
 import {
   DocumentBreadCrumbs,
-  DocumentTypeHeader,
+  DocumentTypeNav,
   DocumentArgs,
   DocumentFields,
   DocumentRoot,
@@ -12,33 +13,49 @@ import {
 } from 'features';
 import { useTypesInfo } from '../model';
 
-export const DocumentSideBar: FC = () => {
-  const { introspection, isLoading } = useIntrospection();
+export const DocumentationSideBar: FC = () => {
+  const { t } = useTranslation(['playground']);
+
   const breadCrumbsState = useAppSelector((state) => state.documentReducer);
-  const { typeAsField, currentType } = useTypesInfo(breadCrumbsState, introspection);
   const { breadCrumbs } = breadCrumbsState;
 
+  const { introspection, isLoading } = useIntrospection();
+  const { typeAsField, currentType } = useTypesInfo(breadCrumbsState, introspection);
+
   return (
-    <Box>
+    <Box color="text.primary">
       <Typography variant="h6" sx={{ mb: 2 }}>
-        Documentation
+        {t('Documentation')}
       </Typography>
+
       {isLoading ? (
         <Spinner />
       ) : (
         <>
           <DocumentBreadCrumbs />
+
           {breadCrumbs.length < 2 ? (
             <DocumentRoot introspection={introspection} />
           ) : (
-            <Box>
-              <DocumentTypeHeader typeAsField={typeAsField} />
+            <Box p={1}>
+              <DocumentTypeNav typeAsField={typeAsField} />
 
-              {typeAsField?.description ? <Typography variant="body2">{typeAsField?.description}</Typography> : null}
+              {typeAsField?.description ? (
+                <Box>
+                  <Typography p={1} variant="body2">
+                    {typeAsField?.description}
+                  </Typography>
+
+                  <Divider variant="middle" />
+                </Box>
+              ) : null}
 
               <DocumentArgs {...{ typeAsField }} />
+
               <DocumentMetaData {...{ currentType }} />
+
               <DocumentFields {...{ currentType }} />
+
               <DocumentPossibleTypes {...{ currentType, introspection }} />
             </Box>
           )}

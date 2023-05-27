@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { uid } from 'uid';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { QUESTION_LIST } from '../constants';
@@ -17,7 +16,7 @@ export const AboutFAQ = () => {
   return (
     <>
       {QUESTION_LIST.map((question) => (
-        <Accordion key={uid()} expanded={expanded === question} onChange={handleChange(question)}>
+        <Accordion key={question} expanded={expanded === question} onChange={handleChange(question)}>
           <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'secondary.main' }} />}>
             <Typography
               sx={{ width: { md: '35%', xs: '100%' }, flexShrink: 0, color: 'secondary.main', fontWeight: 500 }}

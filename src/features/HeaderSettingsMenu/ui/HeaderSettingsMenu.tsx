@@ -18,7 +18,13 @@ export const HeaderSettingsMenu: FC = () => {
   }, [i18n.language, mode]);
 
   return (
-    <Box sx={{ width: 250, p: 2, display: 'flex', flexDirection: 'column' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%'
+      }}
+    >
       <Typography sx={{ fontSize: 24, color: 'secondary.main' }}>{t('Settings')}</Typography>
       <Divider sx={{ mb: 3 }} />
 

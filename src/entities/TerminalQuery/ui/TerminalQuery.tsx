@@ -2,7 +2,17 @@ import React, { FC, useCallback, useContext, useEffect } from 'react';
 import { GraphQLSchema } from 'graphql';
 import Codemirror from '@uiw/react-codemirror';
 import { graphql, updateSchema } from 'cm6-graphql';
-import { graphqlParseGuard, useAppActions, useAppSelector, EXTENTIONS, EditorContext, lintEditorErrors } from 'shared';
+import { useTheme } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import {
+  graphqlParseGuard,
+  useAppActions,
+  useAppSelector,
+  EXTENTIONS,
+  EditorContext,
+  lintEditorErrors,
+  TOAST_MESSAGES
+} from 'shared';
 
 type Props = {
   schema: GraphQLSchema | undefined;
@@ -12,6 +22,8 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
   const { queryRef, isOpenConfig } = useContext(EditorContext);
   const { setQuery } = useAppActions();
   const { query } = useAppSelector((state) => state.editorReducer);
+  const theme = useTheme();
+  const { t } = useTranslation('toastify');
 
   useEffect(() => {
     if (queryRef && schema) {
@@ -30,7 +42,7 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
 
   const handlePrettify = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'KeyF' && e.getModifierState('Shift') && e.getModifierState('Alt')) {
-      const isQueryPass = lintEditorErrors(queryRef, 'query');
+      const isQueryPass = lintEditorErrors(queryRef, t(`${TOAST_MESSAGES['queryLint']}`));
 
       if (isQueryPass) {
         graphqlParseGuard(query, setQuery);
@@ -44,7 +56,7 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
       ref={queryRef}
       height="100%"
       value={query}
-      theme={'none'}
+      theme={theme.palette.mode}
       onChange={handleChange}
       onKeyDown={handlePrettify}
       indentWithTab={false}
@@ -53,7 +65,13 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
         highlightActiveLine: false,
         highlightActiveLineGutter: false,
         defaultKeymap: false,
-        completionKeymap: false
+        completionKeymap: false,
+        bracketMatching: true,
+        closeBrackets: true,
+        history: true,
+        drawSelection: true,
+        indentOnInput: true,
+        lineNumbers: true
       }}
     />
   );

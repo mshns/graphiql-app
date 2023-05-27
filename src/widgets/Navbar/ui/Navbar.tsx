@@ -7,7 +7,7 @@ import { NavigationList } from './NavigationList.styled';
 
 export const Navbar: FC = () => {
   return (
-    <Box sx={{ backgroundColor: 'background.paper' }}>
+    <Box p={0} sx={{ backgroundColor: 'barsColor.light' }}>
       <NavigationList>
         {NAVIGATION.map((nav) => (
           <NavigationBarLink key={uid()} {...{ nav }} />
