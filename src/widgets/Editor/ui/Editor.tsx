@@ -1,5 +1,5 @@
 import { FC, useRef, useState } from 'react';
-import { Divider, Paper } from '@mui/material';
+import { Box, Divider, Paper } from '@mui/material';
 import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { TerminalQuery } from 'entities';
 import { EditorConfigBar, EditorTools } from 'features';
@@ -25,9 +25,18 @@ export const Editor: FC = () => {
       }}
     >
       <EditorContext.Provider value={{ queryRef, headersRef, variablesRef, isOpenConfig, setIsOpenConfig }}>
-        <TerminalQuery schema={schema} />
+        <Box
+          display="flex"
+          height="100%"
+          width="100%"
+          maxHeight={isOpenConfig ? '70%' : '100%'}
+          flex="1 1 auto"
+          overflow="hidden"
+        >
+          <TerminalQuery schema={schema} />
 
-        <EditorTools />
+          <EditorTools />
+        </Box>
 
         <Divider />
 

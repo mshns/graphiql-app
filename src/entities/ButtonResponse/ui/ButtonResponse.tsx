@@ -9,12 +9,12 @@ import { ButtonStyled, PlaygroundContext, useAppSelector } from 'shared';
 export const ButtonResponse: FC = () => {
   const { t } = useTranslation('playground');
   const { isResponseOpen, setIsResponseOpen } = useContext(PlaygroundContext);
-  const { requestObject } = useAppSelector((state) => state.editorReducer);
+  const { response } = useAppSelector((state) => state.editorReducer);
 
   const theme = useTheme();
   const isLessMd = useMediaQuery(theme.breakpoints.down('md'));
 
-  if (!isLessMd || !requestObject) {
+  if (!isLessMd || !response) {
     return null;
   }
 

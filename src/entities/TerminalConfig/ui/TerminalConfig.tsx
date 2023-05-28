@@ -5,7 +5,15 @@ import { linter } from '@codemirror/lint';
 import { json, jsonParseLinter } from '@codemirror/lang-json';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { useTheme } from '@mui/material';
-import { EXTENTIONS, TOAST_MESSAGES, jsonParseGuard, lintEditorErrors } from 'shared';
+import { autocompletion } from '@codemirror/autocomplete';
+import {
+  EXTENTIONS,
+  headersAutocomplition,
+  TOAST_MESSAGES,
+  useJsonParseGuard,
+  useLintEditorErrors,
+  useVariablesAutocomplition
+} from 'shared';
 
 type Props = {
   editorRef: MutableRefObject<ReactCodeMirrorRef | null>;
@@ -15,6 +23,10 @@ type Props = {
 };
 
 export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalName }) => {
+  const { jsonParseGuard } = useJsonParseGuard();
+  const { lintEditorErrors } = useLintEditorErrors();
+  const { variablesAutocomplition } = useVariablesAutocomplition();
+
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -58,7 +70,16 @@ export const TerminalConfig: FC<Props> = ({ editorRef, action, state, terminalNa
         defaultKeymap: false,
         completionKeymap: false
       }}
-      extensions={[...EXTENTIONS, json(), linter(jsonParseLinter())]}
+      extensions={[
+        ...EXTENTIONS,
+        json(),
+        linter(jsonParseLinter()),
+        autocompletion({
+          defaultKeymap: false,
+          activateOnTyping: true,
+          override: [terminalName === 'headers' ? headersAutocomplition : variablesAutocomplition]
+        })
+      ]}
     />
   );
 };

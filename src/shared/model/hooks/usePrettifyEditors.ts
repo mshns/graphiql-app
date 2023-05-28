@@ -2,13 +2,17 @@ import { useCallback, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TOAST_MESSAGES } from '../../constants';
 import { EditorContext } from '../context';
-import { useAppActions, useAppSelector } from '../hooks';
-import { lintEditorErrors, graphqlParseGuard, jsonParseGuard } from '../../lib';
+import { useAppActions, useAppSelector, useLintEditorErrors, useJsonParseGuard, useGraphqlParseGuard } from '../hooks';
 
 export const usePrettifyEditors = () => {
   const { query, variables, headers } = useAppSelector((state) => state.editorReducer);
   const { setQuery, setVariables, setHeaders } = useAppActions();
   const { headersRef, queryRef, variablesRef } = useContext(EditorContext);
+
+  const { lintEditorErrors } = useLintEditorErrors();
+  const { jsonParseGuard } = useJsonParseGuard();
+  const { graphqlParseGuard } = useGraphqlParseGuard();
+
   const { t } = useTranslation('toastify');
 
   const prettifyHandler = useCallback(async () => {
@@ -33,7 +37,21 @@ export const usePrettifyEditors = () => {
     }
 
     return isQueryParsed && isVarsParsed && isHeadersParsed;
-  }, [headersRef, queryRef, variablesRef, headers, variables, query, setHeaders, setQuery, setVariables, t]);
+  }, [
+    headersRef,
+    queryRef,
+    variablesRef,
+    headers,
+    variables,
+    query,
+    setHeaders,
+    setQuery,
+    setVariables,
+    t,
+    lintEditorErrors,
+    jsonParseGuard,
+    graphqlParseGuard
+  ]);
 
   return { prettifyHandler };
 };

@@ -7,7 +7,7 @@ export const initI18n = () =>
     .use(Backend)
     .use(initReactI18next)
     .init({
-      fallbackLng: localStorage.getItem('language') || 'en',
+      fallbackLng: localStorage.getItem('[graphiql]language') || 'en',
       debug: false,
       interpolation: {
         escapeValue: false

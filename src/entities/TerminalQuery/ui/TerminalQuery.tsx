@@ -5,12 +5,12 @@ import { graphql, updateSchema } from 'cm6-graphql';
 import { useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import {
-  graphqlParseGuard,
+  useGraphqlParseGuard,
   useAppActions,
   useAppSelector,
   EXTENTIONS,
   EditorContext,
-  lintEditorErrors,
+  useLintEditorErrors,
   TOAST_MESSAGES
 } from 'shared';
 
@@ -19,10 +19,14 @@ type Props = {
 };
 
 export const TerminalQuery: FC<Props> = ({ schema }) => {
-  const { queryRef, isOpenConfig } = useContext(EditorContext);
+  const { queryRef } = useContext(EditorContext);
   const { setQuery } = useAppActions();
   const { query } = useAppSelector((state) => state.editorReducer);
+  const { graphqlParseGuard } = useGraphqlParseGuard();
+  const { lintEditorErrors } = useLintEditorErrors();
+
   const theme = useTheme();
+
   const { t } = useTranslation('toastify');
 
   useEffect(() => {
@@ -52,7 +56,7 @@ export const TerminalQuery: FC<Props> = ({ schema }) => {
 
   return (
     <Codemirror
-      style={{ overflow: 'hidden', maxHeight: isOpenConfig ? '70%' : '100%', flex: '1 1 auto' }}
+      style={{ overflow: 'hidden', flex: '1 1 100%' }}
       ref={queryRef}
       height="100%"
       value={query}

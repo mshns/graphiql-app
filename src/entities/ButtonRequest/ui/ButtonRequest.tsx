@@ -25,6 +25,7 @@ export const ButtonRequest: FC = () => {
       const headersRequest = JSON.parse(headers);
 
       setIsResponseOpen(true);
+      localStorage.setItem('[graphiql]request', JSON.stringify({ query, variables, headers }));
       setRequestObject({ query: queryRequest, variables: variablesRequest, headers: headersRequest });
     }
   };

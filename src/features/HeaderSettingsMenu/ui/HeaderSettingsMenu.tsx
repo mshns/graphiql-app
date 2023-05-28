@@ -13,8 +13,8 @@ export const HeaderSettingsMenu: FC = () => {
   const { mode, toggleColorMode } = useContext(ColorModeContext);
 
   useEffect(() => {
-    localStorage.setItem('mode', mode);
-    localStorage.setItem('language', i18n.language);
+    localStorage.setItem('[graphiql]mode', mode);
+    localStorage.setItem('[graphiql]language', i18n.language);
   }, [i18n.language, mode]);
 
   return (
