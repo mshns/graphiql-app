@@ -13,7 +13,7 @@ export const FooterRSSchool: FC = () => {
   return (
     <>
       <Link to="https://rs.school/react/">
-        <SvgIconLogo viewBox="0 0 242 90" width={'85px'}>
+        <SvgIconLogo viewBox="0 0 242 90" width={'85px'} sx={{ mb: { md: -0.5, xs: 0.5 } }}>
           <LogoRSS />
         </SvgIconLogo>
       </Link>

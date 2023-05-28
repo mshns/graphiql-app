@@ -25,5 +25,9 @@ export const FooterItem = styled(Box)(({ theme }) => ({
     '&:after': {
       right: 0
     }
+  },
+
+  [theme.breakpoints.down('md')]: {
+    minWidth: 85
   }
 }));
