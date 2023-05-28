@@ -10,6 +10,7 @@ export const NotFound: FC = () => {
   return (
     <Box
       sx={{
+        width: 1,
         minHeight: '50vh',
         display: 'flex',
         flexDirection: 'column',
