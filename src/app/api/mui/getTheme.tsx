@@ -4,6 +4,39 @@ export const getTheme = (mode: PaletteMode): ThemeOptions => {
   const isLight = mode === 'light';
 
   return {
+    components: {
+      MuiCssBaseline: {
+        styleOverrides(theme) {
+          return {
+            body: {
+              scrollbarColor: '#6b6b6b #2b2b2b',
+              '&::-webkit-scrollbar, & *::-webkit-scrollbar': {
+                padding: '10px 0',
+                width: theme.spacing(1.3),
+                borderRadius: theme.shape.borderRadius,
+                backgroundColor: theme.palette.barsColor.main
+              },
+              '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
+                borderRadius: theme.shape.borderRadius,
+                backgroundColor: theme.palette.secondary.main
+              },
+              '&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus': {
+                backgroundColor: theme.palette.text.secondary
+              },
+              '&::-webkit-scrollbar-thumb:active, & *::-webkit-scrollbar-thumb:active': {
+                backgroundColor: theme.palette.text.primary
+              },
+              '&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover': {
+                backgroundColor: theme.palette.text.secondary
+              },
+              '&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner': {
+                backgroundColor: theme.palette.text.primary
+              }
+            }
+          };
+        }
+      }
+    },
     palette: {
       mode,
       primary: {

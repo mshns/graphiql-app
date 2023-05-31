@@ -22,11 +22,15 @@ export const withMUI = (component: () => React.ReactNode) => () => {
   const theme = useMemo(() => createTheme(getTheme(mode)), [mode]);
 
   return (
-    <>
-      <CssBaseline />
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>{component()}</ThemeProvider>
-      </ColorModeContext.Provider>
-    </>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        {
+          <>
+            <CssBaseline />
+            {component()}
+          </>
+        }
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 };
