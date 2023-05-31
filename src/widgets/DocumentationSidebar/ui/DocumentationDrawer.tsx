@@ -23,9 +23,7 @@ export const DocumentationDrawer: FC = () => {
     >
       {isLessLg ? <ButtonClose side="left" handler={handleClose} /> : null}
 
-      <Suspense fallback={<Spinner />}>
-        <DocumentationSideBar />
-      </Suspense>
+      <Suspense fallback={<Spinner />}>{isDocumentOpen && <DocumentationSideBar />}</Suspense>
     </DocumentationDrawerStyled>
   );
 };

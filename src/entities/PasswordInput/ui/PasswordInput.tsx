@@ -32,10 +32,17 @@ export const PasswordInput: FC = forwardRef<HTMLInputElement>((props, ref) => {
       }}
       InputProps={{
         endAdornment: (
-          <IconButton color="secondary" onClick={() => setIsVisible(!isVisible)}>
+          <IconButton
+            sx={{ position: 'absolute', right: '0' }}
+            color="secondary"
+            onClick={() => setIsVisible(!isVisible)}
+          >
             {isVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}
           </IconButton>
         )
+      }}
+      sx={{
+        '.MuiInputBase-root': { paddingRight: 0 }
       }}
       {...props}
       ref={ref}
