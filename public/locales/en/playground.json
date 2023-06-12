@@ -1,0 +1,17 @@
+{
+  "Documentation": "Documentation",
+  "Status": "Status",
+  "Response": "Response",
+  "Request": "Request",
+  "Prettify Shift + Alt + F": "Prettify Shift + Alt + F",
+  "Autocomplition Ctrl + Space": "Autocomplition Ctrl + Space",
+  "variables": "Variables",
+  "headers": "Headers",
+  "Root types": "Root types",
+  "Arguments": "Arguments",
+  "Metadata": "Metadata for",
+  "Type": "type",
+  "Fields": "Fields",
+  "Implementations": "Implementations",
+  "Close": "Close"
+}
